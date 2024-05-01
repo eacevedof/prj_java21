@@ -6,6 +6,11 @@ public final class GetProductsController {
 
     public void Invoke()
     {
-        (new GetProductsService()).Invoke();
+        try {
+            (new GetProductsService()).Invoke();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
