@@ -4,10 +4,10 @@ import json.application.services.GetProductsService;
 
 public final class GetProductsController {
 
-    public void Invoke()
+    public void invoke()
     {
         try {
-            (new GetProductsService()).Invoke();
+            (new GetProductsService()).invoke();
         }
         catch (Exception e) {
             e.printStackTrace();
