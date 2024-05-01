@@ -1,4 +1,4 @@
-package json.domain.entities;
+package from_api.domain.entities;
 
 import java.util.Date;
 import shared.domain.entities.AbstractEntity;

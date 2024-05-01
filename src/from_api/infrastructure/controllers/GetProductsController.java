@@ -1,6 +1,6 @@
-package json.infrastructure.controllers;
+package from_api.infrastructure.controllers;
 
-import json.application.services.GetProductsService;
+import from_api.application.services.GetProductsService;
 
 public final class GetProductsController {
 

@@ -1,6 +1,6 @@
 import shared.infrastructure.io.Log;
 
-import json.infrastructure.controllers.GetProductsController;
+import from_api.infrastructure.controllers.GetProductsController;
 
 public class Main {
     public static void main(String[] args) {
