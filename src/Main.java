@@ -1,6 +1,6 @@
 import shared.infrastructure.io.Log;
 
-import loopdemo.services.application.LoopService;
+import loopdemo.application.services.LoopService;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {

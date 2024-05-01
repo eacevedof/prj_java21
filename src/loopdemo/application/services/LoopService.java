@@ -1,4 +1,4 @@
-package loopdemo.services.application;
+package loopdemo.application.services;
 
 import shared.infrastructure.io.Log;
 
