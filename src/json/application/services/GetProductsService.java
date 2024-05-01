@@ -11,7 +11,7 @@ public final class GetProductsService {
     public void Invoke() throws Exception {
         try {
             String json = FileGetContent.getInstance().GetContentFromUrlOrFail(this._productsUrl);
-            Log.InfoNl(json);
+            Log.console(json);
         }
         catch (Exception e) {
             GetProductsException.ErrorOnReadingEndpoint(this._productsUrl);
