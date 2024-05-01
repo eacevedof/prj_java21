@@ -13,10 +13,8 @@ public final class FileGetContent {
 
     public String getContentFromUrl(String urlEndpoint) throws Exception
     {
-        // URL of the JSON file
-        URL url = URI.create(urlEndpoint).toURL();
-        // Open connection to the URL
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(url.openStream()));
+        URL objUrl = URI.create(urlEndpoint).toURL();
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(objUrl.openStream()));
         StringBuilder stringBuilder = new StringBuilder();
         String strLine;
         while ((strLine = bufferedReader.readLine()) != null) {
