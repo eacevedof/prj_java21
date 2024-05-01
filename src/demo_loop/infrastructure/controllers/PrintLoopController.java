@@ -1,7 +1,7 @@
-package loopdemo.infrastructure.controllers;
+package demo_loop.infrastructure.controllers;
 
 import shared.infrastructure.io.Log;
-import loopdemo.application.services.LoopService;
+import demo_loop.application.services.LoopService;
 
 public final class PrintLoopController {
 

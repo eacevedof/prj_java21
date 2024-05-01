@@ -1,4 +1,4 @@
-package json.application.exceptions;
+package from_api.application.exceptions;
 
 import shared.infrastructure.exceptions.AbstractException;
 import shared.infrastructure.enums.HttpStatusCodeEnum;

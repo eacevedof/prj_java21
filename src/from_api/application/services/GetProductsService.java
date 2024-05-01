@@ -1,10 +1,10 @@
-package json.application.services;
+package from_api.application.services;
 
 import shared.infrastructure.io.Log;
 import shared.infrastructure.file.FileGetContent;
 import shared.infrastructure.formatters.Json;
-import json.application.exceptions.GetProductsException;
-import json.domain.entities.ProductEntity;
+import from_api.application.exceptions.GetProductsException;
+import from_api.domain.entities.ProductEntity;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
