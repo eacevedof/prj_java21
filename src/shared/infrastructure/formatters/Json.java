@@ -1,8 +1,8 @@
 package shared.infrastructure.formatters;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
-import from_api.domain.entities.ProductEntity;
 import java.util.List;
 
 public final class Json {
@@ -11,8 +11,10 @@ public final class Json {
         return (new Json());
     }
 
-    public List<ProductEntity> getJsonStringAsEntity(String jsonString, Type reflectType) {
+    public <T> List<T> getJsonStringAsEntity(String jsonString, Class<T> entityType) {
         Gson gson = new Gson();
-        return gson.fromJson(jsonString, reflectType);
+        Type listType = TypeToken.getParameterized(List.class, entityType).getType();
+        return gson.fromJson(jsonString, listType);
     }
+
 }
