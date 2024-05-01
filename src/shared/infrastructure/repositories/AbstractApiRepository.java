@@ -10,14 +10,12 @@ import java.util.List;
 
 public abstract class AbstractApiRepository {
 
-    protected List<AbstractEntity> getResult(String endpoint) {
+    protected <T extends AbstractEntity> List<T> getResult(String endpoint, Class<T> entityClass) {
         try {
             String jsonProducts = FileGetContent.getInstance().getContentFromUrl(endpoint);
-
-            return Json.getInstance().getJsonStringAsEntity(jsonProducts, ProductEntity.class);
-
-        }
-        catch (Exception e) {
+            return Json.getInstance().getJsonStringAsEntity(jsonProducts, entityClass);
+        } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
