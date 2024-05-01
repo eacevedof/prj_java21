@@ -5,6 +5,9 @@ import shared.infrastructure.file.FileGetContent;
 import shared.infrastructure.formatters.Json;
 import json.application.exceptions.GetProductsException;
 import json.domain.entities.ProductEntity;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
+import java.util.List;
 
 public final class GetProductsService {
 
@@ -12,10 +15,10 @@ public final class GetProductsService {
 
     public void invoke() throws Exception {
         try {
-            String json = FileGetContent.getInstance().getContentFromUrl(this._productsUrl);
-            //ProductEntity productEntity = new ProductEntity();
-            Object productEntity = Json.getInstance().getJsonStringAsEntity(json, ProductEntity.class);
-            Log.console(json);
+            String jsonProducts = FileGetContent.getInstance().getContentFromUrl(this._productsUrl);
+            Type reflectProductList = new TypeToken<List<ProductEntity>>(){}.getType();
+            List<ProductEntity> productEntityList = Json.getInstance().getJsonStringAsEntity(jsonProducts, reflectProductList);
+            Log.console(jsonProducts);
         }
         catch (Exception e) {
             GetProductsException.ErrorOnReadingEndpoint(this._productsUrl);
