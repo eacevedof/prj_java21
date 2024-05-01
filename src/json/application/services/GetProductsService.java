@@ -8,7 +8,7 @@ public final class GetProductsService {
 
     private final String _productsUrl = "https://json.theframework.es/index.php?getfile=app_product.json";
 
-    public void Invoke() {
+    public void Invoke() throws Exception {
         try {
             String json = FileGetContent.getInstance().GetContentFromUrlOrFail(this._productsUrl);
             Log.InfoNl(json);
