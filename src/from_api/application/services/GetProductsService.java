@@ -1,6 +1,5 @@
 package from_api.application.services;
 
-
 import from_api.domain.entities.ProductEntity;
 import from_api.domain.repositories.InterfaceProductsRepository;
 import from_api.infrastructure.repositories.ProductsRepository;
