@@ -7,7 +7,7 @@ public final class PrintLoopController {
 
     public void Invoke()
     {
-        Log.InfoNl("PrintController");
+        Log.console("PrintController");
         (new LoopService()).Invoke();
     }
 }
