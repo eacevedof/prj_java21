@@ -2,8 +2,9 @@ package json.domain.entities;
 
 import java.util.Date;
 import shared.domain.entities.AbstractEntity;
+import shared.domain.entities.InterfaceEntity;
 
-public final class ProductEntity extends AbstractEntity {
+public final class ProductEntity extends AbstractEntity implements InterfaceEntity {
     public final int insertPlatform;
     public final int insertUser;
     public final Date insertDate;
