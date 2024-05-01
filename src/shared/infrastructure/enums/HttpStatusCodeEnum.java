@@ -1,6 +1,6 @@
 package shared.infrastructure.enums;
 
-public enum HttpStatusEnum {
+public enum HttpStatusCodeEnum {
     // Informational
     CONTINUE(100),
     SWITCHING_PROTOCOLS(101),
@@ -43,7 +43,7 @@ public enum HttpStatusEnum {
 
     private final int code;
 
-    HttpStatusEnum(int code) {
+    HttpStatusCodeEnum(int code) {
         this.code = code;
     }
 
