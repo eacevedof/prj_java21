@@ -1,23 +1,22 @@
 package from_api.application.services;
 
-import shared.infrastructure.io.Log;
-import shared.infrastructure.file.FileGetContent;
-import shared.infrastructure.formatters.Json;
-import from_api.application.exceptions.GetProductsException;
+
 import from_api.domain.entities.ProductEntity;
-import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
-import java.util.List;
+import from_api.infrastructure.repositories.ProductsRepository;
+import shared.infrastructure.io.Log;
 
 public final class GetProductsService {
 
 
     public void invoke() throws Exception {
         try {
-
+            var products = ProductsRepository.getInstance().getAllProducts();
+            for (ProductEntity product : products) {
+                Log.console(product.toString());
+            }
         }
         catch (Exception e) {
-
+            Log.console(e.getMessage());
         }
     }
 }
