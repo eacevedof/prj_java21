@@ -1,6 +1,5 @@
 package shared.infrastructure.file;
 
-import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URI;
@@ -12,7 +11,7 @@ public final class FileGetContent {
         return new FileGetContent();
     }
 
-    public String GetContentFromUrlOrFail(String urlEndpoint) throws Exception
+    public String getContentFromUrl(String urlEndpoint) throws Exception
     {
         // URL of the JSON file
         URL url = URI.create(urlEndpoint).toURL();

@@ -8,6 +8,6 @@ public class Main {
         // to see how IntelliJ IDEA suggests fixing it.
         Log.console("** Main.main ***");
         //(new PrintLoopController()).Invoke();
-        (new GetProductsController()).Invoke();
+        (new GetProductsController()).invoke();
     }
 }
