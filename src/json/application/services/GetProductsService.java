@@ -18,6 +18,9 @@ public final class GetProductsService {
             String jsonProducts = FileGetContent.getInstance().getContentFromUrl(this._productsUrl);
             Type reflectProductList = new TypeToken<List<ProductEntity>>(){}.getType();
             List<ProductEntity> productEntityList = Json.getInstance().getJsonStringAsEntity(jsonProducts, reflectProductList);
+            for (ProductEntity product : productEntityList) {
+                System.out.println(product);
+            }
             Log.console(jsonProducts);
         }
         catch (Exception e) {
