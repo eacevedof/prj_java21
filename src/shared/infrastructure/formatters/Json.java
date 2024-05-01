@@ -1,6 +1,9 @@
 package shared.infrastructure.formatters;
 
 import com.google.gson.Gson;
+import shared.domain.entities.AbstractEntity;
+import shared.domain.entities.InterfaceEntity;
+import json.domain.entities.ProductEntity;
 
 public final class Json {
 
@@ -8,8 +11,8 @@ public final class Json {
         return (new Json());
     }
 
-    public Object getJsonStringAsObject(String jsonString, Class<?> anyClass) {
+    public ProductEntity getJsonStringAsEntity(String jsonString, Class<ProductEntity> classOfT) {
         Gson gson = new Gson();
-        return gson.fromJson(jsonString, anyClass);
+        return gson.fromJson(jsonString, classOfT);
     }
 }
