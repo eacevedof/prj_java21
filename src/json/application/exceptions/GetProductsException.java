@@ -1,6 +1,7 @@
 package json.application.exceptions;
 
 import shared.infrastructure.exceptions.AbstractException;
+import shared.infrastructure.enums.HttpStatusEnum;
 
 public final class GetProductsException extends AbstractException {
 
@@ -9,6 +10,9 @@ public final class GetProductsException extends AbstractException {
     }
 
     public static void ErrorOnReadingEndpoint(String endpoint) throws Exception {
-        throw new GetProductsException("Error reading endpoint:".concat(endpoint), 500);
+        throw new GetProductsException(
+                "Error reading endpoint:".concat(endpoint),
+                HttpStatusEnum.SERVICE_UNAVAILABLE.getValue()
+        );
     }
 }
