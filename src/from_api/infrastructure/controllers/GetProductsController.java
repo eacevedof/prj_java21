@@ -15,8 +15,9 @@ public final class GetProductsController {
             var products = (new GetProductsService()).invoke();
             var json = Json.getInstance().getListAsJsonString(products);
             //sys.printEnvs().die();
-            var home = sys.getEnv("HOME");
-            Echo.info(home, "HOME");
+            var home = sys.getUserDir();
+            Echo.info(home, "user idr");
+            //sys.die();
 
             Echo.info("** GetProductsController result: **");
             Log.getInstance().logDebug(json, "GetProductsController result :)");
@@ -26,6 +27,5 @@ public final class GetProductsController {
             Echo.error(e.getMessage());
         }
     }
-
 
 }

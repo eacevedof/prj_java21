@@ -34,6 +34,10 @@ public final class InfraSystem {
     }
 
     public String getEnv(String envKey) {
-        return System.getenv("JAVA_HOME");
+        return System.getenv(envKey);
+    }
+
+    public String getUserDir() {
+        return System.getProperty("user.dir");
     }
 }
