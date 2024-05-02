@@ -2,7 +2,7 @@ package from_api.infrastructure.controllers;
 
 import from_api.application.services.GetProductsService;
 import shared.infrastructure.formatters.Json;
-import shared.infrastructure.io.Log;
+import shared.infrastructure.io.Echo;
 
 public final class GetProductsController {
 
@@ -11,8 +11,8 @@ public final class GetProductsController {
         try {
             var products = (new GetProductsService()).invoke();
             var json = Json.getInstance().getListAsJsonString(products);
-            Log.console("** GetProductsController result: **");
-            Log.console(json);
+            Echo.console("** GetProductsController result: **");
+            Echo.console(json);
         }
         catch (Exception e) {
             e.printStackTrace();

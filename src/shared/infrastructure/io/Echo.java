@@ -1,11 +1,9 @@
 package shared.infrastructure.io;
 
-public final class Log {
+public final class Echo {
 
-    public Log() {}
-
-    public static Log getInstance() {
-        return (new Log());
+    public static Echo getInstance() {
+        return (new Echo());
     }
 
     public static void console(String message) {
