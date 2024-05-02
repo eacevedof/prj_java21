@@ -1,5 +1,4 @@
 package from_api.application.dtos;
-import java.util.HashMap;
 import java.util.Map;
 
 public record GetProductDto(
