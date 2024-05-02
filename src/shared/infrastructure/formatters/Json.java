@@ -12,9 +12,11 @@ public final class Json {
     }
 
     public <T> List<T> getJsonStringAsList(String jsonString, Class<T> entityType) {
-        Gson gson = new Gson();
         Type listType = TypeToken.getParameterized(List.class, entityType).getType();
-        return gson.fromJson(jsonString, listType);
+        return (new Gson()).fromJson(jsonString, listType);
     }
 
+    public String getListAsJsonString(List<Object> anyList) {
+        return (new Gson()).toJson(anyList);
+    }
 }
