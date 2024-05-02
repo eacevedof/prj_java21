@@ -32,4 +32,8 @@ public final class InfraSystem {
         }
         return infraSystem;
     }
+
+    public String getEnv(String envKey) {
+        return System.getenv("JAVA_HOME");
+    }
 }

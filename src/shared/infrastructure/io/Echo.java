@@ -13,6 +13,10 @@ public final class Echo {
         printWithTime(message, "info");
     }
 
+    public static void info(String message, String title) {
+        printWithTime(title+": "+message, "info");
+    }
+
     public static void error(String message) {
         printWithTime(message, "error");
     }
