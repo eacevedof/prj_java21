@@ -11,9 +11,12 @@ public final class GetProductsController {
     public void invoke()
     {
         try {
+            var sys = InfraSystem.getInstance();
             var products = (new GetProductsService()).invoke();
             var json = Json.getInstance().getListAsJsonString(products);
-            InfraSystem.getInstance().printEnvs().die();
+            //sys.printEnvs().die();
+            var home = sys.getEnv("HOME");
+            Echo.info(home, "HOME");
 
             Echo.info("** GetProductsController result: **");
             Log.getInstance().logDebug(json, "GetProductsController result :)");
