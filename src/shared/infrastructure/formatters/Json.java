@@ -16,7 +16,7 @@ public final class Json {
         return (new Gson()).fromJson(jsonString, listType);
     }
 
-    public String getListAsJsonString(List<Object> anyList) {
+    public String getListAsJsonString(List<?> anyList) {
         return (new Gson()).toJson(anyList);
     }
 }
