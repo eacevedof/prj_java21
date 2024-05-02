@@ -33,8 +33,8 @@ public final class GetProductsService {
             return products;
         }
         catch (Exception e) {
-            return products;
             Log.console(e.getMessage());
+            return products;
         }
     }
 }
