@@ -16,6 +16,6 @@ public final class ProductsRepository extends AbstractApiRepository implements I
 
     @Override
     public List<ProductEntity> getAllProducts() {
-        return this.getResult(PRODUCTS_ENDPOINT, ProductEntity.class);
+        return this.getResultFromGet(PRODUCTS_ENDPOINT, ProductEntity.class);
     }
 }

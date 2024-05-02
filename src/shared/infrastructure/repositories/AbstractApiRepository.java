@@ -8,7 +8,7 @@ import java.util.List;
 
 public abstract class AbstractApiRepository {
 
-    protected <T extends AbstractEntity> List<T> getResult(String endpoint, Class<T> entityClass) {
+    protected <T extends AbstractEntity> List<T> getResultFromGet(String endpoint, Class<T> entityClass) {
         try {
             String jsonProducts = FileGetContent.getInstance().getContentFromUrl(endpoint);
             return Json.getInstance().getJsonStringAsList(jsonProducts, entityClass);
