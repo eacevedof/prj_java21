@@ -14,10 +14,6 @@ public final class GetProductsController {
             var sys = InfraSystem.getInstance();
             var products = (new GetProductsService()).invoke();
             var json = Json.getInstance().getListAsJsonString(products);
-            //sys.printEnvs().die();
-            var home = sys.getUserDir();
-            Echo.info(home, "user idr");
-            //sys.die();
 
             Echo.info("** GetProductsController result: **");
             Log.getInstance().logDebug(json, "GetProductsController result :)");

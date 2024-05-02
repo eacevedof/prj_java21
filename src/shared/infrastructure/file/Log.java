@@ -8,7 +8,6 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.io.File;
-import shared.infrastructure.enums.EnvVarEnum;
 
 public final class Log {
 
@@ -64,7 +63,7 @@ public final class Log {
 
         try (FileWriter fileWriter = new FileWriter(pbjPath.toFile(), true)) {
             var now = getNow();
-            fileWriter.write("["+ now + "]:"+title+"\n" + content + "\n");
+            fileWriter.write("["+ now + "]: "+title+"\n" + content + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -98,7 +97,13 @@ public final class Log {
     }
 
     private String getLogDirPath() {
-        var pathHome = System.getenv(EnvVarEnum.PATH_PROJECTS.getValue());
-        return pathHome.concat("/prj_java21/logs");
+        //var pathHome = System.getenv(EnvVarEnum.PATH_PROJECTS.getValue());
+        var pathHome = getProjectDir();
+        return pathHome.concat("/logs");
+    }
+
+    private String getProjectDir() {
+        // $USER_HOME/projects/prj_java21
+        return System.getProperty("user.dir");
     }
 }
