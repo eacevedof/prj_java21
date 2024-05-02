@@ -1,8 +1,9 @@
 package shared.infrastructure.repositories;
 
 import shared.domain.entities.AbstractEntity;
-import shared.infrastructure.file.FileGetContent;
+import shared.infrastructure.http.requests.GETRequest;
 import shared.infrastructure.formatters.Json;
+import shared.infrastructure.file.Log;
 
 import java.util.List;
 
@@ -13,10 +14,10 @@ public abstract class AbstractApiRepository {
         Class<T> entityClass
     ) {
         try {
-            String jsonProducts = FileGetContent.getInstance().getContentFromUrl(endpoint);
+            String jsonProducts = GETRequest.getInstance().sendRequest(endpoint);
             return Json.getInstance().getJsonStringAsList(jsonProducts, entityClass);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.getInstance().logException(e);
             return null;
         }
     }
