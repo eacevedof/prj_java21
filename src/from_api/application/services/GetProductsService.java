@@ -33,7 +33,7 @@ public final class GetProductsService {
             return products;
         }
         catch (Exception e) {
-            Echo.console(e.getMessage());
+            Echo.info(e.getMessage());
             return products;
         }
     }
