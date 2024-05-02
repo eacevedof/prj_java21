@@ -4,7 +4,7 @@ import from_api.application.dtos.GetProductDto;
 import from_api.domain.entities.ProductEntity;
 import from_api.domain.repositories.InterfaceProductsRepository;
 import from_api.infrastructure.repositories.ProductsRepository;
-import shared.infrastructure.io.Log;
+import shared.infrastructure.io.Echo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +33,7 @@ public final class GetProductsService {
             return products;
         }
         catch (Exception e) {
-            Log.console(e.getMessage());
+            Echo.console(e.getMessage());
             return products;
         }
     }

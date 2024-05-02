@@ -1,14 +1,14 @@
 package demo_loop.application.services;
 
-import shared.infrastructure.io.Log;
+import shared.infrastructure.io.Echo;
 
 public final class LoopService {
     // Readonly property (not directly available in PHP, but could be achieved through getters only)
     //private final String readonlyProperty;
     public void Invoke() {
-        Log.console("LoopService");
+        Echo.console("LoopService");
         for (int i = 1; i <= 5; i++) {
-            Log.console("i = " + i);
+            Echo.console("i = " + i);
         }
     }
 }
