@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.io.File;
 
 public final class Log {
 
@@ -14,7 +15,7 @@ public final class Log {
         return (new Log());
     }
 
-    private void createLogsDirectory() {
+    private void tryToCreateLogsDirectory() {
         Path path = Paths.get("logs");
         if (Files.exists(path))
             return;
@@ -27,32 +28,40 @@ public final class Log {
     }
 
     public void logError(String errorMessage) {
-        createLogsDirectory();
+        tryToCreateLogsDirectory();
         String pathFile = getPathLogWithDaySuffix("error");
         logInFile(pathFile, errorMessage, "");
     }
 
     public void logError(String errorMessage, String title) {
-        createLogsDirectory();
+        tryToCreateLogsDirectory();
         String pathFile = getPathLogWithDaySuffix("error");
         logInFile(pathFile, errorMessage, title);
     }
 
     public void logDebug(String errorMessage) {
-        createLogsDirectory();
+        tryToCreateLogsDirectory();
         String pathFile = getPathLogWithDaySuffix("debug");
         logInFile(pathFile, errorMessage, "");
     }
 
     public void logDebug(String errorMessage, String title) {
-        createLogsDirectory();
+        tryToCreateLogsDirectory();
         String pathFile = getPathLogWithDaySuffix("debug");
         logInFile(pathFile, errorMessage, title);
     }
 
     private void logInFile(String pathFile, String content, String title) {
-        Path logFile = Paths.get(pathFile);
-        try (FileWriter fileWriter = new FileWriter(logFile.toFile(), true)) {
+        Path pbjPath = Paths.get(pathFile);
+        try {
+            tryToCreateFileOrFail();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+
+        try (FileWriter fileWriter = new FileWriter(pbjPath.toFile(), true)) {
             var now = getNow();
             fileWriter.write("["+ now + "]:"+title+"\n" + content + "\n");
         } catch (IOException e) {
@@ -76,5 +85,16 @@ public final class Log {
         LocalDateTime currentDateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return currentDateTime.format(formatter);
+    }
+
+    private String getCurrentDirectory() {
+        return System.getProperty("user.dir");
+    }
+
+    private void tryToCreateFileOrFail() throws Exception{
+        File logsDir = new File("../logs");
+        if (logsDir.exists())
+            return;
+        logsDir.mkdir();
     }
 }
