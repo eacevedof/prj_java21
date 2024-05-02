@@ -12,12 +12,12 @@ public final class GetProductsController {
         try {
             var products = (new GetProductsService()).invoke();
             var json = Json.getInstance().getListAsJsonString(products);
-            Echo.console("** GetProductsController result: **");
+            Echo.info("** GetProductsController result: **");
             Log.getInstance().logDebug(json, "GetProductsController result :)");
-            Echo.console(json);
+            Echo.info(json);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            Echo.error(e.getMessage());
         }
     }
 }

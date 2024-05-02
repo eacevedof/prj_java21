@@ -7,7 +7,7 @@ public final class PrintLoopController {
 
     public void Invoke()
     {
-        Echo.console("PrintController");
+        Echo.info("PrintController");
         (new LoopService()).Invoke();
     }
 }
