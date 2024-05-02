@@ -8,6 +8,8 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 public final class Log {
 
@@ -105,5 +107,21 @@ public final class Log {
     private String getProjectDir() {
         // $USER_HOME/projects/prj_java21
         return System.getProperty("user.dir");
+    }
+
+    public void logException(Throwable throwable) {
+        // Create a StringWriter to capture the stack trace
+        StringWriter stringWriter = new StringWriter();
+        // Create a PrintWriter to write the stack trace to the StringWriter
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+        // Write the stack trace to the PrintWriter
+        throwable.printStackTrace(printWriter);
+        // Flush the PrintWriter to ensure everything is written
+        printWriter.flush();
+        // Close the PrintWriter
+        printWriter.close();
+        // Return the stack trace as a string
+        var error = stringWriter.toString();
+        logError(error, "exception");
     }
 }
