@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.io.File;
+import shared.infrastructure.enums.EnvVarEnum;
 
 public final class Log {
 
@@ -70,7 +71,8 @@ public final class Log {
     }
 
     private String getPathLogWithDaySuffix(String fileName) {
-        return "../logs/"+fileName+"_"+getTodayInYYYYmmdd()+".log";
+        var logDirPath = getLogDirPath();
+        return logDirPath+"/"+fileName+"_"+getTodayInYYYYmmdd()+".log";
     }
 
     private String getNow() {
@@ -87,14 +89,16 @@ public final class Log {
         return currentDateTime.format(formatter);
     }
 
-    private String getCurrentDirectory() {
-        return System.getProperty("user.dir");
-    }
-
-    private void tryToCreateFileOrFail() throws Exception{
-        File logsDir = new File("../logs");
+    private void tryToCreateFileOrFail() throws Exception {
+        var pathLogDir = getLogDirPath();
+        File logsDir = new File(pathLogDir);
         if (logsDir.exists())
             return;
         logsDir.mkdir();
+    }
+
+    private String getLogDirPath() {
+        var pathHome = System.getenv(EnvVarEnum.PATH_PROJECTS.getValue());
+        return pathHome.concat("/prj_java21/logs");
     }
 }
