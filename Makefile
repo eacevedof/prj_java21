@@ -11,3 +11,6 @@ help: ## Show this help message
 gitpush: ## git push
 	clear;
 	git add .; git commit -m "$(m)"; git push;
+
+build:
+	docker-compose up -d --build --remove-orphans
