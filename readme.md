@@ -42,3 +42,5 @@ public class MongoClientConnectionExample {
 }
 ```
 #### [fly.io](https://fly.io/docs/languages-and-frameworks/dockerfile/)
+
+#### [redis](https://console.upstash.com/redis/69c1da72-4477-4869-a86d-c0bf83c3abd7)
