@@ -23,6 +23,7 @@ logs-be: ## shows logs be
 	docker logs cont-balance-java
 
 rebuild-all: ## rebuild all services containers in docker-compose
+	cp target/*.jar docker/balance_be
 	docker-compose -f docker-compose.yml down
 	docker-compose -f docker-compose.yml up -d --build --remove-orphans
 	docker ps
@@ -30,7 +31,7 @@ rebuild-all: ## rebuild all services containers in docker-compose
 ssh-be: ## ssh be
 	docker exec -it --user root cont-balance-java bash
 
-ssh-db: ## ssh be
+ssh-db: ## ssh db
 	docker exec -it --user root cont-balance-mysql bash
 
 health-be: ## health get-products
