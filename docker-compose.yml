@@ -4,7 +4,7 @@ services:
   balance_be:
     build:
       context: ./docker/balance_be
-    hostname: hostjava
+    hostname: hostbe
     container_name: cont-balance-java
     ports:
       # puerto-maquina-host:puerto-publico-en-contenedor
@@ -28,7 +28,7 @@ services:
 
   balance_db:
     image: mysql:8.0.33
-    hostname: hotsmysql
+    hostname: hostmysql
     container_name: cont-balance-mysql
     ports:
       - "3308:3306"
@@ -39,5 +39,5 @@ services:
     # restart: always
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      timeout: 10s
-      retries: 10
+      # timeout: 2s
+      # retries: 10
