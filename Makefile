@@ -32,3 +32,6 @@ ssh-be: ## ssh be
 
 ssh-db: ## ssh be
 	docker exec -it --user root cont-balance-mysql bash
+
+health-be:
+	curl http://localhost:8085/get-products
