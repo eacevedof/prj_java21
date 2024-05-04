@@ -44,3 +44,15 @@ public class MongoClientConnectionExample {
 #### [fly.io](https://fly.io/docs/languages-and-frameworks/dockerfile/)
 
 #### [redis](https://console.upstash.com/redis/69c1da72-4477-4869-a86d-c0bf83c3abd7)
+
+### properties
+```
+spring.datasource.url=${DB_URL}
+spring.datasource.username=${DB_USER_NAME}
+spring.datasource.password=${DB_PASSWORD}
+spring.application.name=balance
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+server.port=8080
+#spring.jpa.database-platform=${DB_PLATFORM}
+```
