@@ -31,3 +31,4 @@ bin/
 logs
 .fake
 target/
+docker/balance_java/*.jar
