@@ -3,7 +3,7 @@ version: '3'
 services:
   balance_be:
     build:
-      context: docker/balance_java
+      context: docker/balance_be
     hostname: hostjava
     container_name: cont-balance-java
     ports:
