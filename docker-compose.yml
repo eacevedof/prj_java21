@@ -7,7 +7,8 @@ services:
     hostname: hostjava
     container_name: cont-balance-java
     ports:
-      - "8080:8080"
+      # puerto-maquina-host:puerto-publico-en-contenedor
+      - "8085:8080"
     environment:
       DB_URL: jdbc:mysql://cont-balance-mysql:3306/db_balance?createDatabaseIfNotExist=true&serverTimezone=UTC
       DB_USER_NAME: root
