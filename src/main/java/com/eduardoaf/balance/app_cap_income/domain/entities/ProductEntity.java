@@ -1,4 +1,4 @@
-package com.eduardoaf.balance.from_api.domain.entities;
+package com.eduardoaf.balance.app_cap_income.domain.entities;
 
 import java.util.Date;
 import com.eduardoaf.balance.shared.domain.entities.AbstractEntity;

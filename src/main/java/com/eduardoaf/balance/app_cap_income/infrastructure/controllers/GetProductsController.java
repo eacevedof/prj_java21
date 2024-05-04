@@ -1,6 +1,6 @@
-package com.eduardoaf.balance.from_api.infrastructure.controllers;
+package com.eduardoaf.balance.app_cap_income.infrastructure.controllers;
 
-import com.eduardoaf.balance.from_api.application.services.GetProductsService;
+import com.eduardoaf.balance.app_cap_income.application.services.GetProductsService;
 import com.eduardoaf.balance.shared.infrastructure.file.Log;
 import com.eduardoaf.balance.shared.infrastructure.http.responses.SuccessResponse;
 import com.eduardoaf.balance.shared.infrastructure.enums.HttpStatusCodeEnum;

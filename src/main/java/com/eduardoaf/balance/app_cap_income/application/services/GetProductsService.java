@@ -1,8 +1,8 @@
-package com.eduardoaf.balance.from_api.application.services;
+package com.eduardoaf.balance.app_cap_income.application.services;
 
-import com.eduardoaf.balance.from_api.application.dtos.GetProductDto;
-import com.eduardoaf.balance.from_api.domain.entities.ProductEntity;
-import com.eduardoaf.balance.from_api.infrastructure.repositories.ProductsRepository;
+import com.eduardoaf.balance.app_cap_income.application.dtos.GetProductDto;
+import com.eduardoaf.balance.app_cap_income.domain.entities.ProductEntity;
+import com.eduardoaf.balance.app_cap_income.infrastructure.repositories.ProductsRepository;
 import com.eduardoaf.balance.shared.infrastructure.file.Log;
 import java.util.ArrayList;
 import java.util.List;

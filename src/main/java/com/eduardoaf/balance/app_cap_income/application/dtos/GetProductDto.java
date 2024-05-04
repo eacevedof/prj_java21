@@ -1,4 +1,4 @@
-package com.eduardoaf.balance.from_api.application.dtos;
+package com.eduardoaf.balance.app_cap_income.application.dtos;
 import java.util.Map;
 
 public record GetProductDto(

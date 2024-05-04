@@ -1,4 +1,4 @@
-package com.eduardoaf.balance.from_api.application.exceptions;
+package com.eduardoaf.balance.app_cap_income.application.exceptions;
 
 import com.eduardoaf.balance.shared.infrastructure.exceptions.AbstractException;
 import com.eduardoaf.balance.shared.infrastructure.enums.HttpStatusCodeEnum;

@@ -1,7 +1,7 @@
-package com.eduardoaf.balance.from_api.infrastructure.repositories;
+package com.eduardoaf.balance.app_cap_income.infrastructure.repositories;
 
-import com.eduardoaf.balance.from_api.domain.entities.ProductEntity;
-import com.eduardoaf.balance.from_api.domain.repositories.InterfaceProductsRepository;
+import com.eduardoaf.balance.app_cap_income.domain.entities.ProductEntity;
+import com.eduardoaf.balance.app_cap_income.domain.repositories.InterfaceProductsRepository;
 import com.eduardoaf.balance.shared.infrastructure.repositories.AbstractApiRepository;
 import org.springframework.stereotype.Component;
 
