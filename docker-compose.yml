@@ -3,7 +3,7 @@ version: '3'
 services:
   balance_be:
     build:
-      context: docker/balance_be
+      context: ./docker/balance_be
     hostname: hostjava
     container_name: cont-balance-java
     ports:
@@ -13,6 +13,9 @@ services:
       DB_URL: jdbc:mysql://cont-balance-mysql:3306/db_balance?createDatabaseIfNotExist=true&serverTimezone=UTC
       DB_USER_NAME: root
       DB_PASSWORD: 1234
+    #volumes:
+      #- ../../target/app_balance-0.0.1.jar :/app/app.jar
+
     # restart: always
     deploy:
       resources:
