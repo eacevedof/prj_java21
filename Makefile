@@ -12,5 +12,12 @@ gitpush: ## git push
 	clear;
 	git add .; git commit -m "$(m)"; git push;
 
-build:
-	docker-compose up -d --build --remove-orphans
+rebuild-all: ## rebuild all services containers in docker-compose
+	docker-compose -f docker-compose.yml down
+	docker-compose -f docker-compose.yml up -d --build --remove-orphans
+
+ssh-be: ## ssh be
+	docker exec -it --user root cont-balance-java bash
+
+ssh-db: ## ssh be
+	docker exec -it --user root cont-balance-mysql bash
