@@ -16,7 +16,7 @@ destroy:
 	docker-compose -f docker-compose.yml down
 
 rebuild-be: ## rebuild web image (nginx)
-	docker-compose up -d --no-deps --force-recreate --build balance_java
+	docker-compose up -d --no-deps --force-recreate --build balance_be
 	docker ps
 
 logs-be: ## shows logs be
