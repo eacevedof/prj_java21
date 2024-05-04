@@ -33,3 +33,4 @@ logs
 target/
 docker/balance_java/*.jar
 src/main/resources/application.properties
+.mvn
