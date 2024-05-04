@@ -15,6 +15,13 @@ gitpush: ## git push
 destroy:
 	docker-compose -f docker-compose.yml down
 
+rebuild-be: ## rebuild web image (nginx)
+	docker-compose up -d --no-deps --force-recreate --build balance_java
+	docker ps
+
+logs-be: ## shows logs be
+	docker logs cont-balance-java
+
 rebuild-all: ## rebuild all services containers in docker-compose
 	docker-compose -f docker-compose.yml down
 	docker-compose -f docker-compose.yml up -d --build --remove-orphans
