@@ -1,4 +1,4 @@
-SET NAMES utf8mb4;
+ET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
@@ -38,7 +38,7 @@ CREATE TABLE `app_array` (
   KEY `id_owner` (`id_owner`) USING BTREE,
   KEY `order_by_idx` (`order_by`) USING BTREE,
   KEY `id__type_idx` (`id`,`type`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=889 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of app_array
@@ -953,7 +953,7 @@ CREATE TABLE `app_business_attribute` (
   KEY `delete_date_idx` (`delete_date`) USING BTREE,
   KEY `id_business_idx` (`id_user`) USING BTREE,
   KEY `attr_key_idx` (`attr_key`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of app_business_attribute
@@ -1006,10 +1006,189 @@ CREATE TABLE `app_business_data` (
   KEY `id_user_idx` (`id_user`) USING BTREE,
   KEY `slug_idx` (`slug`) USING BTREE,
   KEY `id__uuid_idx` (`id`,`uuid`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of app_business_data
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for app_cap_expenses
+-- ----------------------------
+DROP TABLE IF EXISTS `app_cap_expenses`;
+CREATE TABLE `app_cap_expenses` (
+  `processflag` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'en procesos etl indica estados de preprocesamiento',
+  `insert_platform` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1' COMMENT 'base_array.type=platform (id_pk) desde que plataforma se ha realizado la creacion, mobile, web, api',
+  `insert_user` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'creador (no necesariamente en base_user) puede ser un proceso ETL',
+  `insert_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT 'datetime de la creacion',
+  `update_platform` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `update_user` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `update_date` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `delete_platform` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `delete_user` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `delete_date` datetime DEFAULT NULL,
+  `cru_csvnote` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `is_erpsent` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '0' COMMENT 'en procesos etl indica si se ha exportado',
+  `is_enabled` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1' COMMENT 'bloquea por completo el archivo',
+  `i` int DEFAULT NULL COMMENT 'en procesos de etl con disp offline el autoid en la máquina',
+  `id` int NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `code_erp` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `description` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'titulo',
+  `payment_for` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'en concepto de que',
+  `payed_to` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'quien ha realizado el pago',
+  `expense_date` datetime DEFAULT NULL COMMENT 'cuando se efectuo',
+  `amount` decimal(10,3) NOT NULL,
+  `notes` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `id_owner` int NOT NULL DEFAULT '-1',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `delete_date_idx` (`delete_date`) USING BTREE,
+  KEY `is_enabled_idx` (`is_enabled`) USING BTREE,
+  KEY `uuid_idx` (`uuid`) USING BTREE,
+  KEY `type_idx` (`amount`) USING BTREE,
+  KEY `id_pk_idx` (`notes`) USING BTREE,
+  KEY `description_idx` (`description`) USING BTREE,
+  KEY `id_owner` (`id_owner`) USING BTREE,
+  KEY `id__type_idx` (`id`,`amount`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
+-- Records of app_cap_expenses
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for app_cap_expenses_tags
+-- ----------------------------
+DROP TABLE IF EXISTS `app_cap_expenses_tags`;
+CREATE TABLE `app_cap_expenses_tags` (
+  `processflag` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'en procesos etl indica estados de preprocesamiento',
+  `insert_platform` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1' COMMENT 'base_array.type=platform (id_pk) desde que plataforma se ha realizado la creacion, mobile, web, api',
+  `insert_user` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'creador (no necesariamente en base_user) puede ser un proceso ETL',
+  `insert_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT 'datetime de la creacion',
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_cap_expense` int NOT NULL,
+  `id_cap_tag` int NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `id__type_idx` (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
+-- Records of app_cap_expenses_tags
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for app_cap_income
+-- ----------------------------
+DROP TABLE IF EXISTS `app_cap_income`;
+CREATE TABLE `app_cap_income` (
+  `processflag` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'en procesos etl indica estados de preprocesamiento',
+  `insert_platform` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1' COMMENT 'base_array.type=platform (id_pk) desde que plataforma se ha realizado la creacion, mobile, web, api',
+  `insert_user` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'creador (no necesariamente en base_user) puede ser un proceso ETL',
+  `insert_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT 'datetime de la creacion',
+  `update_platform` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `update_user` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `update_date` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `delete_platform` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `delete_user` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `delete_date` datetime DEFAULT NULL,
+  `cru_csvnote` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `is_erpsent` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '0' COMMENT 'en procesos etl indica si se ha exportado',
+  `is_enabled` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1' COMMENT 'bloquea por completo el archivo',
+  `i` int DEFAULT NULL COMMENT 'en procesos de etl con disp offline el autoid en la máquina',
+  `id` int NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `code_erp` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `description` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'titulo',
+  `payment_for` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'en concepto de que',
+  `payed_from` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'quien ha realizado el pago',
+  `income_date` datetime DEFAULT NULL COMMENT 'cuando se efectuo',
+  `amount` decimal(10,3) NOT NULL,
+  `notes` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `id_owner` int NOT NULL DEFAULT '-1',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `delete_date_idx` (`delete_date`) USING BTREE,
+  KEY `is_enabled_idx` (`is_enabled`) USING BTREE,
+  KEY `uuid_idx` (`uuid`) USING BTREE,
+  KEY `type_idx` (`amount`) USING BTREE,
+  KEY `id_pk_idx` (`notes`) USING BTREE,
+  KEY `description_idx` (`description`) USING BTREE,
+  KEY `id_owner` (`id_owner`) USING BTREE,
+  KEY `id__type_idx` (`id`,`amount`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
+-- Records of app_cap_income
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for app_cap_income_tags
+-- ----------------------------
+DROP TABLE IF EXISTS `app_cap_income_tags`;
+CREATE TABLE `app_cap_income_tags` (
+  `processflag` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'en procesos etl indica estados de preprocesamiento',
+  `insert_platform` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1' COMMENT 'base_array.type=platform (id_pk) desde que plataforma se ha realizado la creacion, mobile, web, api',
+  `insert_user` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'creador (no necesariamente en base_user) puede ser un proceso ETL',
+  `insert_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT 'datetime de la creacion',
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_cap_income` int NOT NULL,
+  `id_cap_tag` int NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `id__type_idx` (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
+-- Records of app_cap_income_tags
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for app_cap_tags
+-- ----------------------------
+DROP TABLE IF EXISTS `app_cap_tags`;
+CREATE TABLE `app_cap_tags` (
+  `processflag` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'en procesos etl indica estados de preprocesamiento',
+  `insert_platform` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1' COMMENT 'base_array.type=platform (id_pk) desde que plataforma se ha realizado la creacion, mobile, web, api',
+  `insert_user` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'creador (no necesariamente en base_user) puede ser un proceso ETL',
+  `insert_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT 'datetime de la creacion',
+  `update_platform` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `update_user` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `update_date` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `delete_platform` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `delete_user` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `delete_date` datetime DEFAULT NULL,
+  `cru_csvnote` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `is_erpsent` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '0' COMMENT 'en procesos etl indica si se ha exportado',
+  `is_enabled` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1' COMMENT 'bloquea por completo el archivo',
+  `i` int DEFAULT NULL COMMENT 'en procesos de etl con disp offline el autoid en la máquina',
+  `id` int NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `code_erp` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `type` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'income, expenses, both',
+  `description` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `id_owner` int NOT NULL DEFAULT '-1',
+  `order_by` int DEFAULT '100',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `delete_date_idx` (`delete_date`) USING BTREE,
+  KEY `is_enabled_idx` (`is_enabled`) USING BTREE,
+  KEY `uuid_idx` (`uuid`) USING BTREE,
+  KEY `type_idx` (`type`) USING BTREE,
+  KEY `description_idx` (`description`) USING BTREE,
+  KEY `id_owner` (`id_owner`) USING BTREE,
+  KEY `order_by_idx` (`order_by`) USING BTREE,
+  KEY `id__type_idx` (`id`,`type`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
+-- Records of app_cap_tags
 -- ----------------------------
 BEGIN;
 COMMIT;
@@ -1032,7 +1211,7 @@ CREATE TABLE `app_ip_untracked` (
   KEY `id_user_idx` (`id_user`) USING BTREE,
   KEY `id_owner_idx` (`id_owner`) USING BTREE,
   KEY `remote_ip_idx` (`remote_ip`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of app_ip_untracked
@@ -1058,7 +1237,7 @@ CREATE TABLE `app_query` (
   KEY `uuid_idx` (`uuid`) USING BTREE,
   KEY `module_idx` (`module`) USING BTREE,
   KEY `id__uuid_idx` (`id`,`uuid`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of app_query
@@ -1124,7 +1303,7 @@ CREATE TABLE `base_array` (
   KEY `description_idx` (`description`) USING BTREE,
   KEY `order_by_idx` (`order_by`) USING BTREE,
   KEY `id__type_idx` (`id`,`type`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of base_array
@@ -1186,7 +1365,7 @@ CREATE TABLE `base_user` (
   KEY `secret_idx` (`secret`) USING BTREE,
   KEY `description_idx` (`description`) USING BTREE,
   KEY `id__uuid_idx` (`id`,`uuid`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of base_user
@@ -1217,7 +1396,7 @@ CREATE TABLE `base_user_permissions` (
   KEY `delete_date_idx` (`delete_date`) USING BTREE,
   KEY `uuid_idx` (`uuid`) USING BTREE,
   KEY `id_user_idx` (`id_user`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of base_user_permissions
@@ -1248,7 +1427,7 @@ CREATE TABLE `base_user_preferences` (
   KEY `delete_date_idx` (`delete_date`) USING BTREE,
   KEY `id_user_idx` (`id_user`) USING BTREE,
   KEY `pref_key_idx` (`pref_key`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of base_user_preferences
