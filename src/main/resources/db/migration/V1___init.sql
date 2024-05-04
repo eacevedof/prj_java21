@@ -1077,7 +1077,7 @@ CREATE TABLE `app_query_actions` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_query` int NOT NULL,
   `description` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'csv, pdf, json, xml, ...',
-  `params` varchar(20000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'payload de columnas',
+  `params` varchar(16000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'payload de columnas',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `id__id_query_idx` (`id`,`id_query`) USING BTREE,
   KEY `id_query_idx` (`id_query`) USING BTREE
