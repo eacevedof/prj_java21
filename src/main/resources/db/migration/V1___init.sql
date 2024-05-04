@@ -38,7 +38,7 @@ CREATE TABLE `app_array` (
   KEY `id_owner` (`id_owner`) USING BTREE,
   KEY `order_by_idx` (`order_by`) USING BTREE,
   KEY `id__type_idx` (`id`,`type`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=889 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=889 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of app_array
@@ -953,7 +953,7 @@ CREATE TABLE `app_business_attribute` (
   KEY `delete_date_idx` (`delete_date`) USING BTREE,
   KEY `id_business_idx` (`id_user`) USING BTREE,
   KEY `attr_key_idx` (`attr_key`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of app_business_attribute
@@ -1006,7 +1006,7 @@ CREATE TABLE `app_business_data` (
   KEY `id_user_idx` (`id_user`) USING BTREE,
   KEY `slug_idx` (`slug`) USING BTREE,
   KEY `id__uuid_idx` (`id`,`uuid`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of app_business_data
@@ -1032,7 +1032,7 @@ CREATE TABLE `app_ip_untracked` (
   KEY `id_user_idx` (`id_user`) USING BTREE,
   KEY `id_owner_idx` (`id_owner`) USING BTREE,
   KEY `remote_ip_idx` (`remote_ip`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of app_ip_untracked
@@ -1058,7 +1058,7 @@ CREATE TABLE `app_query` (
   KEY `uuid_idx` (`uuid`) USING BTREE,
   KEY `module_idx` (`module`) USING BTREE,
   KEY `id__uuid_idx` (`id`,`uuid`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of app_query
@@ -1081,7 +1081,7 @@ CREATE TABLE `app_query_actions` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `id__id_query_idx` (`id`,`id_query`) USING BTREE,
   KEY `id_query_idx` (`id_query`) USING BTREE
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of app_query_actions
@@ -1124,7 +1124,7 @@ CREATE TABLE `base_array` (
   KEY `description_idx` (`description`) USING BTREE,
   KEY `order_by_idx` (`order_by`) USING BTREE,
   KEY `id__type_idx` (`id`,`type`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of base_array
@@ -1186,7 +1186,7 @@ CREATE TABLE `base_user` (
   KEY `secret_idx` (`secret`) USING BTREE,
   KEY `description_idx` (`description`) USING BTREE,
   KEY `id__uuid_idx` (`id`,`uuid`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of base_user
@@ -1217,7 +1217,7 @@ CREATE TABLE `base_user_permissions` (
   KEY `delete_date_idx` (`delete_date`) USING BTREE,
   KEY `uuid_idx` (`uuid`) USING BTREE,
   KEY `id_user_idx` (`id_user`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of base_user_permissions
@@ -1248,7 +1248,7 @@ CREATE TABLE `base_user_preferences` (
   KEY `delete_date_idx` (`delete_date`) USING BTREE,
   KEY `id_user_idx` (`id_user`) USING BTREE,
   KEY `pref_key_idx` (`pref_key`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of base_user_preferences
