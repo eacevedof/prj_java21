@@ -8,6 +8,6 @@ public final class PrintLoopController {
     public void Invoke()
     {
         Echo.getInstance().info("PrintController");
-        (new LoopService()).Invoke();
+        (new LoopService()).invoke();
     }
 }
