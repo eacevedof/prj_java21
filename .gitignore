@@ -31,6 +31,6 @@ bin/
 logs
 .fake
 target/
-docker/balance_java/*.jar
+docker/balance_be/*.jar
 src/main/resources/application.properties
 .mvn
