@@ -19,6 +19,18 @@ rebuild-be: ## rebuild web image (nginx)
 	docker-compose up -d --no-deps --force-recreate --build balance_be
 	docker ps
 
+debug: ## tail logs/debug.log
+	rm -f logs/debug-$(TODAY).log
+	touch logs/debug-$(TODAY).log
+	clear
+	tail -f logs/debug-$(TODAY).log
+
+error: ## tail logs/error.log
+	rm -f logs/error-$(TODAY).log
+	touch logs/error-$(TODAY).log
+	clear
+	tail -f logs/error-$(TODAY).log
+
 logs-be: ## shows logs be
 	docker logs cont-balance-java
 

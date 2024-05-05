@@ -77,7 +77,7 @@ public final class Log {
 
     private String getPathLogWithDaySuffix(String fileName) {
         var logDirPath = getLogDirPath();
-        return logDirPath+"/"+fileName+"_"+getTodayInYYYYmmdd()+".log";
+        return logDirPath+"/"+fileName+"-"+getTodayInYYYYmmdd()+".log";
     }
 
     private String getNow() {

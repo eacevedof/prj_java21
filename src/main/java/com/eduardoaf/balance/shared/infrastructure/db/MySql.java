@@ -12,8 +12,8 @@ import com.eduardoaf.balance.shared.infrastructure.db.contexts.MysqlContextDto;
 
 public final class MySql {
 
-    private MysqlContextDto contextDto = null;
-    private String stringConnection = null;
+    private final MysqlContextDto contextDto;
+    private String stringConnection = "";
 
     private Connection connection = null;
 
