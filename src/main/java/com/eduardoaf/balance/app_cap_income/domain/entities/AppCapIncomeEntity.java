@@ -5,6 +5,7 @@ import com.eduardoaf.balance.shared.domain.entities.AbstractEntity;
 import java.util.Date;
 
 public final class AppCapIncomeEntity extends AbstractEntity {
+
     public final int id;
     public final String uuid;
     public final String codeErp;
