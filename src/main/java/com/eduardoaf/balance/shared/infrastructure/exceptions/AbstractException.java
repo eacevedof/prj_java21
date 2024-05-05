@@ -1,6 +1,5 @@
 package com.eduardoaf.balance.shared.infrastructure.exceptions;
 
-
 import lombok.Getter;
 
 @Getter
