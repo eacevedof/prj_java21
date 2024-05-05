@@ -1,13 +1,13 @@
 package com.eduardoaf.balance.app_cap_income.infrastructure.repositories;
 
-import com.eduardoaf.balance.shared.infrastructure.repositories.AbstractMysqlRepository;
+import java.util.Map;
 import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.eduardoaf.balance.shared.infrastructure.file.Log;
 
-import java.util.Map;
+import com.eduardoaf.balance.shared.infrastructure.file.Log;
+import com.eduardoaf.balance.shared.infrastructure.repositories.AbstractMysqlRepository;
 
 @Component
 public final class AppCapIncomeReaderRepository extends AbstractMysqlRepository {
