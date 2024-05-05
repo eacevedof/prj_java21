@@ -8,17 +8,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.eduardoaf.balance.shared.infrastructure.db.contexts.ContextDto;
+import com.eduardoaf.balance.shared.infrastructure.db.contexts.MysqlContextDto;
 
 public final class MySql {
 
-    private final ContextDto contextDto;
+    private MysqlContextDto contextDto = null;
     private String stringConnection = null;
+
     private Connection connection = null;
+
     private int lastInsertId = -1;
     private int rowsAffected = -1;
 
-    public MySql(ContextDto contextDto) {
+    public MySql(MysqlContextDto contextDto) {
         this.contextDto = contextDto;
     }
 

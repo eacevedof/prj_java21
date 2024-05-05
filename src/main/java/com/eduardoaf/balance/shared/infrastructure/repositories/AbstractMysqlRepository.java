@@ -1,24 +1,42 @@
 package com.eduardoaf.balance.shared.infrastructure.repositories;
 
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-
 import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+
+import com.eduardoaf.balance.shared.infrastructure.db.contexts.MysqlContextDto;
 import com.eduardoaf.balance.shared.infrastructure.db.MySql;
 
-public abstract class AbstractMysqlRepository<T> {
+public abstract class AbstractMysqlRepository {
 
-    private final JdbcTemplate jdbcTemplate;
+    @Autowired
+    private Environment env;
+    private MySql mySql = null;
 
-    protected AbstractMysqlRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    protected int lastInsertId = -1;
+    protected int rowsAffected = -1;
+
+    private void loadConnection() {
+        if (mySql != null) return;
+        String connectionString = env.getProperty("spring.datasource.url");
+        String username = env.getProperty("spring.datasource.username");
+        String password = env.getProperty("spring.datasource.password");
+        var mysqlDto = MysqlContextDto.getInstance(connectionString, username, password);
+        mySql = new MySql(mysqlDto);
     }
 
-    protected void write(String sql) {
-        jdbcTemplate.update(sql);
+    protected boolean execute(String query) throws Exception {
+        loadConnection();
+        var result = mySql.execute(query);
+        lastInsertId = mySql.getLastInsertId();
+        rowsAffected = mySql.getRowsAffected();
+        return result;
     }
 
-    public List<T> getData(String sql, RowMapper<T> rowMapper) {
-        return jdbcTemplate.query(sql, rowMapper);
+    protected List<Map<String, String>> query(String query) throws Exception {
+        loadConnection();
+        return mySql.query(query);
     }
 }
