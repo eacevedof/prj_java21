@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
 import com.eduardoaf.balance.shared.infrastructure.db.contexts.MysqlContextDto;
-import lombok.Getter;
 
 public final class MySql {
 
