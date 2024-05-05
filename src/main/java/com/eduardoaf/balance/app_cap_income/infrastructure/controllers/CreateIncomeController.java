@@ -1,5 +1,7 @@
 package com.eduardoaf.balance.app_cap_income.infrastructure.controllers;
 
+import com.eduardoaf.balance.app_cap_income.application.dtos.CreateIncomeDto;
+import com.eduardoaf.balance.app_cap_income.application.services.CreateIncomeService;
 import com.eduardoaf.balance.app_cap_income.application.services.GetProductsService;
 import com.eduardoaf.balance.shared.infrastructure.enums.HttpStatusCodeEnum;
 import com.eduardoaf.balance.shared.infrastructure.file.Log;
@@ -7,34 +9,34 @@ import com.eduardoaf.balance.shared.infrastructure.http.responses.SuccessRespons
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public final class InsertCapIncomeController {
+public final class CreateIncomeController {
 
     private final Log log;
-    private final GetProductsService getProductsService;
+    private final CreateIncomeService createIncomeService;
 
     @Autowired
-    public InsertCapIncomeController(
+    public CreateIncomeController(
         Log log,
-        GetProductsService getProductsService
+        CreateIncomeService getProductsService
     ) {
         this.log = log;
-        this.getProductsService = getProductsService;
+        this.createIncomeService = getProductsService;
     }
 
     @PostMapping("api/v1/create-income")
-    public ResponseEntity<?> invoke()
+    public ResponseEntity<?> invoke(@RequestBody CreateIncomeDto createIncomeDto)
     {
         try {
-            var products = getProductsService.invoke();
+            var createdIncomeDto = createIncomeService.invoke(createIncomeDto);
 
             return ResponseEntity.ok(SuccessResponse.getInstance(
                         HttpStatusCodeEnum.OK.getValue(),
-                        products
+                    createdIncomeDto
                     ));
         }
         catch (Exception e) {
