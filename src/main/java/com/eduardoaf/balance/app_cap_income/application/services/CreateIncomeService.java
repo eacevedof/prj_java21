@@ -52,6 +52,7 @@ public final class CreateIncomeService {
 
         return CreatedIncomeDto.getInstance(
             Integer.parseInt(dict.get("id")),
+            dict.get("uuid"),
             dict.get("code_erp"),
             dict.get("description"),
             dict.get("payment_for"),
