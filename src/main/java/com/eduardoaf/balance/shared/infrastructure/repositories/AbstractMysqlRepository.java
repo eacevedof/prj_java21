@@ -20,6 +20,7 @@ public abstract class AbstractMysqlRepository {
 
     private void loadConnection() {
         if (mySql != null) return;
+
         String connectionString = env.getProperty("spring.datasource.url");
         String username = env.getProperty("spring.datasource.username");
         String password = env.getProperty("spring.datasource.password");
