@@ -13,7 +13,7 @@ public record GetProductDto(
             (int) primitives.getOrDefault("id", null),
             (int) primitives.getOrDefault("codeErp", ""),
             (String) primitives.getOrDefault("description", ""),
-            (int) primitives.getOrDefault("idProductBrand", null),
+            (int) primitives.getOrDefault("idOwner", null),
             (String) primitives.getOrDefault("name", "")
         );
     }

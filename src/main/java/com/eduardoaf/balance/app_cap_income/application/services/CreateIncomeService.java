@@ -36,15 +36,30 @@ public final class CreateIncomeService {
     public CreatedIncomeDto invoke(CreateIncomeDto createIncomeDto) {
         List<GetProductDto> products = new ArrayList<>();
         try {
-            var newIncome = AppCapIncomeEntity.getInstance(null, null, null, createIncomeDto.description(), createIncomeDto.description(), )
+            var newIncome = AppCapIncomeEntity.getInstance(
+                    null, null, null, createIncomeDto.description(), createIncomeDto.description()
+            );
             appCapIncomeWriterRepository.createNewIncome(newIncome);
-            var lastId = appCapIncomeWriterRepository.
+            var lastId = appCapIncomeWriterRepository.getLastInsertId();
+            var dict = appCapIncomeReaderRepository.getIncomeByIncomeId(lastId);
+            if (dict.isEmpty())
+                return null;
 
-            return products;
+            return CreatedIncomeDto.getInstance(
+                Integer.parseInt(dict.get("id")),
+                dict.get("code_erp"),
+                dict.get("description"),
+                dict.get("payment_for"),
+                dict.get("payed_from"),
+                dict.get("income_date"),
+                Double.parseDouble(dict.get("amount")),
+                dict.get("notes"),
+                Integer.parseInt(dict.get("id_owner"))
+            );
         }
         catch (Exception e) {
             log.exception(e);
-            return products;
+            return null;
         }
     }
 }

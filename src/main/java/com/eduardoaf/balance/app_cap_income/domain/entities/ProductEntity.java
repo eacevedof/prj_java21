@@ -105,7 +105,7 @@ public final class ProductEntity extends AbstractEntity implements InterfaceEnti
                 ", id=" + id +
                 ", codeErp=" + codeErp +
                 ", description='" + description + '\'' +
-                ", idProductBrand=" + idProductBrand +
+                ", idOwner=" + idProductBrand +
                 ", idProductFamily=" + idProductFamily +
                 ", idProductSubfamily=" + idProductSubfamily +
                 ", name='" + name + '\'' +
