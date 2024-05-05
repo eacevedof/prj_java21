@@ -18,7 +18,7 @@ public final class AppCapIncomeWriterRepository extends AbstractMysqlRepository 
     @Autowired
     private Uuid uuid;
 
-    public void insertIncome(AppCapIncomeEntity appCapIncomeEntity) throws Exception {
+    public void createNewIncome(AppCapIncomeEntity appCapIncomeEntity) throws Exception {
         var sql = InsertQuery.fromIntoTable("app_cap_income")
                 .addColumn("insert_platform", appCapIncomeEntity.insertPlatform)
                 .addColumn("insert_user", appCapIncomeEntity.insertUser)

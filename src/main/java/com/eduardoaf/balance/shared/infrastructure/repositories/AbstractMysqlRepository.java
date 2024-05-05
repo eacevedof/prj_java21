@@ -40,4 +40,13 @@ public abstract class AbstractMysqlRepository {
         loadConnection();
         return mySql.query(query);
     }
+
+    public int getLastInsertId() {
+        return lastInsertId;
+    }
+
+    public int getRowsAffected() {
+        return rowsAffected;
+    }
+
 }
