@@ -42,7 +42,7 @@ public class InsertQuery {
         }
 
         StringBuilder sqlInsert = new StringBuilder("INSERT INTO ").append(intoTable).append(" (");
-        StringBuilder sqlValues = new StringBuilder("VALUES (");
+        StringBuilder sqlValues = new StringBuilder("\nVALUES (");
 
         for (int i = 0; i < columns.size(); i++) {
             sqlInsert.append(columns.get(i));
