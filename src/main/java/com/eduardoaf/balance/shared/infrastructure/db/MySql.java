@@ -16,6 +16,7 @@ public final class MySql {
     private String stringConnection = null;
     private Connection connection = null;
     private int lastInsertId = -1;
+    private int rowsAffected = -1;
 
     public MySql(ContextDto contextDto) {
         this.contextDto = contextDto;
@@ -43,6 +44,31 @@ public final class MySql {
             rowsResult.add(row);
         }
         return rowsResult;
+    }
+
+    public boolean execute(String query) throws Exception {
+        query = query.trim();
+        if (query.isEmpty()) return false;
+
+        boolean isInsert = query.contains("INSERT INTO ");
+        if (isInsert) query += "; SELECT LAST_INSERT_ID();";
+
+        loadStringConnectionOrFail();
+        loadConnection();
+
+        Statement statement = connection.createStatement();
+
+        if (isInsert) {
+            statement.execute(query);
+            try (ResultSet resultSet = statement.getGeneratedKeys()) {
+                if (resultSet.next()) {
+                    lastInsertId = resultSet.getInt(1);
+                }
+            }
+        } else {
+            rowsAffected = statement.executeUpdate(query);
+        }
+        return true;
     }
 
     private List<String> getColumnNames(ResultSet resultSet) throws SQLException {
@@ -86,5 +112,12 @@ public final class MySql {
         }
     }
 
+    public int getRowsAffected() {
+        return rowsAffected;
+    }
+
+    public int getLastInsertId() {
+        return lastInsertId;
+    }
 
 }
