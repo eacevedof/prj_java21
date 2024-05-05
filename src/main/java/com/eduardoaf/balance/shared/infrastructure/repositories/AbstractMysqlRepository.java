@@ -4,6 +4,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.util.List;
+import com.eduardoaf.balance.shared.infrastructure.db.MySql;
 
 public abstract class AbstractMysqlRepository<T> {
 
