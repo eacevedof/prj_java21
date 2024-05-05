@@ -47,12 +47,12 @@ public class InsertQuery {
         for (int i = 0; i < columns.size(); i++) {
             sqlInsert.append(columns.get(i));
 
-            var value = values.get(i);
-            value = getObjectAsString(value);
-            if (!value.equals("null"))
-                value = "'"+ value +"'";
-
-            sqlValues.append(value);
+            var obj = values.get(i);
+            String strValue = getObjectAsString(obj);
+            if (!strValue.equals("null")) {
+                strValue = "'" + strValue.replace("'", "\\'") + "'";
+            }
+            sqlValues.append(strValue);
 
             if (i < columns.size() - 1) {
                 sqlInsert.append(", ");
