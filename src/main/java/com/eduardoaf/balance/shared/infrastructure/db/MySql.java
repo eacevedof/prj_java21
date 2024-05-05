@@ -34,8 +34,6 @@ public final class MySql {
 
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
-        connection.close();
-
         List<String> columnNames = getColumnNames(resultSet);
         while (resultSet.next()) {
             Map<String, String> row = new HashMap<>();
@@ -45,6 +43,7 @@ public final class MySql {
             }
             rowsResult.add(row);
         }
+        connection.close();
         return rowsResult;
     }
 
@@ -60,7 +59,8 @@ public final class MySql {
         Statement statement = connection.createStatement();
 
         if (writeQuery.contains("INSERT INTO ")) {
-            statement.execute(writeQuery);
+            //statement = connection.prepareStatement(writeQuery, Statement.RETURN_GENERATED_KEYS);
+            rowsAffected = statement.executeUpdate(writeQuery, Statement.RETURN_GENERATED_KEYS);
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
                 if (resultSet.next()) {
                     lastInsertId = resultSet.getInt(1);

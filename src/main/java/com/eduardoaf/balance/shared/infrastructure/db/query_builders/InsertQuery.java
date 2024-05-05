@@ -2,6 +2,8 @@ package com.eduardoaf.balance.shared.infrastructure.db.query_builders;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.eduardoaf.balance.shared.infrastructure.db.MySql;
 
@@ -26,10 +28,6 @@ public class InsertQuery {
         return new InsertQuery(intoTable);
     }
 
-    public static InsertQuery fromIntoTable(String intoTable, MySql mySql) {
-        return new InsertQuery(intoTable, mySql);
-    }
-
     public InsertQuery addColumn(String column, Object value) {
         columns.add(column);
         values.add(value);
@@ -48,7 +46,13 @@ public class InsertQuery {
 
         for (int i = 0; i < columns.size(); i++) {
             sqlInsert.append(columns.get(i));
-            sqlValues.append("'" + values.get(i) + "'");
+
+            var value = values.get(i);
+            value = getObjectAsString(value);
+            if (!value.equals("null"))
+                value = "'"+ value +"'";
+
+            sqlValues.append(value);
 
             if (i < columns.size() - 1) {
                 sqlInsert.append(", ");
@@ -57,5 +61,20 @@ public class InsertQuery {
         }
         sqlInsert.append(") ").append(sqlValues).append(")");
         return sqlInsert.toString();
+    }
+
+    private String getObjectAsString(Object obj) {
+        if (obj == null)
+            return "null"; // Return null if the object is null
+
+        if (obj instanceof Double || obj instanceof Integer)
+            return String.valueOf(obj); // Convert Double or Integer to string
+
+        if (obj instanceof Date) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return dateFormat.format((Date) obj); // Convert Date to string using a specific format
+        }
+
+        return obj.toString(); // Convert other objects to string using their toString() method
     }
 }
