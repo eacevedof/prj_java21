@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.eduardoaf.balance.shared.infrastructure.db.contexts.MysqlContextDto;
+import lombok.Getter;
 
 public final class MySql {
 
@@ -17,7 +18,9 @@ public final class MySql {
 
     private Connection connection = null;
 
+    @Getter
     private int lastInsertId = -1;
+    @Getter
     private int rowsAffected = -1;
 
     public MySql(MysqlContextDto contextDto) {
@@ -47,19 +50,18 @@ public final class MySql {
         return rowsResult;
     }
 
-    public boolean execute(String writeQuery) throws Exception {
+    public void execute(String writeQuery) throws Exception {
         lastInsertId = -1;
         rowsAffected = 0;
 
         writeQuery = writeQuery.trim();
-        if (writeQuery.isEmpty()) return false;
+        if (writeQuery.isEmpty()) return;
 
         loadStringConnectionOrFail();
         loadConnection();
         Statement statement = connection.createStatement();
 
         if (writeQuery.contains("INSERT INTO ")) {
-            //statement = connection.prepareStatement(writeQuery, Statement.RETURN_GENERATED_KEYS);
             rowsAffected = statement.executeUpdate(writeQuery, Statement.RETURN_GENERATED_KEYS);
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
                 if (resultSet.next()) {
@@ -67,12 +69,11 @@ public final class MySql {
                 }
             }
             connection.close();
-            return true;
+            return;
         }
 
         rowsAffected = statement.executeUpdate(writeQuery);
         connection.close();
-        return true;
     }
 
     private List<String> getColumnNames(ResultSet resultSet) throws SQLException {
@@ -114,14 +115,6 @@ public final class MySql {
                     contextDto.password()
             );
         }
-    }
-
-    public int getRowsAffected() {
-        return rowsAffected;
-    }
-
-    public int getLastInsertId() {
-        return lastInsertId;
     }
 
 }
