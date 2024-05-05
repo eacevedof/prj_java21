@@ -15,8 +15,16 @@ public final class Uuid {
 
     public String getUuid() {
         UUID uuid = UUID.randomUUID();
-        var sha256 = getSha256(uuid.toString());
-        return sha256;
+        return getSha256(uuid.toString());
+    }
+
+    public String getUuid(String prefix) {
+        return prefix + getUuid();
+    }
+
+    public String getUuid(String prefix, int length) {
+        var sha256 = getUuid(prefix);
+        return sha256.substring(0, length);
     }
 
     private String getSha256(String value) {

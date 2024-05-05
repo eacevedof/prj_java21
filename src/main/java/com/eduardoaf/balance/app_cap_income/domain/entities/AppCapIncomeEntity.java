@@ -10,8 +10,8 @@ public final class AppCapIncomeEntity extends AbstractEntity {
     public final String codeErp;
     public final String description;
     public final String paymentFor;
-    public final String payedTo;
-    public final Date expenseDate;
+    public final String payedFrom;
+    public final String incomeDate;
     public final double amount;
     public final String notes;
     public final int idOwner;
@@ -20,8 +20,8 @@ public final class AppCapIncomeEntity extends AbstractEntity {
     public final int isEnabled;
 
     public AppCapIncomeEntity(
-        int id, String uuid, String codeErp, String description, String paymentFor, String payedTo,
-        Date expenseDate, double amount, String notes, int idOwner, String cruCsvNote, int isErpSent,
+        int id, String uuid, String codeErp, String description, String paymentFor, String payedFrom,
+        String incomeDate, double amount, String notes, int idOwner, String cruCsvNote, int isErpSent,
         int isEnabled
     ) {
         this.id = id;
@@ -29,8 +29,8 @@ public final class AppCapIncomeEntity extends AbstractEntity {
         this.codeErp = codeErp;
         this.description = description;
         this.paymentFor = paymentFor;
-        this.payedTo = payedTo;
-        this.expenseDate = expenseDate;
+        this.payedFrom = payedFrom;
+        this.incomeDate = incomeDate;
         this.amount = amount;
         this.notes = notes;
         this.idOwner = idOwner;
@@ -40,12 +40,12 @@ public final class AppCapIncomeEntity extends AbstractEntity {
     }
 
     public static AppCapIncomeEntity getInstance(
-        int id, String uuid, String codeErp, String description, String paymentFor, String payedTo,
-        Date expenseDate, double amount, String notes, int idOwner, String cruCsvNote, int isErpSent,
+        int id, String uuid, String codeErp, String description, String paymentFor, String payedFrom,
+        String incomeDate, double amount, String notes, int idOwner, String cruCsvNote, int isErpSent,
         int isEnabled
     ) {
         return new AppCapIncomeEntity(
-            id, uuid,codeErp, description, paymentFor, payedTo, expenseDate, amount,
+            id, uuid,codeErp, description, paymentFor, payedFrom, incomeDate, amount,
             notes, idOwner, cruCsvNote, isErpSent, isEnabled
         );
     }
