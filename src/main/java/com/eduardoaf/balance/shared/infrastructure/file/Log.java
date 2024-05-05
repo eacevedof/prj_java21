@@ -88,7 +88,7 @@ public final class Log {
 
     private String getTodayInYYYYmmdd() {
         LocalDateTime currentDateTime = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         return currentDateTime.format(formatter);
     }
 
