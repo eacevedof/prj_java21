@@ -50,4 +50,14 @@ public final class AppCapIncomeEntity extends AbstractEntity {
             notes, idOwner, cruCsvNote, isErpSent, isEnabled
         );
     }
+
+    public static AppCapIncomeEntity getInstance(
+            String codeErp, String description, String paymentFor, String payedFrom,
+            String incomeDate, double amount, String notes, int idOwner
+    ) {
+        return new AppCapIncomeEntity(
+                0, null, codeErp, description, paymentFor, payedFrom, incomeDate, amount,
+                notes, idOwner, null, 0, 1
+        );
+    }
 }

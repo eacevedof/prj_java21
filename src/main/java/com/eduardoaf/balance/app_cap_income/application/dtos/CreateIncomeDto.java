@@ -1,26 +1,35 @@
 package com.eduardoaf.balance.app_cap_income.application.dtos;
 
 public record CreateIncomeDto(
-     int id,
-     int codeErp,
-     String description,
-     int idProductBrand,
-     String name
+        String codeErp,
+        String description,
+        String paymentFor,
+        String payedFrom,
+        String incomeDate,
+        Double amount,
+        String notes,
+        int idOwner
 ) {
 
     public static CreateIncomeDto getInstance(
-        int id,
-        int codeErp,
-        String description,
-        int idProductBrand,
-        String name
+            String codeErp,
+            String description,
+            String paymentFor,
+            String payedFrom,
+            String incomeDate,
+            Double amount,
+            String notes,
+            int idOwner
     ) {
         return new CreateIncomeDto(
-            id,
-            codeErp,
-            description,
-            idProductBrand,
-            name
+                codeErp,
+                description,
+                paymentFor,
+                payedFrom,
+                incomeDate,
+                amount,
+                notes,
+                idOwner
         );
     }
 }

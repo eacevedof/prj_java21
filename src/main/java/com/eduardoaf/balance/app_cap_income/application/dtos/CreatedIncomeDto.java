@@ -8,7 +8,7 @@ public record CreatedIncomeDto(
      String payedFrom,
      String incomeDate,
      Double amount,
-     String Notes,
+     String notes,
      int idOwner
 ) {
 
@@ -20,7 +20,7 @@ public record CreatedIncomeDto(
         String payedFrom,
         String incomeDate,
         Double amount,
-        String Notes,
+        String notes,
         int idOwner
     ) {
         return new CreatedIncomeDto(
@@ -31,7 +31,7 @@ public record CreatedIncomeDto(
             payedFrom,
             incomeDate,
             amount,
-            Notes,
+            notes,
             idOwner
         );
     }

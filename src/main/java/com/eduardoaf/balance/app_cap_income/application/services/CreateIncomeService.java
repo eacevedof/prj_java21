@@ -34,10 +34,20 @@ public final class CreateIncomeService {
     }
 
     public CreatedIncomeDto invoke(CreateIncomeDto createIncomeDto) {
-        List<GetProductDto> products = new ArrayList<>();
         try {
+            /*
+            *   String codeErp, String description, String paymentFor, String payedFrom,
+            String incomeDate, double amount, String notes, int idOwner
+            * */
             var newIncome = AppCapIncomeEntity.getInstance(
-                    null, null, null, createIncomeDto.description(), createIncomeDto.description()
+                    createIncomeDto.codeErp(),
+                    createIncomeDto.description(),
+                    createIncomeDto.paymentFor(),
+                    createIncomeDto.payedFrom(),
+                    createIncomeDto.incomeDate(),
+                    createIncomeDto.amount(),
+                    createIncomeDto.notes(),
+                    createIncomeDto.idOwner()
             );
             appCapIncomeWriterRepository.createNewIncome(newIncome);
             var lastId = appCapIncomeWriterRepository.getLastInsertId();
