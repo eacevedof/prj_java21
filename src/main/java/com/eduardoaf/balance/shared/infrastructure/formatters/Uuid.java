@@ -24,7 +24,7 @@ public final class Uuid {
 
     public String getUuid(String prefix, int length) {
         var sha256 = getUuid(prefix);
-        return sha256.substring(0, length);
+        return sha256.substring(0, length).toUpperCase();
     }
 
     private String getSha256(String value) {
