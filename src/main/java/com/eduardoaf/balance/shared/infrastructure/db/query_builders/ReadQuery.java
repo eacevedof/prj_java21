@@ -25,7 +25,7 @@ public class ReadQuery {
     private String sql = "";
     private String sqlCount = "";
 
-    private List<String> reserved = List.of("get", "order", "password");
+    private final List<String> reserved = List.of("get", "order", "password");
 
     private static final String READ = "r";
     public static final String ORDER_ASC = "ASC";
