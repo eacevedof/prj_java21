@@ -65,16 +65,15 @@ public class InsertQuery {
 
     private String getObjectAsString(Object obj) {
         if (obj == null)
-            return "null"; // Return null if the object is null
+            return "null";
 
         if (obj instanceof Double || obj instanceof Integer)
-            return String.valueOf(obj); // Convert Double or Integer to string
+            return String.valueOf(obj);
 
         if (obj instanceof Date) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            return dateFormat.format((Date) obj); // Convert Date to string using a specific format
+            return dateFormat.format((Date) obj);
         }
-
-        return obj.toString(); // Convert other objects to string using their toString() method
+        return obj.toString();
     }
 }
