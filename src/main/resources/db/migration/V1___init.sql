@@ -1,19 +1,3 @@
-/*
- Navicat Premium Data Transfer
-
- Source Server         : db_balance
- Source Server Type    : MySQL
- Source Server Version : 80033 (8.0.33)
- Source Host           : localhost:3308
- Source Schema         : db_balance
-
- Target Server Type    : MySQL
- Target Server Version : 80033 (8.0.33)
- File Encoding         : 65001
-
- Date: 05/05/2024 00:35:53
-*/
-
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -1055,7 +1039,7 @@ CREATE TABLE `app_cap_expenses` (
   `description` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'titulo',
   `payment_for` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'en concepto de que',
   `payed_to` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'quien ha realizado el pago',
-  `expense_date` datetime DEFAULT NULL COMMENT 'cuando se efectuo',
+  `expense_date` date DEFAULT NULL COMMENT 'cuando se efectuo',
   `amount` decimal(10,3) NOT NULL,
   `notes` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `id_owner` int NOT NULL DEFAULT '-1',
@@ -1167,7 +1151,7 @@ CREATE TABLE `app_cap_income` (
   `description` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'titulo',
   `payment_for` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'en concepto de que',
   `payed_from` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'quien ha realizado el pago',
-  `income_date` datetime DEFAULT NULL COMMENT 'cuando se efectuo',
+  `income_date` date DEFAULT NULL COMMENT 'cuando se efectuo',
   `amount` decimal(10,3) NOT NULL,
   `notes` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `id_owner` int NOT NULL DEFAULT '-1',
