@@ -10,9 +10,13 @@ import java.util.Map;
 public final class AppCapIncomeReaderRepository extends AbstractMysqlRepository {
 
     public Map<String, String> getIncomeByIncomeId(int incomeId) throws Exception {
-        String sql = """
-        SELECT * FROM app_cap_income
-        """;
+        String sql = String.format("""
+        SELECT * 
+        FROM app_cap_income
+        WHERE 1=1
+        AND delete_date IS NULL
+        AND id = %s
+        """, incomeId);
         var list = query(sql);
         if (list.isEmpty()) return Collections.emptyMap();
         return list.getFirst();
