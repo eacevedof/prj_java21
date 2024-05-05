@@ -33,43 +33,33 @@ public final class CreateIncomeService {
         this.appCapIncomeReaderRepository = appCapIncomeReaderRepository;
     }
 
-    public CreatedIncomeDto invoke(CreateIncomeDto createIncomeDto) {
-        try {
-            /*
-            *   String codeErp, String description, String paymentFor, String payedFrom,
-            String incomeDate, double amount, String notes, int idOwner
-            * */
-            var newIncome = AppCapIncomeEntity.getInstance(
-                    createIncomeDto.codeErp(),
-                    createIncomeDto.description(),
-                    createIncomeDto.paymentFor(),
-                    createIncomeDto.payedFrom(),
-                    createIncomeDto.incomeDate(),
-                    createIncomeDto.amount(),
-                    createIncomeDto.notes(),
-                    createIncomeDto.idOwner()
-            );
-            appCapIncomeWriterRepository.createNewIncome(newIncome);
-            var lastId = appCapIncomeWriterRepository.getLastInsertId();
-            var dict = appCapIncomeReaderRepository.getIncomeByIncomeId(lastId);
-            if (dict.isEmpty())
-                return null;
-
-            return CreatedIncomeDto.getInstance(
-                Integer.parseInt(dict.get("id")),
-                dict.get("code_erp"),
-                dict.get("description"),
-                dict.get("payment_for"),
-                dict.get("payed_from"),
-                dict.get("income_date"),
-                Double.parseDouble(dict.get("amount")),
-                dict.get("notes"),
-                Integer.parseInt(dict.get("id_owner"))
-            );
-        }
-        catch (Exception e) {
-            log.exception(e);
+    public CreatedIncomeDto invoke(CreateIncomeDto createIncomeDto) throws Exception {
+        var newIncome = AppCapIncomeEntity.getInstance(
+                createIncomeDto.codeErp(),
+                createIncomeDto.description(),
+                createIncomeDto.paymentFor(),
+                createIncomeDto.payedFrom(),
+                createIncomeDto.incomeDate(),
+                createIncomeDto.amount(),
+                createIncomeDto.notes(),
+                createIncomeDto.idOwner()
+        );
+        appCapIncomeWriterRepository.createNewIncome(newIncome);
+        var lastId = appCapIncomeWriterRepository.getLastInsertId();
+        var dict = appCapIncomeReaderRepository.getIncomeByIncomeId(lastId);
+        if (dict.isEmpty())
             return null;
-        }
+
+        return CreatedIncomeDto.getInstance(
+            Integer.parseInt(dict.get("id")),
+            dict.get("code_erp"),
+            dict.get("description"),
+            dict.get("payment_for"),
+            dict.get("payed_from"),
+            dict.get("income_date"),
+            Double.parseDouble(dict.get("amount")),
+            dict.get("notes"),
+            Integer.parseInt(dict.get("id_owner"))
+        );
     }
 }
