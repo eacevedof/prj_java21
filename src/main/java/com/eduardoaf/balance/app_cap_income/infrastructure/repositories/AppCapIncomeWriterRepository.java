@@ -13,10 +13,17 @@ import com.eduardoaf.balance.shared.infrastructure.db.query_builders.InsertQuery
 @Component
 public final class AppCapIncomeWriterRepository extends AbstractMysqlRepository {
 
+    private final Date dateFormatter;
+    private final Uuid uuid;
+
     @Autowired
-    private Date dateFormatter;
-    @Autowired
-    private Uuid uuid;
+    public AppCapIncomeWriterRepository(
+        Date dateFormatter,
+        Uuid uuid
+    ) {
+        this.dateFormatter = dateFormatter;
+        this.uuid = uuid;
+    }
 
     public void createNewIncome(AppCapIncomeEntity appCapIncomeEntity) throws Exception {
         var sql = InsertQuery.fromIntoTable("app_cap_income")
