@@ -1,8 +1,13 @@
 package com.eduardoaf.balance.shared.infrastructure.formatters;
 
+import org.springframework.stereotype.Component;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
+@Component
 public final class Date {
 
     public static Date getInstance() {
