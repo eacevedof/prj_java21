@@ -37,24 +37,25 @@ public class InsertQuery {
     }
 
     public String getQuery() throws Exception {
-        if (columns.isEmpty() || values.isEmpty() || columns.size() != values.size()) {
+        if (
+            columns.isEmpty() || values.isEmpty() || columns.size() != values.size()
+        ) {
             throw new IllegalArgumentException("Columns and values must not be empty and must have the same size.");
         }
 
-        StringBuilder sql = new StringBuilder("INSERT INTO ").append(intoTable).append(" (");
-        StringBuilder params = new StringBuilder("VALUES (");
+        StringBuilder sqlInsert = new StringBuilder("INSERT INTO ").append(intoTable).append(" (");
+        StringBuilder sqlValues = new StringBuilder("VALUES (");
 
         for (int i = 0; i < columns.size(); i++) {
-            sql.append(columns.get(i));
-            params.append("?");
+            sqlInsert.append(columns.get(i));
+            sqlValues.append(values.get(i));
 
             if (i < columns.size() - 1) {
-                sql.append(", ");
-                params.append(", ");
+                sqlInsert.append(", ");
+                sqlValues.append(", ");
             }
         }
-
-        sql.append(") ").append(params).append(")");
-        return sql.toString();
+        sqlInsert.append(") ").append(sqlValues).append(")");
+        return sqlInsert.toString();
     }
 }
