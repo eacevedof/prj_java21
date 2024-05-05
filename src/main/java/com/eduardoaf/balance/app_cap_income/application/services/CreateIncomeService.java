@@ -1,18 +1,14 @@
 package com.eduardoaf.balance.app_cap_income.application.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.eduardoaf.balance.app_cap_income.application.dtos.CreateIncomeDto;
 import com.eduardoaf.balance.app_cap_income.application.dtos.CreatedIncomeDto;
-import com.eduardoaf.balance.app_cap_income.application.dtos.GetProductDto;
-import com.eduardoaf.balance.app_cap_income.domain.entities.ProductEntity;
 import com.eduardoaf.balance.app_cap_income.infrastructure.repositories.AppCapIncomeReaderRepository;
 import com.eduardoaf.balance.app_cap_income.infrastructure.repositories.AppCapIncomeWriterRepository;
 import com.eduardoaf.balance.app_cap_income.domain.entities.AppCapIncomeEntity;
 import com.eduardoaf.balance.shared.infrastructure.file.Log;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public final class CreateIncomeService {

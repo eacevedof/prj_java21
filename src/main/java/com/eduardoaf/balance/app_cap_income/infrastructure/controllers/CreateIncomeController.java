@@ -22,10 +22,10 @@ public final class CreateIncomeController {
     @Autowired
     public CreateIncomeController(
         Log log,
-        CreateIncomeService getProductsService
+        CreateIncomeService createIncomeService
     ) {
         this.log = log;
-        this.createIncomeService = getProductsService;
+        this.createIncomeService = createIncomeService;
     }
 
     @PostMapping(value = "api/v1/create-income", consumes = {"application/json"})
