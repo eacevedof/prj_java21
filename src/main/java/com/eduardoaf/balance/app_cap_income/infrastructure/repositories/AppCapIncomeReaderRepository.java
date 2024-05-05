@@ -12,8 +12,12 @@ import java.util.Map;
 @Component
 public final class AppCapIncomeReaderRepository extends AbstractMysqlRepository {
 
+    private final Log log;
+
     @Autowired
-    private Log log;
+    public AppCapIncomeReaderRepository (Log log) {
+        this.log = log;
+    }
 
     public Map<String, String> getIncomeByIncomeId(int incomeId) throws Exception {
         String sql = String.format("""
