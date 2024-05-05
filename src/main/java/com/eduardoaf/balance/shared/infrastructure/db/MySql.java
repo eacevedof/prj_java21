@@ -48,28 +48,30 @@ public final class MySql {
         return rowsResult;
     }
 
-    public boolean execute(String query) throws Exception {
-        query = query.trim();
-        if (query.isEmpty()) return false;
+    public boolean execute(String writeQuery) throws Exception {
+        lastInsertId = -1;
+        rowsAffected = 0;
 
-        boolean isInsert = query.contains("INSERT INTO ");
-        if (isInsert) query += "; SELECT LAST_INSERT_ID();";
+        writeQuery = writeQuery.trim();
+        if (writeQuery.isEmpty()) return false;
 
         loadStringConnectionOrFail();
         loadConnection();
-
         Statement statement = connection.createStatement();
 
-        if (isInsert) {
-            statement.execute(query);
+        if (writeQuery.contains("INSERT INTO ")) {
+            statement.execute(writeQuery);
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
                 if (resultSet.next()) {
                     lastInsertId = resultSet.getInt(1);
                 }
             }
-        } else {
-            rowsAffected = statement.executeUpdate(query);
+            connection.close();
+            return true;
         }
+
+        rowsAffected = statement.executeUpdate(writeQuery);
+        connection.close();
         return true;
     }
 

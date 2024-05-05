@@ -48,7 +48,7 @@ public class InsertQuery {
 
         for (int i = 0; i < columns.size(); i++) {
             sqlInsert.append(columns.get(i));
-            sqlValues.append(values.get(i));
+            sqlValues.append("'" + values.get(i) + "'");
 
             if (i < columns.size() - 1) {
                 sqlInsert.append(", ");
