@@ -50,7 +50,9 @@ public class InsertQuery {
             var obj = values.get(i);
             String strValue = getObjectAsString(obj);
             if (!strValue.equals("null")) {
-                strValue = "'" + strValue.replace("'", "\\'") + "'";
+                strValue = strValue.replace("\\", "\\\\");
+                strValue = strValue.replace("'", "\\'");
+                strValue = "'" + strValue + "'";
             }
             sqlValues.append(strValue);
 
