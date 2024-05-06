@@ -40,6 +40,7 @@ public final class CreateIncomeController {
         }
         catch (Exception e) {
             log.exception(e);
+            //ResponseEntity.internalServerError()
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(SuccessResponse.getInstance(
                             HttpStatusCodeEnum.INTERNAL_SERVER_ERROR.getValue(),

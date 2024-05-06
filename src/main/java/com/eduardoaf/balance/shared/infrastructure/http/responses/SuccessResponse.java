@@ -5,29 +5,30 @@ import org.springframework.beans.factory.annotation.Qualifier;
 @Qualifier("SuccessResponse")
 public record SuccessResponse(
     int code,
-    Object details,
-    String message
+    String message,
+    Object data
 ) {
+
     public static SuccessResponse getInstance(
         int code,
-        Object details,
-        String message
+        String message,
+        Object data
     ) {
         return new SuccessResponse(
             code,
-            details,
-            message
+            message,
+            data
         );
     }
 
     public static SuccessResponse getInstance(
             int code,
-            Object details
+            Object data
     ) {
         return new SuccessResponse(
-                code,
-                details,
-                null
+            code,
+            null,
+            data
         );
     }
 }
