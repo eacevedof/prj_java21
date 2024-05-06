@@ -44,7 +44,7 @@ public final class CreateIncomeService {
         var lastId = appCapIncomeWriterRepository.getLastInsertId();
         var dict = appCapIncomeReaderRepository.getIncomeByIncomeId(lastId);
         if (dict.isEmpty()) {
-            log.debug("CreateIncomeService.dict");
+            log.debug("not found by id:"+lastId);
             return null;
         }
 
