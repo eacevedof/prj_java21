@@ -8,24 +8,33 @@ import org.springframework.stereotype.Component;
 public final class  HttpResponse{
 
     public int statusCode;
+    public String status;
     public String message;
     public Object data;
 
     public HttpResponse() {}
 
-    public HttpResponse(int statusCode, String message, Object data) {
+    public HttpResponse(
+        int statusCode,
+        String status,
+        String message,
+        Object data
+    ) {
         this.statusCode = statusCode;
+        this.status = status;
         this.message = message;
         this.data = data;
     }
 
     public static HttpResponse getInstance(
         int statusCode,
+        String status,
         String message,
         Object data
     ) {
         return new HttpResponse(
             statusCode,
+            status,
             message,
             data
         );
@@ -34,6 +43,7 @@ public final class  HttpResponse{
     public ResponseEntity<?> getResponse200(String message, Object data) {
         var httpResponse = HttpResponse.getInstance(
                 HttpStatus.OK.value(),
+                HttpStatus.OK.name(),
                 message,
                 data
         );
@@ -43,6 +53,7 @@ public final class  HttpResponse{
     public ResponseEntity<?> getResponse500(String message) {
         var httpResponse = HttpResponse.getInstance(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                HttpStatus.INTERNAL_SERVER_ERROR.name(),
                 message,
                 null
         );
