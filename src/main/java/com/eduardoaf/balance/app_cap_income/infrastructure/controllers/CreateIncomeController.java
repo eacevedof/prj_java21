@@ -4,11 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.eduardoaf.balance.shared.infrastructure.file.Log;
-import com.eduardoaf.balance.shared.infrastructure.enums.HttpStatusCodeEnum;
 import com.eduardoaf.balance.shared.infrastructure.http.responses.HttpResponse;
 import com.eduardoaf.balance.app_cap_income.application.dtos.CreateIncomeDto;
 import com.eduardoaf.balance.app_cap_income.application.services.CreateIncomeService;
@@ -18,14 +16,17 @@ public final class CreateIncomeController {
 
     private final Log log;
     private final CreateIncomeService createIncomeService;
+    private final HttpResponse httpResponse;
 
     @Autowired
     public CreateIncomeController(
         Log log,
-        CreateIncomeService createIncomeService
+        CreateIncomeService createIncomeService,
+        HttpResponse httpResponse
     ) {
         this.log = log;
         this.createIncomeService = createIncomeService;
+        this.httpResponse = httpResponse;
     }
 
     @PostMapping(value = "api/v1/create-income", consumes = {"application/json"})
@@ -33,20 +34,11 @@ public final class CreateIncomeController {
         try {
             var createdIncomeDto = createIncomeService.invoke(createIncomeDto);
 
-            return ResponseEntity.ok(HttpResponse.getInstance(
-                        HttpStatusCodeEnum.OK.getValue(),
-                    createdIncomeDto
-                    ));
+            return httpResponse.getResponse200("entity created", createdIncomeDto);
         }
         catch (Exception e) {
             log.exception(e);
-            //ResponseEntity.internalServerError()
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(HttpResponse.getInstance(
-                            HttpStatusCodeEnum.INTERNAL_SERVER_ERROR.getValue(),
-                            null,
-                            "Infra error"
-                    ));
+            return httpResponse.getResponse500("some unexpected error occurred");
         }
     }
 

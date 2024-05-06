@@ -1,6 +1,5 @@
 package com.eduardoaf.balance.shared.infrastructure.http.responses;
 
-import com.eduardoaf.balance.shared.infrastructure.enums.HttpStatusCodeEnum;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -69,5 +68,15 @@ public record HttpResponse(
                 data
         );
         return ResponseEntity.status(HttpStatus.OK).body(httpResponse);
-    }    
+    }
+
+    public ResponseEntity<?> getResponse500(String message) {
+        int statusCode = HttpStatus.INTERNAL_SERVER_ERROR.value();
+        var httpResponse = HttpResponse.getInstance(
+                statusCode,
+                message,
+                null
+        );
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(httpResponse);
+    }
 }
