@@ -29,8 +29,7 @@ public final class CreateIncomeController {
     }
 
     @PostMapping(value = "api/v1/create-income", consumes = {"application/json"})
-    public ResponseEntity<?> invoke(@RequestBody CreateIncomeDto createIncomeDto)
-    {
+    public ResponseEntity<?> invoke(@RequestBody CreateIncomeDto createIncomeDto) {
         try {
             var createdIncomeDto = createIncomeService.invoke(createIncomeDto);
 
