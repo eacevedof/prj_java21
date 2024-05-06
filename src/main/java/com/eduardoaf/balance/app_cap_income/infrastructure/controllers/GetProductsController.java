@@ -34,6 +34,7 @@ public final class GetProductsController {
 
             return ResponseEntity.ok(HttpResponse.getInstance(
                         HttpStatusCodeEnum.OK.getValue(),
+                        "ok",
                         products
                     ));
         }

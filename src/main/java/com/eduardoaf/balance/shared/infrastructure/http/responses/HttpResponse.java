@@ -5,11 +5,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public record HttpResponse(
-    int statusCode,
-    String message,
-    Object data
-) {
+public final class  HttpResponse{
+
+    public int statusCode;
+    public String message;
+    public Object data;
+
+    public HttpResponse() {}
+
+    public HttpResponse(int statusCode, String message, Object data) {
+        this.statusCode = statusCode;
+        this.message = message;
+        this.data = data;
+    }
 
     public static HttpResponse getInstance(
         int statusCode,
@@ -23,21 +31,9 @@ public record HttpResponse(
         );
     }
 
-    public static HttpResponse getInstance(
-            int statusCode,
-            Object data
-    ) {
-        return new HttpResponse(
-            statusCode,
-            "",
-            data
-        );
-    }
-
     public ResponseEntity<?> getResponse200(String message, Object data) {
-        int statusCode = HttpStatus.OK.value();
         var httpResponse = HttpResponse.getInstance(
-                statusCode,
+                HttpStatus.OK.value(),
                 message,
                 data
         );
@@ -45,9 +41,8 @@ public record HttpResponse(
     }
 
     public ResponseEntity<?> getResponse500(String message) {
-        int statusCode = HttpStatus.INTERNAL_SERVER_ERROR.value();
         var httpResponse = HttpResponse.getInstance(
-                statusCode,
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 message,
                 null
         );

@@ -1,11 +1,14 @@
 package com.eduardoaf.balance.shared.infrastructure.http.requests;
 
+import lombok.Getter;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URI;
 
+@Getter
 public final class GETRequest {
 
     private static final String METHOD_GET = "GET";
@@ -32,5 +35,4 @@ public final class GETRequest {
         return responseAccumulator.toString();
     }
 
-    public int getStatusCode() { return statusCode; }
 }
