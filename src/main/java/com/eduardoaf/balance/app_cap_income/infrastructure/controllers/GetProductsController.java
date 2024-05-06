@@ -2,7 +2,7 @@ package com.eduardoaf.balance.app_cap_income.infrastructure.controllers;
 
 import com.eduardoaf.balance.app_cap_income.application.services.GetProductsService;
 import com.eduardoaf.balance.shared.infrastructure.file.Log;
-import com.eduardoaf.balance.shared.infrastructure.http.responses.SuccessResponse;
+import com.eduardoaf.balance.shared.infrastructure.http.responses.HttpResponse;
 import com.eduardoaf.balance.shared.infrastructure.enums.HttpStatusCodeEnum;
 
 import org.springframework.http.HttpStatus;
@@ -32,7 +32,7 @@ public final class GetProductsController {
         try {
             var products = getProductsService.invoke();
 
-            return ResponseEntity.ok(SuccessResponse.getInstance(
+            return ResponseEntity.ok(HttpResponse.getInstance(
                         HttpStatusCodeEnum.OK.getValue(),
                         products
                     ));
@@ -40,7 +40,7 @@ public final class GetProductsController {
         catch (Exception e) {
             log.exception(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(SuccessResponse.getInstance(
+                    .body(HttpResponse.getInstance(
                             HttpStatusCodeEnum.INTERNAL_SERVER_ERROR.getValue(),
                             null,
                             "Infra error"

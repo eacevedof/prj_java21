@@ -6,7 +6,7 @@ public enum HttpStatusCodeEnum {
     SWITCHING_PROTOCOLS(101),
     PROCESSING(102),
 
-    // SuccessResponse
+    // HttpResponse
     OK(200),
     CREATED(201),
     ACCEPTED(202),

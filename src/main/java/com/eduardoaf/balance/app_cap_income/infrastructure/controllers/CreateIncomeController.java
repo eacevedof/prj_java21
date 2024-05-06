@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.eduardoaf.balance.shared.infrastructure.file.Log;
 import com.eduardoaf.balance.shared.infrastructure.enums.HttpStatusCodeEnum;
-import com.eduardoaf.balance.shared.infrastructure.http.responses.SuccessResponse;
+import com.eduardoaf.balance.shared.infrastructure.http.responses.HttpResponse;
 import com.eduardoaf.balance.app_cap_income.application.dtos.CreateIncomeDto;
 import com.eduardoaf.balance.app_cap_income.application.services.CreateIncomeService;
 
@@ -33,7 +33,7 @@ public final class CreateIncomeController {
         try {
             var createdIncomeDto = createIncomeService.invoke(createIncomeDto);
 
-            return ResponseEntity.ok(SuccessResponse.getInstance(
+            return ResponseEntity.ok(HttpResponse.getInstance(
                         HttpStatusCodeEnum.OK.getValue(),
                     createdIncomeDto
                     ));
@@ -42,7 +42,7 @@ public final class CreateIncomeController {
             log.exception(e);
             //ResponseEntity.internalServerError()
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(SuccessResponse.getInstance(
+                    .body(HttpResponse.getInstance(
                             HttpStatusCodeEnum.INTERNAL_SERVER_ERROR.getValue(),
                             null,
                             "Infra error"
