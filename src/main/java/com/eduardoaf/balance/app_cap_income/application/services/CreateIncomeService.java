@@ -43,8 +43,10 @@ public final class CreateIncomeService {
         appCapIncomeWriterRepository.createNewIncome(newIncome);
         var lastId = appCapIncomeWriterRepository.getLastInsertId();
         var dict = appCapIncomeReaderRepository.getIncomeByIncomeId(lastId);
-        if (dict.isEmpty())
+        if (dict.isEmpty()) {
+            log.debug("CreateIncomeService.dict");
             return null;
+        }
 
         return CreatedIncomeDto.getInstance(
             Integer.parseInt(dict.get("id")),

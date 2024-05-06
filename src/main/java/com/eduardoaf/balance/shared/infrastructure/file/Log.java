@@ -33,28 +33,28 @@ public final class Log {
         }
     }
 
-    public void error(String errorMessage) {
+    public void error(String strError) {
         tryToCreateLogsDirectory();
         String pathFile = getPathLogWithDaySuffix("error");
-        logInFile(pathFile, errorMessage, "");
+        logInFile(pathFile, strError, "");
     }
 
-    public void error(String errorMessage, String title) {
+    public void error(String strError, String title) {
         tryToCreateLogsDirectory();
         String pathFile = getPathLogWithDaySuffix("error");
-        logInFile(pathFile, errorMessage, title);
+        logInFile(pathFile, strError, title);
     }
 
-    public void debug(String errorMessage) {
+    public void debug(String strValue) {
         tryToCreateLogsDirectory();
         String pathFile = getPathLogWithDaySuffix("debug");
-        logInFile(pathFile, errorMessage, "");
+        logInFile(pathFile, strValue, "");
     }
 
-    public void debug(String errorMessage, String title) {
+    public void debug(String strValue, String title) {
         tryToCreateLogsDirectory();
         String pathFile = getPathLogWithDaySuffix("debug");
-        logInFile(pathFile, errorMessage, title);
+        logInFile(pathFile, strValue, title);
     }
 
     private void logInFile(String pathFile, String content, String title) {
