@@ -36,7 +36,7 @@ public final class CreateIncomeService {
                 createIncomeDto.paymentFor(),
                 createIncomeDto.payedFrom(),
                 createIncomeDto.incomeDate(),
-                createIncomeDto.amount(),
+                Double.parseDouble(createIncomeDto.amount()),
                 createIncomeDto.notes(),
                 createIncomeDto.idOwner()
         );

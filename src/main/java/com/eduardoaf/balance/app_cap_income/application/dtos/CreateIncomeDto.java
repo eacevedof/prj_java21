@@ -6,7 +6,7 @@ public record CreateIncomeDto(
         String paymentFor,
         String payedFrom,
         String incomeDate,
-        Double amount,
+        String amount,
         String notes,
         int idOwner
 ) {
@@ -17,7 +17,7 @@ public record CreateIncomeDto(
             String paymentFor,
             String payedFrom,
             String incomeDate,
-            Double amount,
+            String amount,
             String notes,
             int idOwner
     ) {
