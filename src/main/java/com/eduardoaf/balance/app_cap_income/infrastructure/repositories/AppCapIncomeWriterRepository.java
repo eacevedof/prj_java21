@@ -35,6 +35,7 @@ public final class AppCapIncomeWriterRepository extends AbstractMysqlRepository 
                 .addColumn("insert_date", dateFormatter.getNow())
                 .addColumn("uuid", uuid.getUuid("IN", 15))
                 .addColumn("code_erp", appCapIncomeEntity.codeErp)
+                .addColumn("description", appCapIncomeEntity.description)
                 .addColumn("payment_for", appCapIncomeEntity.paymentFor)
                 .addColumn("payed_from", appCapIncomeEntity.payedFrom)
                 .addColumn("income_date", appCapIncomeEntity.incomeDate)
