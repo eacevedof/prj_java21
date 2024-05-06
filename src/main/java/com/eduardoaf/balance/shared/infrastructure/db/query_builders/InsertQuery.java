@@ -1,30 +1,21 @@
 package com.eduardoaf.balance.shared.infrastructure.db.query_builders;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import com.eduardoaf.balance.shared.infrastructure.db.MySql;
 
 public class InsertQuery {
 
-    private MySql mySql = null;
     private String intoTable = "";
     private final List<String> columns = new ArrayList<>();
     private final List<Object> values = new ArrayList<>();
 
     public InsertQuery(String table) {
         this.intoTable = table;
-        //this.mySql = MySql.GetEmailInstanceByEnv();
     }
 
-    public InsertQuery(String table, MySql mySql) {
-        this.intoTable = table;
-        this.mySql = mySql;
-    }
-
-    public static InsertQuery fromIntoTable(String intoTable) {
+    public static InsertQuery getInstance(String intoTable) {
         return new InsertQuery(intoTable);
     }
 
@@ -50,9 +41,7 @@ public class InsertQuery {
             var obj = values.get(i);
             String strValue = getObjectAsString(obj);
             if (!strValue.equals("null")) {
-                strValue = strValue.replace("\\", "\\\\");
-                strValue = strValue.replace("'", "\\'");
-                strValue = "'" + strValue + "'";
+                strValue = SanitizeQuery.getInstance().getMysqlString(strValue);
             }
             sqlValues.append(strValue);
 
