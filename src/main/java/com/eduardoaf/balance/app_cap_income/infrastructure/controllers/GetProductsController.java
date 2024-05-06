@@ -34,6 +34,7 @@ public final class GetProductsController {
 
             return ResponseEntity.ok(HttpResponse.getInstance(
                         HttpStatusCodeEnum.OK.getValue(),
+                        HttpStatusCodeEnum.OK.name(),
                         "ok",
                         products
                     ));
@@ -43,6 +44,7 @@ public final class GetProductsController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(HttpResponse.getInstance(
                             HttpStatusCodeEnum.INTERNAL_SERVER_ERROR.getValue(),
+                            HttpStatusCodeEnum.INTERNAL_SERVER_ERROR.name(),
                             null,
                             "Infra error"
                     ));
