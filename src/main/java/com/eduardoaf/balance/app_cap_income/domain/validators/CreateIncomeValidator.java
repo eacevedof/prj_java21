@@ -29,32 +29,37 @@ public final class CreateIncomeValidator extends AbstractValidator {
         this.createIncomeDto = createIncomeDto;
         failIfWrongPaymentFor();
         failIfWrongCodeErp();
-
+        failIfWrongDescription();
     }
 
     private void failIfWrongPaymentFor() throws TypeException, ValueException {
         var label = "Payment for";
-        var paymentFor = createIncomeDto.paymentFor();
-        if (!isTypeString(paymentFor)) {
-            TypeException.valueIsNotString(label, paymentFor);
-        }
-        if (isLengthGreaterThan(paymentFor, LengthsEnum.PAYMENT_FOR.value())) {
-            ValueException.wrongMaxLength(
-                label,
-                createIncomeDto.codeErp(),
-                LengthsEnum.CODE_ERP.value()
-            );
-        }
+        var value = createIncomeDto.paymentFor();
+        if (!isTypeString(value))
+            TypeException.valueIsNotString(label, value);
+
+        var length = LengthsEnum.PAYMENT_FOR.value();
+        if (isLengthGreaterThan(value, length))
+            ValueException.wrongMaxLength(label, value, length);
     }
 
     private void failIfWrongCodeErp() throws ValueException {
         var label = "Code ERP";
-        if (isLengthGreaterThan(createIncomeDto.codeErp(), LengthsEnum.CODE_ERP.value()))
-            ValueException.wrongMaxLength(
-                label,
-                createIncomeDto.codeErp(),
-                LengthsEnum.CODE_ERP.value()
-            );
+        var value = createIncomeDto.codeErp();
+        var length = LengthsEnum.CODE_ERP.value();
+        if (isLengthGreaterThan(value, length))
+            ValueException.wrongMaxLength(label, value, length);
+    }
+
+    private void failIfWrongDescription() throws TypeException, ValueException {
+        var label = "Description";
+        var value = createIncomeDto.description();
+        if (!isTypeString(value))
+            TypeException.valueIsNotString(label, value);
+
+        var length = LengthsEnum.DESCRIPTION.value();
+        if (isLengthGreaterThan(value, length))
+            ValueException.wrongMaxLength(label, value, length);
 
     }
 }
