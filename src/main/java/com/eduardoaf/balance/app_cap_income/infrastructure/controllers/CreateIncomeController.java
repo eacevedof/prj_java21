@@ -17,7 +17,6 @@ import com.eduardoaf.balance.app_cap_income.application.services.CreateIncomeSer
 public final class CreateIncomeController {
 
     private final Log log;
-    private final CreateIncomeValidator createIncomeValidator;
     private final CreateIncomeService createIncomeService;
     private final HttpResponse httpResponse;
 
@@ -29,7 +28,6 @@ public final class CreateIncomeController {
         HttpResponse httpResponse
     ) {
         this.log = log;
-        this.createIncomeValidator = createIncomeValidator;
         this.createIncomeService = createIncomeService;
         this.httpResponse = httpResponse;
     }
@@ -37,7 +35,6 @@ public final class CreateIncomeController {
     @PostMapping(value = "api/v1/create-income", consumes = {"application/json"})
     public ResponseEntity<?> invoke(@RequestBody CreateIncomeDto createIncomeDto) {
         try {
-            createIncomeValidator.invoke(createIncomeDto);
             var createdIncomeDto = createIncomeService.invoke(createIncomeDto);
             return httpResponse.getResponse200("entity created", createdIncomeDto);
         }

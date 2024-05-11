@@ -4,11 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eduardoaf.balance.shared.infrastructure.file.Log;
-import com.eduardoaf.balance.app_cap_income.domain.entities.AppCapIncomeEntity;
-import com.eduardoaf.balance.app_cap_income.application.dtos.CreateIncomeDto;
-import com.eduardoaf.balance.app_cap_income.application.dtos.CreatedIncomeDto;
 import com.eduardoaf.balance.app_cap_income.infrastructure.repositories.AppCapIncomeReaderRepository;
 import com.eduardoaf.balance.app_cap_income.infrastructure.repositories.AppCapIncomeWriterRepository;
+import com.eduardoaf.balance.app_cap_income.application.dtos.CreateIncomeDto;
+import com.eduardoaf.balance.app_cap_income.application.dtos.CreatedIncomeDto;
+import com.eduardoaf.balance.app_cap_income.domain.validators.CreateIncomeValidator;
+import com.eduardoaf.balance.app_cap_income.domain.entities.AppCapIncomeEntity;
 
 @Service
 public final class CreateIncomeService {
@@ -16,20 +17,26 @@ public final class CreateIncomeService {
     private final Log log;
     private final AppCapIncomeWriterRepository appCapIncomeWriterRepository;
     private final AppCapIncomeReaderRepository appCapIncomeReaderRepository;
+    private final CreateIncomeValidator createIncomeValidator;
 
     @Autowired
     public CreateIncomeService
     (
         Log log,
         AppCapIncomeWriterRepository appCapIncomeWriterRepository,
-        AppCapIncomeReaderRepository appCapIncomeReaderRepository
+        AppCapIncomeReaderRepository appCapIncomeReaderRepository,
+        CreateIncomeValidator createIncomeValidator
     ) {
         this.log = log;
         this.appCapIncomeWriterRepository = appCapIncomeWriterRepository;
         this.appCapIncomeReaderRepository = appCapIncomeReaderRepository;
+        this.createIncomeValidator = createIncomeValidator;
     }
 
     public CreatedIncomeDto invoke(CreateIncomeDto createIncomeDto) throws Exception {
+
+        createIncomeValidator.invoke(createIncomeDto);
+
         var newIncome = AppCapIncomeEntity.getInstance(
                 createIncomeDto.codeErp(),
                 createIncomeDto.description(),
