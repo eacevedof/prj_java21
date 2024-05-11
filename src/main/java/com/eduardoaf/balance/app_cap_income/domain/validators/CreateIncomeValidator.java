@@ -33,6 +33,7 @@ public final class CreateIncomeValidator extends AbstractValidator {
         failIfWrongDescription();
         failIfWrongPayedFrom();
         failIfWrongIncomeDate();
+        failIfWrongAmount();
     }
 
     private void failIfWrongPaymentFor() throws TypeException, ValueException {
@@ -89,6 +90,23 @@ public final class CreateIncomeValidator extends AbstractValidator {
             ValueException.wrongDateFormat(label, value, "yyyyy-mm-dd");
 
         var length = LengthsEnum.INCOME_DATE.value();
+        if (isLengthGreaterThan(value, length))
+            ValueException.wrongMaxLength(label, value, length);
+    }
+
+    private void failIfWrongAmount() throws TypeException, ValueException {
+        var label = "Amount";
+        var value = createIncomeDto.amount();
+        if (!isTypeString(value))
+            TypeException.valueIsNotString(label, value);
+
+        if (isNullOrEmpty(value))
+            ValueException.valueIsEmpty(label);
+
+        if (isTypeNumeric(value))
+            TypeException.valueIsNotNumeric(label, value);
+
+        var length = LengthsEnum.AMOUNT.value();
         if (isLengthGreaterThan(value, length))
             ValueException.wrongMaxLength(label, value, length);
     }
