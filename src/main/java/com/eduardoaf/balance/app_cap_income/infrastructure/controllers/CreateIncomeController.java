@@ -37,8 +37,8 @@ public final class CreateIncomeController {
     @PostMapping(value = "api/v1/create-income", consumes = {"application/json"})
     public ResponseEntity<?> invoke(@RequestBody CreateIncomeDto createIncomeDto) {
         try {
-            var createdIncomeDto = createIncomeService.invoke(createIncomeDto);
             createIncomeValidator.invoke(createIncomeDto);
+            var createdIncomeDto = createIncomeService.invoke(createIncomeDto);
             return httpResponse.getResponse200("entity created", createdIncomeDto);
         }
         catch (CreateIncomeException e) {
