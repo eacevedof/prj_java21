@@ -8,6 +8,9 @@ import com.eduardoaf.balance.app_cap_income.application.dtos.CreateIncomeDto;
 import com.eduardoaf.balance.app_cap_income.infrastructure.repositories.AppCapIncomeReaderRepository;
 import com.eduardoaf.balance.app_cap_income.application.exceptions.CreateIncomeException;
 
+import com.eduardoaf.balance.shared.domain.exceptions.TypeException;
+import com.eduardoaf.balance.shared.domain.exceptions.ValueException;
+
 @Service
 public final class CreateIncomeValidator extends AbstractValidator {
 
@@ -22,15 +25,14 @@ public final class CreateIncomeValidator extends AbstractValidator {
         this.appCapIncomeReaderRepository = appCapIncomeReaderRepository;
     }
 
-    public void invoke(CreateIncomeDto createIncomeDto) throws CreateIncomeException {
+    public void invoke(CreateIncomeDto createIncomeDto) throws Exception {
         this.createIncomeDto = createIncomeDto;
         validateCodeErp();
     }
 
-    private void validateCodeErp() throws CreateIncomeException {
-
+    private void validateCodeErp() throws ValueException {
         if (isLengthGreaterThan(createIncomeDto.codeErp(), 50))
-            CreateIncomeException.errorOnCodeErpLength();
+            ValueException.maxLength("Code Erp", createIncomeDto.codeErp(), 50);
 
     }
 }

@@ -12,9 +12,4 @@ public abstract class AbstractException extends Exception{
         this.statusCode = statusCode;
     }
 
-    public static void errorOnCodeErpLength() throws AbstractException {
-        throw new Exception(
-                "Error on code erp length"
-        );
-    }
 }
