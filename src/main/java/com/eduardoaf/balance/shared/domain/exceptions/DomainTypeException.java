@@ -3,11 +3,11 @@ package com.eduardoaf.balance.shared.domain.exceptions;
 import lombok.Getter;
 
 @Getter
-public final class TypeException extends Exception{
+public final class DomainTypeException extends Exception implements InterfaceDomainException{
 
     private final int statusCode;
 
-    public TypeException(String message, int statusCode) {
+    public DomainTypeException(String message, int statusCode) {
         super(message);
         this.statusCode = statusCode;
     }
@@ -15,13 +15,13 @@ public final class TypeException extends Exception{
     public static void valueIsNotNumeric(
         String field,
         Object currValue
-    ) throws TypeException {
+    ) throws DomainTypeException {
         var message = String.format(
                 "The `%s` value `%s` is not numeric",
                 field,
                 getAsString(currValue)
         );
-        throw new TypeException(
+        throw new DomainTypeException(
                 message,
                 400
         );
@@ -30,13 +30,13 @@ public final class TypeException extends Exception{
     public static void valueIsNotInteger(
         String field,
         Object currValue
-    ) throws TypeException {
+    ) throws DomainTypeException {
         var message = String.format(
                 "The `%s` value `%s` is not an integer",
                 field,
                 getAsString(currValue)
         );
-        throw new TypeException(
+        throw new DomainTypeException(
                 message,
                 400
         );
@@ -45,13 +45,13 @@ public final class TypeException extends Exception{
     public static void valueIsNotString(
         String field,
         Object currValue
-    ) throws TypeException {
+    ) throws DomainTypeException {
         var message = String.format(
                 "The `%s` value `%s` is not a string",
                 field,
                 getAsString(currValue)
         );
-        throw new TypeException(
+        throw new DomainTypeException(
                 message,
                 400
         );
@@ -60,13 +60,13 @@ public final class TypeException extends Exception{
     public static void valueIsNotAList(
         String field,
         Object currValue
-    ) throws TypeException {
+    ) throws DomainTypeException {
         var message = String.format(
                 "The `%s` value `%s` is not a list",
                 field,
                 getAsString(currValue)
         );
-        throw new TypeException(
+        throw new DomainTypeException(
                 message,
                 400
         );
@@ -76,7 +76,4 @@ public final class TypeException extends Exception{
         return obj == null ? "" : obj.toString();
     }
 
-    public int getStatusCode() {
-        return statusCode;
-    }
 }

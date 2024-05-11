@@ -1,7 +1,7 @@
 package com.eduardoaf.balance.app_cap_income.infrastructure.controllers;
 
-import com.eduardoaf.balance.shared.domain.exceptions.TypeException;
-import com.eduardoaf.balance.shared.domain.exceptions.ValueException;
+import com.eduardoaf.balance.shared.domain.exceptions.DomainTypeException;
+import com.eduardoaf.balance.shared.domain.exceptions.DomainValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,10 +38,10 @@ public final class CreateIncomeController {
             var createdIncomeDto = createIncomeService.invoke(createIncomeDto);
             return httpResponse.getResponse200("entity created", createdIncomeDto);
         }
-        catch (TypeException e) {
+        catch (DomainTypeException e) {
             return httpResponse.getResponse(e.getStatusCode(), e.getMessage());
         }
-        catch (ValueException e) {
+        catch (DomainValueException e) {
             return httpResponse.getResponse(e.getStatusCode(), e.getMessage());
         }
         catch (CreateIncomeException e) {
