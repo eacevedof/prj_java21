@@ -62,4 +62,16 @@ public abstract class AbstractValidator {
         }
         return false;
     }
+
+    protected boolean isNotInList(String string, List<String> validValues) {
+        return !validValues.contains(string);
+    }
+
+    protected boolean isNotInList(int integer, List<Integer> validValues) {
+        return !validValues.contains(integer);
+    }
+
+    protected boolean isList(Object object) {
+        return object instanceof List;
+    }
 }
