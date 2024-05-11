@@ -86,12 +86,13 @@ public final class CreateIncomeValidator extends AbstractDomainValidator {
         if (isNullOrEmpty(value))
             DomainValueException.valueIsEmpty(label);
 
-        if (!isTypeDate(value))
-            DomainValueException.wrongDateFormat(label, value, "yyyyy-mm-dd");
-
         var length = LengthsEnum.INCOME_DATE.value();
         if (isLengthGreaterThan(value, length))
             DomainValueException.wrongMaxLength(label, value, length);
+
+        if (!isTypeDate(value))
+            DomainValueException.wrongDateFormat(label, value, "yyyyy-mm-dd");
+
     }
 
     private void failIfWrongAmount() throws DomainTypeException, DomainValueException {
