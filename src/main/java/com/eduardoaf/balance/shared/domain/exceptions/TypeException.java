@@ -12,17 +12,67 @@ public final class TypeException extends Exception{
         this.statusCode = statusCode;
     }
 
-    public static void isLowerThan(String field, int currValue, String minValue) throws TypeException {
+    public static void valueIsNotNumeric(
+        String field,
+        Object currValue
+    ) throws TypeException {
         var message = String.format(
-                "The %s value `%s` is lower than the minimum value %s",
+                "The %s value `%s` is not numeric",
                 field,
-                currValue,
-                minValue
+                getAsString(currValue)
         );
         throw new TypeException(
                 message,
                 400
         );
+    }
+
+    public static void valueIsNotString(
+        String field,
+        Object currValue
+    ) throws TypeException {
+        var message = String.format(
+                "The %s value `%s` is not a string",
+                field,
+                getAsString(currValue)
+        );
+        throw new TypeException(
+                message,
+                400
+        );
+    }
+
+    public static void valueIsNotAList(
+        String field,
+        Object currValue
+    ) throws TypeException {
+        var message = String.format(
+                "The %s value `%s` is not a list",
+                field,
+                getAsString(currValue)
+        );
+        throw new TypeException(
+                message,
+                400
+        );
+    }
+
+    public static void valueIsEmpty(
+        String field
+    ) throws TypeException {
+        var message = String.format(
+                "The %s value is empty",
+                field
+        );
+        throw new TypeException(
+                message,
+                400
+        );
+    }
+
+
+    private static String getAsString(Object obj) {
+        return obj == null ? "" : obj.toString();
     }
 
 }
