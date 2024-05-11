@@ -1,6 +1,7 @@
 package com.eduardoaf.balance.app_cap_income.domain.validators;
 
 import com.eduardoaf.balance.shared.domain.exceptions.TypeException;
+import org.hibernate.query.sql.internal.ParameterRecognizerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,7 @@ public final class CreateIncomeValidator extends AbstractValidator {
         failIfWrongCodeErp();
         failIfWrongDescription();
         failIfWrongPayedFrom();
+        failIfWrongIncomeDate();
     }
 
     private void failIfWrongPaymentFor() throws TypeException, ValueException {
@@ -70,6 +72,20 @@ public final class CreateIncomeValidator extends AbstractValidator {
             TypeException.valueIsNotString(label, value);
 
         var length = LengthsEnum.PAYED_FROM.value();
+        if (isLengthGreaterThan(value, length))
+            ValueException.wrongMaxLength(label, value, length);
+    }
+
+    private void failIfWrongIncomeDate() throws TypeException, ValueException {
+        var label = "Income date";
+        var value = createIncomeDto.incomeDate();
+        if (!isTypeString(value))
+            TypeException.valueIsNotString(label, value);
+
+        if (!isTypeDate(value))
+            ValueException.wrongDateFormat(label, value, "yyyyy-mm-dd");
+
+        var length = LengthsEnum.INCOME_DATE.value();
         if (isLengthGreaterThan(value, length))
             ValueException.wrongMaxLength(label, value, length);
     }
