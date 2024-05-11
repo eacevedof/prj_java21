@@ -4,7 +4,7 @@ import com.eduardoaf.balance.shared.domain.exceptions.DomainTypeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.eduardoaf.balance.shared.domain.validators.AbstractValidator;
+import com.eduardoaf.balance.shared.domain.validators.AbstractDomainValidator;
 import com.eduardoaf.balance.app_cap_income.application.dtos.CreateIncomeDto;
 import com.eduardoaf.balance.app_cap_income.infrastructure.repositories.AppCapIncomeReaderRepository;
 
@@ -12,7 +12,7 @@ import com.eduardoaf.balance.shared.domain.exceptions.DomainValueException;
 import com.eduardoaf.balance.shared.domain.enums.LengthsEnum;
 
 @Service
-public final class CreateIncomeValidator extends AbstractValidator {
+public final class CreateIncomeValidator extends AbstractDomainValidator {
 
     private final AppCapIncomeReaderRepository appCapIncomeReaderRepository;
     private CreateIncomeDto createIncomeDto;

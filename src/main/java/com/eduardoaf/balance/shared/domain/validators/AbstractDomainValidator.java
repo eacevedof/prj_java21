@@ -2,7 +2,7 @@ package com.eduardoaf.balance.shared.domain.validators;
 
 import java.util.List;
 
-public abstract class AbstractValidator {
+public abstract class AbstractDomainValidator {
 
     protected boolean isLengthGreaterThan(String string, int maxLength) {
         return string.length() > maxLength;

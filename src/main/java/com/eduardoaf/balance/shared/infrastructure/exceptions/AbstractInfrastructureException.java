@@ -3,16 +3,13 @@ package com.eduardoaf.balance.shared.infrastructure.exceptions;
 import lombok.Getter;
 
 @Getter
-public abstract class AbstractException extends Exception{
+public abstract class AbstractInfrastructureException extends Exception{
 
     private final int statusCode;
 
-    protected AbstractException(String message, int statusCode) {
+    protected AbstractInfrastructureException(String message, int statusCode) {
         super(message);
         this.statusCode = statusCode;
     }
 
-    public int getStatusCode() {
-        return statusCode;
-    }
 }
