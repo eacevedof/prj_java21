@@ -76,4 +76,7 @@ public final class TypeException extends Exception{
         return obj == null ? "" : obj.toString();
     }
 
+    public int getStatusCode() {
+        return statusCode;
+    }
 }

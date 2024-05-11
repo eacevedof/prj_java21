@@ -97,4 +97,8 @@ public final class ValueException extends Exception{
     private static String getAsString(Object obj) {
         return obj == null ? "" : obj.toString();
     }
+
+    public int getStatusCode() {
+        return statusCode;
+    }
 }

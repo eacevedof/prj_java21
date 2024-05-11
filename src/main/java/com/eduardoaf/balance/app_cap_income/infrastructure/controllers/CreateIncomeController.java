@@ -1,5 +1,7 @@
 package com.eduardoaf.balance.app_cap_income.infrastructure.controllers;
 
+import com.eduardoaf.balance.shared.domain.exceptions.TypeException;
+import com.eduardoaf.balance.shared.domain.exceptions.ValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import com.eduardoaf.balance.shared.infrastructure.file.Log;
 import com.eduardoaf.balance.shared.infrastructure.http.responses.HttpResponse;
 import com.eduardoaf.balance.app_cap_income.application.exceptions.CreateIncomeException;
-import com.eduardoaf.balance.app_cap_income.domain.validators.CreateIncomeValidator;
 import com.eduardoaf.balance.app_cap_income.application.dtos.CreateIncomeDto;
 import com.eduardoaf.balance.app_cap_income.application.services.CreateIncomeService;
 
@@ -23,7 +24,6 @@ public final class CreateIncomeController {
     @Autowired
     public CreateIncomeController(
         Log log,
-        CreateIncomeValidator createIncomeValidator,
         CreateIncomeService createIncomeService,
         HttpResponse httpResponse
     ) {
@@ -37,6 +37,12 @@ public final class CreateIncomeController {
         try {
             var createdIncomeDto = createIncomeService.invoke(createIncomeDto);
             return httpResponse.getResponse200("entity created", createdIncomeDto);
+        }
+        catch (TypeException e) {
+            return httpResponse.getResponse(e.getStatusCode(), e.getMessage());
+        }
+        catch (ValueException e) {
+            return httpResponse.getResponse(e.getStatusCode(), e.getMessage());
         }
         catch (CreateIncomeException e) {
             return httpResponse.getResponse(e.getStatusCode(), e.getMessage());

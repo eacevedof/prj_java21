@@ -4,6 +4,7 @@ import lombok.Getter;
 
 @Getter
 public abstract class AbstractException extends Exception{
+
     private final int statusCode;
 
     protected AbstractException(String message, int statusCode) {
@@ -11,4 +12,7 @@ public abstract class AbstractException extends Exception{
         this.statusCode = statusCode;
     }
 
+    public int getStatusCode() {
+        return statusCode;
+    }
 }
