@@ -25,7 +25,7 @@ public final class CreateIncomeValidator extends AbstractValidator {
         this.appCapIncomeReaderRepository = appCapIncomeReaderRepository;
     }
 
-    public void invoke(CreateIncomeDto createIncomeDto) throws Exception {
+    public void invoke(CreateIncomeDto createIncomeDto) throws TypeException, ValueException {
         this.createIncomeDto = createIncomeDto;
         failIfWrongPaymentFor();
         failIfWrongCodeErp();
