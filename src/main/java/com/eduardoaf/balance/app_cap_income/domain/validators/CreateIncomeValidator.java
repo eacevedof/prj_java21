@@ -33,6 +33,7 @@ public final class CreateIncomeValidator extends AbstractDomainValidator {
         failIfWrongPayedFrom();
         failIfWrongIncomeDate();
         failIfWrongAmount();
+        failIfWrongNotes();
     }
 
     private void failIfWrongPaymentFor() throws DomainTypeException, DomainValueException {
@@ -102,10 +103,21 @@ public final class CreateIncomeValidator extends AbstractDomainValidator {
         if (isNullOrEmpty(value))
             DomainValueException.valueIsEmpty(label);
 
-        if (isTypeNumeric(value))
+        if (!isTypeNumeric(value))
             DomainTypeException.valueIsNotNumeric(label, value);
 
         var length = LengthsEnum.AMOUNT.value();
+        if (isLengthGreaterThan(value, length))
+            DomainValueException.wrongMaxLength(label, value, length);
+    }
+
+    private void failIfWrongNotes() throws DomainTypeException, DomainValueException {
+        var label = "Notes";
+        var value = createIncomeDto.notes();
+        if (!isTypeString(value))
+            DomainTypeException.valueIsNotString(label, value);
+
+        var length = LengthsEnum.NOTES.value();
         if (isLengthGreaterThan(value, length))
             DomainValueException.wrongMaxLength(label, value, length);
     }
