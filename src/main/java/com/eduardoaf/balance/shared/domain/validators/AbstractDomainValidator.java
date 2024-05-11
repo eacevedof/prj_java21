@@ -16,8 +16,16 @@ public abstract class AbstractDomainValidator {
         return string.length() < minLength || string.length() > maxLength;
     }
 
-    protected boolean isTypeString(String string) {
-        return (string instanceof String) || isTypeNumeric(string);
+    protected boolean isValueGreaterThan(String string, int maxValue) {
+        return Integer.parseInt(string) > maxValue;
+    }
+
+    protected boolean isValueLowerThan(String string, int minValue) {
+        return Integer.parseInt(string) < minValue;
+    }
+
+    protected boolean isTypeString(Object object) {
+        return (object instanceof String) || isTypeNumeric(object);
     }
 
     protected boolean isTypeDouble(String string) {
@@ -40,6 +48,10 @@ public abstract class AbstractDomainValidator {
 
     protected boolean isTypeNumeric(String string) {
         return isTypeInteger(string) || isTypeDouble(string);
+    }
+
+    protected boolean isTypeNumeric(Object object) {
+        return object instanceof Number;
     }
 
     protected boolean isNullOrEmpty(String string) {

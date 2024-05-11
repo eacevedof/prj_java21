@@ -96,7 +96,20 @@ public final class DomainValueException extends Exception implements InterfaceDo
                 message,
                 400
         );
-    }    
+    }
+
+    public static void valueIsLowerThanMinimum(String field, String currValue, int minValue) throws DomainValueException {
+        var message = String.format(
+                "The `%s` value: `%s` is lower than the minimum value %s",
+                field,
+                currValue,
+                minValue
+        );
+        throw new DomainValueException(
+                message,
+                400
+        );
+    }
 
     private static String getAsString(Object obj) {
         return obj == null ? "" : obj.toString();

@@ -72,6 +72,9 @@ public final class CreateIncomeValidator extends AbstractDomainValidator {
         if (!isTypeString(value))
             DomainTypeException.valueIsNotString(label, value);
 
+        if (isNullOrEmpty(value))
+            DomainValueException.valueIsEmpty(label);
+
         var length = LengthsEnum.PAYED_FROM.value();
         if (isLengthGreaterThan(value, length))
             DomainValueException.wrongMaxLength(label, value, length);
@@ -106,6 +109,9 @@ public final class CreateIncomeValidator extends AbstractDomainValidator {
 
         if (!isTypeNumeric(value))
             DomainTypeException.valueIsNotNumeric(label, value);
+
+        if (isValueLowerThan(value, 0))
+            DomainValueException.valueIsLowerThanMinimum(label, value, 0);
 
         var length = LengthsEnum.AMOUNT.value();
         if (isLengthGreaterThan(value, length))
