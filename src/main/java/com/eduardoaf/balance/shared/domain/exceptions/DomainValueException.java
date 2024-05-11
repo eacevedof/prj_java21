@@ -14,7 +14,7 @@ public final class DomainValueException extends Exception implements InterfaceDo
 
     public static void intValueIsLowerThan(String field, int currValue, String minValue) throws DomainValueException {
         var message = String.format(
-                "The %s value `%s` is lower than the minimum value %s",
+                "The `%s` value: `%s` is lower than the minimum value %s",
                 field,
                 currValue,
                 minValue
@@ -27,7 +27,7 @@ public final class DomainValueException extends Exception implements InterfaceDo
 
     public static void intValueIsGreaterThan(String field, int currValue, int maxValue) throws DomainValueException {
         var message = String.format(
-                "The %s value `%s` is greater than the maximum value %s",
+                "The `%s` value: `%s` is greater than the maximum value %s",
                 field,
                 currValue,
                 maxValue
@@ -39,10 +39,12 @@ public final class DomainValueException extends Exception implements InterfaceDo
     }
     
     public static void wrongMinLength(String field, String currValue, int minLength) throws DomainValueException {
+        var currLength = currValue.length();
         var message = String.format(
-                "The %s value `%s` is shorter than the minimum length %s",
+                "The `%s` value: `%s` (%s) is shorter than the minimum length: %s",
                 field,
                 currValue,
+                currLength,
                 minLength
         );
         throw new DomainValueException(
@@ -52,10 +54,12 @@ public final class DomainValueException extends Exception implements InterfaceDo
     }
 
     public static void wrongMaxLength(String field, String currValue, int maxLength) throws DomainValueException {
+        var currLength = currValue.length();
         var message = String.format(
-                "The %s value `%s` is larger than the maximum length %s",
+                "The `%s` value: `%s` (%s) is larger than the maximum length: %s",
                 field,
                 currValue,
+                currLength,
                 maxLength
         );
         throw new DomainValueException(
@@ -70,7 +74,7 @@ public final class DomainValueException extends Exception implements InterfaceDo
         String validFormat
     ) throws DomainValueException {
         var message = String.format(
-                "The %s value `%s` does not match the format %s",
+                "The `%s` value: `%s` does not match the format %s",
                 field,
                 getAsString(currValue),
                 validFormat
