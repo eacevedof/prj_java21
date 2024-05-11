@@ -15,9 +15,9 @@ import com.eduardoaf.balance.app_cap_income.domain.entities.AppCapIncomeEntity;
 public final class CreateIncomeService {
 
     private final Log log;
+    private final CreateIncomeValidator createIncomeValidator;
     private final AppCapIncomeWriterRepository appCapIncomeWriterRepository;
     private final AppCapIncomeReaderRepository appCapIncomeReaderRepository;
-    private final CreateIncomeValidator createIncomeValidator;
 
     @Autowired
     public CreateIncomeService
@@ -28,9 +28,9 @@ public final class CreateIncomeService {
         CreateIncomeValidator createIncomeValidator
     ) {
         this.log = log;
+        this.createIncomeValidator = createIncomeValidator;
         this.appCapIncomeWriterRepository = appCapIncomeWriterRepository;
         this.appCapIncomeReaderRepository = appCapIncomeReaderRepository;
-        this.createIncomeValidator = createIncomeValidator;
     }
 
     public CreatedIncomeDto invoke(CreateIncomeDto createIncomeDto) throws Exception {

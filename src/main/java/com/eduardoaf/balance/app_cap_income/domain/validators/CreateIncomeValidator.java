@@ -1,9 +1,9 @@
 package com.eduardoaf.balance.app_cap_income.domain.validators;
 
-import com.eduardoaf.balance.shared.domain.exceptions.DomainTypeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.eduardoaf.balance.shared.domain.exceptions.DomainTypeException;
 import com.eduardoaf.balance.shared.domain.validators.AbstractDomainValidator;
 import com.eduardoaf.balance.app_cap_income.application.dtos.CreateIncomeDto;
 import com.eduardoaf.balance.app_cap_income.infrastructure.repositories.AppCapIncomeReaderRepository;
