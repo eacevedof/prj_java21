@@ -7,6 +7,7 @@ public enum LengthsEnum {
     PAYED_FROM(250),
     INCOME_DATE(10),
     AMOUNT(10),
+    NOTES(500),
     DESCRIPTION(150);
 
     private final int length;
