@@ -1,5 +1,7 @@
 package com.eduardoaf.balance.shared.domain.validators;
 
+import java.util.List;
+
 public abstract class AbstractValidator {
 
     protected boolean isLengthGreaterThan(String string, int maxLength) {
@@ -50,5 +52,14 @@ public abstract class AbstractValidator {
 
     protected boolean isTime(String string) {
         return string.matches("\\d{2}:\\d{2}:\\d{2}");
+    }
+
+    protected boolean hasInvalidCharacters(String string, List<String> invalidCharacters) {
+        for (String invalidCharacter : invalidCharacters) {
+            if (string.contains(invalidCharacter)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
