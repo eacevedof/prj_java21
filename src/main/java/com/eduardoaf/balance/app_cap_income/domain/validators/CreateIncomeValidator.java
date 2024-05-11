@@ -30,6 +30,7 @@ public final class CreateIncomeValidator extends AbstractValidator {
         failIfWrongPaymentFor();
         failIfWrongCodeErp();
         failIfWrongDescription();
+        failIfWrongPayedFrom();
     }
 
     private void failIfWrongPaymentFor() throws TypeException, ValueException {
@@ -60,6 +61,16 @@ public final class CreateIncomeValidator extends AbstractValidator {
         var length = LengthsEnum.DESCRIPTION.value();
         if (isLengthGreaterThan(value, length))
             ValueException.wrongMaxLength(label, value, length);
+    }
 
+    private void failIfWrongPayedFrom() throws TypeException, ValueException {
+        var label = "Payed from";
+        var value = createIncomeDto.payedFrom();
+        if (!isTypeString(value))
+            TypeException.valueIsNotString(label, value);
+
+        var length = LengthsEnum.PAYED_FROM.value();
+        if (isLengthGreaterThan(value, length))
+            ValueException.wrongMaxLength(label, value, length);
     }
 }
