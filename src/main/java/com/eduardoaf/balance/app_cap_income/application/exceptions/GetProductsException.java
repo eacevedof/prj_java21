@@ -9,10 +9,11 @@ public final class GetProductsException extends AbstractException {
         super(message, statusCode);
     }
 
-    public static void ErrorOnReadingEndpoint(String endpoint) throws Exception {
+    public static void ErrorOnReadingEndpoint(String endpoint) throws GetProductsException {
         throw new GetProductsException(
                 "Error reading endpoint:".concat(endpoint),
                 HttpStatusCodeEnum.SERVICE_UNAVAILABLE.getValue()
         );
     }
+
 }
