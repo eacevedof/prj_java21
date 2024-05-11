@@ -37,7 +37,7 @@ public final class ValueException extends Exception{
                 400
         );
     }
-
+    
     public static void wrongMinLength(String field, String currValue, int minLength) throws ValueException {
         var message = String.format(
                 "The %s value `%s` is shorter than the minimum length %s",
@@ -68,18 +68,31 @@ public final class ValueException extends Exception{
         String field,
         Object currValue,
         String validFormat
-    ) throws TypeException {
+    ) throws ValueException {
         var message = String.format(
                 "The %s value `%s` does not match the format %s",
                 field,
                 getAsString(currValue),
                 validFormat
         );
-        throw new TypeException(
+        throw new ValueException(
                 message,
                 400
         );
     }
+
+    public static void valueIsEmpty(
+            String field
+    ) throws ValueException {
+        var message = String.format(
+                "The `%s` value is empty",
+                field
+        );
+        throw new ValueException(
+                message,
+                400
+        );
+    }    
 
     private static String getAsString(Object obj) {
         return obj == null ? "" : obj.toString();

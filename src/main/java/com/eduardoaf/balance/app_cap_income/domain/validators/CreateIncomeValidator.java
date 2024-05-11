@@ -82,6 +82,9 @@ public final class CreateIncomeValidator extends AbstractValidator {
         if (!isTypeString(value))
             TypeException.valueIsNotString(label, value);
 
+        if (isNullOrEmpty(value))
+            ValueException.valueIsEmpty(label);
+
         if (!isTypeDate(value))
             ValueException.wrongDateFormat(label, value, "yyyyy-mm-dd");
 

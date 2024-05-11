@@ -72,19 +72,6 @@ public final class TypeException extends Exception{
         );
     }
 
-    public static void valueIsEmpty(
-        String field
-    ) throws TypeException {
-        var message = String.format(
-                "The `%s` value is empty",
-                field
-        );
-        throw new TypeException(
-                message,
-                400
-        );
-    }
-
     private static String getAsString(Object obj) {
         return obj == null ? "" : obj.toString();
     }
