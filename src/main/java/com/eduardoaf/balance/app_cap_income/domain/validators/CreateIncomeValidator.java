@@ -28,8 +28,9 @@ public final class CreateIncomeValidator extends AbstractValidator {
     }
 
     private void validateCodeErp() throws CreateIncomeException {
-        if (createIncomeDto.codeErp().length() > 50) {
+
+        if (isLengthGreaterThan(createIncomeDto.codeErp(), 50))
             CreateIncomeException.errorOnCodeErpLength();
-        }
+
     }
 }
