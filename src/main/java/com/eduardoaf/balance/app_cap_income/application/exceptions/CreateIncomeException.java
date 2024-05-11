@@ -9,11 +9,10 @@ public final class CreateIncomeException extends AbstractException {
         super(message, statusCode);
     }
 
-    public static void ErrorOnReadingEndpoint(String endpoint) throws CreateIncomeException {
+    public static void errorOnCodeErpLength() throws CreateIncomeException {
         throw new CreateIncomeException(
-                "Error reading endpoint:".concat(endpoint),
-                HttpStatusCodeEnum.SERVICE_UNAVAILABLE.getValue()
+                "Error on code erp length",
+                HttpStatusCodeEnum.BAD_REQUEST.getValue()
         );
     }
-
 }
