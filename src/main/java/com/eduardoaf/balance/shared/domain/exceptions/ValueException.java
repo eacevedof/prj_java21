@@ -12,7 +12,7 @@ public final class ValueException extends Exception{
         this.statusCode = statusCode;
     }
 
-    public static void isLowerThan(String field, int currValue, String minValue) throws ValueException {
+    public static void intValueIsLowerThan(String field, int currValue, String minValue) throws ValueException {
         var message = String.format(
                 "The %s value `%s` is lower than the minimum value %s",
                 field,
@@ -25,7 +25,7 @@ public final class ValueException extends Exception{
         );
     }
 
-    public static void isGreaterThan(String field, int currValue, int maxValue) throws ValueException {
+    public static void intValueIsGreaterThan(String field, int currValue, int maxValue) throws ValueException {
         var message = String.format(
                 "The %s value `%s` is greater than the maximum value %s",
                 field,
@@ -38,7 +38,7 @@ public final class ValueException extends Exception{
         );
     }
 
-    public static void minLength(String field, String currValue, int minLength) throws ValueException {
+    public static void wrongMinLength(String field, String currValue, int minLength) throws ValueException {
         var message = String.format(
                 "The %s value `%s` is shorter than the minimum length %s",
                 field,
@@ -51,7 +51,7 @@ public final class ValueException extends Exception{
         );
     }
 
-    public static void  maxLength(String field, String currValue, int maxLength) throws ValueException {
+    public static void wrongMaxLength(String field, String currValue, int maxLength) throws ValueException {
         var message = String.format(
                 "The %s value `%s` is larger than the maximum length %s",
                 field,
@@ -62,5 +62,26 @@ public final class ValueException extends Exception{
                 message,
                 400
         );
+    }
+
+    public static void wrongDateFormat(
+        String field,
+        Object currValue,
+        String validFormat
+    ) throws TypeException {
+        var message = String.format(
+                "The %s value `%s` does not match the format %s",
+                field,
+                getAsString(currValue),
+                validFormat
+        );
+        throw new TypeException(
+                message,
+                400
+        );
+    }
+
+    private static String getAsString(Object obj) {
+        return obj == null ? "" : obj.toString();
     }
 }

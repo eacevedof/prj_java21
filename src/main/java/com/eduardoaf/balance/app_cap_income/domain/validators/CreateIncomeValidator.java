@@ -6,9 +6,7 @@ import org.springframework.stereotype.Service;
 import com.eduardoaf.balance.shared.domain.validators.AbstractValidator;
 import com.eduardoaf.balance.app_cap_income.application.dtos.CreateIncomeDto;
 import com.eduardoaf.balance.app_cap_income.infrastructure.repositories.AppCapIncomeReaderRepository;
-import com.eduardoaf.balance.app_cap_income.application.exceptions.CreateIncomeException;
 
-import com.eduardoaf.balance.shared.domain.exceptions.TypeException;
 import com.eduardoaf.balance.shared.domain.exceptions.ValueException;
 
 @Service
@@ -32,7 +30,7 @@ public final class CreateIncomeValidator extends AbstractValidator {
 
     private void validateCodeErp() throws ValueException {
         if (isLengthGreaterThan(createIncomeDto.codeErp(), 50))
-            ValueException.maxLength("Code Erp", createIncomeDto.codeErp(), 50);
+            ValueException.wrongMaxLength("Code Erp", createIncomeDto.codeErp(), 50);
 
     }
 }
