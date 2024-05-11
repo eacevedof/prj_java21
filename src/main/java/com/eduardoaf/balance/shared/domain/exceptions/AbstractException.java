@@ -12,8 +12,4 @@ public abstract class AbstractException extends Exception implements InterfaceDo
         this.statusCode = statusCode;
     }
 
-    public int getStatusCode() {
-        return statusCode;
-    }
-
 }
