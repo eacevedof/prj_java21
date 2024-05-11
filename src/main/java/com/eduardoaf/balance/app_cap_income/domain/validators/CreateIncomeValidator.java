@@ -8,6 +8,7 @@ import com.eduardoaf.balance.app_cap_income.application.dtos.CreateIncomeDto;
 import com.eduardoaf.balance.app_cap_income.infrastructure.repositories.AppCapIncomeReaderRepository;
 
 import com.eduardoaf.balance.shared.domain.exceptions.ValueException;
+import com.eduardoaf.balance.shared.domain.enums.LengthsEnum;
 
 @Service
 public final class CreateIncomeValidator extends AbstractValidator {
@@ -30,7 +31,11 @@ public final class CreateIncomeValidator extends AbstractValidator {
 
     private void validateCodeErp() throws ValueException {
         if (isLengthGreaterThan(createIncomeDto.codeErp(), 50))
-            ValueException.wrongMaxLength("Code Erp", createIncomeDto.codeErp(), 50);
+            ValueException.wrongMaxLength(
+                "Code Erp",
+                createIncomeDto.codeErp(),
+                LengthsEnum.CODE_ERP.value()
+            );
 
     }
 }
