@@ -1,4 +1,4 @@
-package com.eduardoaf.balance.app_cap_income.application.validators;
+package com.eduardoaf.balance.app_cap_income.domain.validators;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

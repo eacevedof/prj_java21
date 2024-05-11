@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import com.eduardoaf.balance.shared.infrastructure.file.Log;
 import com.eduardoaf.balance.shared.infrastructure.http.responses.HttpResponse;
 import com.eduardoaf.balance.app_cap_income.application.exceptions.CreateIncomeException;
-import com.eduardoaf.balance.app_cap_income.application.validators.CreateIncomeValidator;
+import com.eduardoaf.balance.app_cap_income.domain.validators.CreateIncomeValidator;
 import com.eduardoaf.balance.app_cap_income.application.dtos.CreateIncomeDto;
 import com.eduardoaf.balance.app_cap_income.application.services.CreateIncomeService;
 
