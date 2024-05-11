@@ -32,4 +32,5 @@ public record CreateIncomeDto(
                 idOwner
         );
     }
+
 }
