@@ -32,16 +32,26 @@ public final class CreateIncomeValidator extends AbstractValidator {
 
     }
 
-    private void failIfWrongPaymentFor() throws TypeException {
-        if (!isTypeString(createIncomeDto.paymentFor())) {
-            TypeException.valueIsNotString("Payment for", createIncomeDto.paymentFor());
+    private void failIfWrongPaymentFor() throws TypeException, ValueException {
+        var label = "Payment for";
+        var paymentFor = createIncomeDto.paymentFor();
+        if (!isTypeString(paymentFor)) {
+            TypeException.valueIsNotString(label, paymentFor);
+        }
+        if (isLengthGreaterThan(paymentFor, LengthsEnum.PAYMENT_FOR.value())) {
+            ValueException.wrongMaxLength(
+                label,
+                createIncomeDto.codeErp(),
+                LengthsEnum.CODE_ERP.value()
+            );
         }
     }
 
     private void failIfWrongCodeErp() throws ValueException {
+        var label = "Code ERP";
         if (isLengthGreaterThan(createIncomeDto.codeErp(), LengthsEnum.CODE_ERP.value()))
             ValueException.wrongMaxLength(
-                "Code Erp",
+                label,
                 createIncomeDto.codeErp(),
                 LengthsEnum.CODE_ERP.value()
             );
