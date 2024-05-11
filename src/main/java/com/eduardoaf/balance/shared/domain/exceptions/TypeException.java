@@ -27,6 +27,21 @@ public final class TypeException extends Exception{
         );
     }
 
+    public static void valueIsNotInteger(
+        String field,
+        Object currValue
+    ) throws TypeException {
+        var message = String.format(
+                "The %s value `%s` is not an integer",
+                field,
+                getAsString(currValue)
+        );
+        throw new TypeException(
+                message,
+                400
+        );
+    }
+
     public static void valueIsNotString(
         String field,
         Object currValue
@@ -69,7 +84,6 @@ public final class TypeException extends Exception{
                 400
         );
     }
-
 
     private static String getAsString(Object obj) {
         return obj == null ? "" : obj.toString();
