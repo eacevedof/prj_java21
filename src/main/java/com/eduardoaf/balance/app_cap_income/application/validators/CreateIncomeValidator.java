@@ -5,23 +5,19 @@ import org.springframework.stereotype.Service;
 
 import com.eduardoaf.balance.app_cap_income.application.dtos.CreateIncomeDto;
 import com.eduardoaf.balance.app_cap_income.infrastructure.repositories.AppCapIncomeReaderRepository;
-import com.eduardoaf.balance.app_cap_income.infrastructure.repositories.AppCapIncomeWriterRepository;
 import com.eduardoaf.balance.app_cap_income.application.exceptions.CreateIncomeException;
 
 @Service
 public final class CreateIncomeValidator {
 
-    private final AppCapIncomeWriterRepository appCapIncomeWriterRepository;
     private final AppCapIncomeReaderRepository appCapIncomeReaderRepository;
     private CreateIncomeDto createIncomeDto;
 
     @Autowired
     public CreateIncomeValidator
     (
-        AppCapIncomeWriterRepository appCapIncomeWriterRepository,
         AppCapIncomeReaderRepository appCapIncomeReaderRepository
     ) {
-        this.appCapIncomeWriterRepository = appCapIncomeWriterRepository;
         this.appCapIncomeReaderRepository = appCapIncomeReaderRepository;
     }
 
