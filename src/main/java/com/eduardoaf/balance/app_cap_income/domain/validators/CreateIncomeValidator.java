@@ -39,7 +39,7 @@ public final class CreateIncomeValidator extends AbstractValidator {
     }
 
     private void failIfWrongCodeErp() throws ValueException {
-        if (isLengthGreaterThan(createIncomeDto.codeErp(), 50))
+        if (isLengthGreaterThan(createIncomeDto.codeErp(), LengthsEnum.CODE_ERP.value()))
             ValueException.wrongMaxLength(
                 "Code Erp",
                 createIncomeDto.codeErp(),

@@ -17,7 +17,7 @@ public final class TypeException extends Exception{
         Object currValue
     ) throws TypeException {
         var message = String.format(
-                "The %s value `%s` is not numeric",
+                "The `%s` value `%s` is not numeric",
                 field,
                 getAsString(currValue)
         );
@@ -32,7 +32,7 @@ public final class TypeException extends Exception{
         Object currValue
     ) throws TypeException {
         var message = String.format(
-                "The %s value `%s` is not an integer",
+                "The `%s` value `%s` is not an integer",
                 field,
                 getAsString(currValue)
         );
@@ -47,7 +47,7 @@ public final class TypeException extends Exception{
         Object currValue
     ) throws TypeException {
         var message = String.format(
-                "The %s value `%s` is not a string",
+                "The `%s` value `%s` is not a string",
                 field,
                 getAsString(currValue)
         );
@@ -62,7 +62,7 @@ public final class TypeException extends Exception{
         Object currValue
     ) throws TypeException {
         var message = String.format(
-                "The %s value `%s` is not a list",
+                "The `%s` value `%s` is not a list",
                 field,
                 getAsString(currValue)
         );
@@ -76,7 +76,7 @@ public final class TypeException extends Exception{
         String field
     ) throws TypeException {
         var message = String.format(
-                "The %s value is empty",
+                "The `%s` value is empty",
                 field
         );
         throw new TypeException(
