@@ -1,5 +1,6 @@
 package com.eduardoaf.balance.app_cap_income.domain.validators;
 
+import com.eduardoaf.balance.shared.domain.exceptions.TypeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,10 +27,18 @@ public final class CreateIncomeValidator extends AbstractValidator {
 
     public void invoke(CreateIncomeDto createIncomeDto) throws Exception {
         this.createIncomeDto = createIncomeDto;
-        validateCodeErp();
+        failIfWrongPaymentFor();
+        failIfWrongCodeErp();
+
     }
 
-    private void validateCodeErp() throws ValueException {
+    private void failIfWrongPaymentFor() throws TypeException {
+        if (!isTypeString(createIncomeDto.paymentFor())) {
+            TypeException.valueIsNotString("Payment for", createIncomeDto.paymentFor());
+        }
+    }
+
+    private void failIfWrongCodeErp() throws ValueException {
         if (isLengthGreaterThan(createIncomeDto.codeErp(), 50))
             ValueException.wrongMaxLength(
                 "Code Erp",

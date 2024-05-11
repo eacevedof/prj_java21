@@ -16,7 +16,11 @@ public abstract class AbstractValidator {
         return string.length() < minLength || string.length() > maxLength;
     }
 
-    protected boolean isDouble(String string) {
+    protected boolean isTypeString(String string) {
+        return (string instanceof String) || isTypeNumeric(string);
+    }
+
+    protected boolean isTypeDouble(String string) {
         try {
             Double.parseDouble(string);
             return true;
@@ -25,7 +29,7 @@ public abstract class AbstractValidator {
         }
     }
 
-    protected boolean isInteger(String string) {
+    protected boolean isTypeInteger(String string) {
         try {
             Integer.parseInt(string);
             return true;
@@ -34,23 +38,23 @@ public abstract class AbstractValidator {
         }
     }
 
-    protected boolean isNumeric(String string) {
-        return isInteger(string) || isDouble(string);
+    protected boolean isTypeNumeric(String string) {
+        return isTypeInteger(string) || isTypeDouble(string);
     }
 
     protected boolean isNullOrEmpty(String string) {
         return string == null || string.isEmpty() || string.isBlank();
     }
 
-    protected boolean isDate(String string) {
+    protected boolean isTypeDate(String string) {
         return string.matches("\\d{4}-\\d{2}-\\d{2}");
     }
 
-    protected boolean isDateTime(String string) {
+    protected boolean isTypeDatetime(String string) {
         return string.matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}");
     }
 
-    protected boolean isTime(String string) {
+    protected boolean isTypeTime(String string) {
         return string.matches("\\d{2}:\\d{2}:\\d{2}");
     }
 
@@ -71,7 +75,7 @@ public abstract class AbstractValidator {
         return !validValues.contains(integer);
     }
 
-    protected boolean isList(Object object) {
+    protected boolean isTypeList(Object object) {
         return object instanceof List;
     }
 }
