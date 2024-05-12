@@ -52,7 +52,7 @@ public final class CreateUserService {
             createUserDto.phone(),
             createUserDto.fullname(),
             createUserDto.address(),
-            createUserDto.birthdate(),
+            createUserDto.birthdate() == "" ? null : createUserDto.birthdate(),
 
             createUserDto.idParent() == "" ? null : Integer.parseInt(createUserDto.idParent()),
             createUserDto.idGender() == "" ? null : Integer.parseInt(createUserDto.idGender()),
