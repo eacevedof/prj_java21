@@ -52,7 +52,6 @@ public final class CreateIncomeValidator extends AbstractDomainValidator {
         if (incomeId == 0) return;
         var uuid = appCapIncomeReaderRepository.getUuidByIncomeId(incomeId);
         CreateIncomeException.incomeAlreadyExists(uuid);
-
     }
 
     private void failIfWrongPaymentFor() throws DomainTypeException, DomainValueException {
@@ -117,7 +116,6 @@ public final class CreateIncomeValidator extends AbstractDomainValidator {
 
         if (!isTypeDate(value))
             DomainValueException.wrongDateFormat(label, value, "yyyyy-mm-dd");
-
     }
 
     private void failIfWrongAmount() throws DomainTypeException, DomainValueException {
