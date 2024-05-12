@@ -1,15 +1,16 @@
 package com.eduardoaf.balance.sys_users.infrastructure.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+
 import com.eduardoaf.balance.shared.infrastructure.file.Log;
 import com.eduardoaf.balance.shared.infrastructure.http.responses.HttpResponse;
 import com.eduardoaf.balance.sys_users.application.dtos.CreateUserDto;
 import com.eduardoaf.balance.sys_users.application.services.CreateUserService;
 import com.eduardoaf.balance.sys_users.domain.exceptions.CreateUserException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CreateUserController {
@@ -32,6 +33,21 @@ public class CreateUserController {
     @PostMapping(value = "api/v1/create-user", consumes = {"application/json"})
     public ResponseEntity<?> createUser(@RequestBody CreateUserDto createUserDto) {
         try {
+            createUserDto = CreateUserDto.getInstance(
+                    createUserDto.codeErp(),
+                    createUserDto.email(),
+                    createUserDto.secret(),
+                    createUserDto.phone(),
+                    createUserDto.fullname(),
+                    createUserDto.address(),
+                    createUserDto.birthdate(),
+                    createUserDto.idParent(),
+                    createUserDto.idGender(),
+                    createUserDto.idNationality(),
+                    createUserDto.idCountry(),
+                    createUserDto.idLanguage(),
+                    createUserDto.idProfile()
+            );
             var createdUserDto = createUserService.invoke(createUserDto);
             return httpResponse.getResponse200("entity created", createdUserDto);
         }

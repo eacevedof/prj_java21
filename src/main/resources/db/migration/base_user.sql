@@ -36,6 +36,8 @@ CREATE TABLE `base_user` (
   `is_erpsent` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '0' COMMENT 'en procesos etl indica si se ha exportado',
   `is_enabled` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1' COMMENT 'bloquea por completo el archivo',
   `i` int DEFAULT NULL COMMENT 'en procesos de etl con disp offline el autoid en la máquina',
+  
+  
   `id` int NOT NULL AUTO_INCREMENT,
   `uuid` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `code_erp` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
@@ -55,6 +57,9 @@ CREATE TABLE `base_user` (
   `url_picture` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `date_validated` datetime DEFAULT NULL,
   `log_attempts` int NOT NULL DEFAULT '0',
+
+
+  
   PRIMARY KEY (`id`) USING BTREE,
   KEY `delete_date_idx` (`delete_date`) USING BTREE,
   KEY `is_enabled_idx` (`is_enabled`) USING BTREE,
