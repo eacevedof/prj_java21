@@ -41,7 +41,7 @@ public final class CreateUserValidator extends AbstractDomainValidator {
 
     private void failIfUserExists() throws Exception {
         var userId = sysUserReaderRepository.doesUserExistByEmail(createUserDto.email());
-        if (userId == 0) return;
+        if (userId == null) return;
         var uuid = sysUserReaderRepository.getUuidByUserId(userId);
         CreateUserException.userAlreadyExists(uuid);
     }
@@ -63,8 +63,9 @@ public final class CreateUserValidator extends AbstractDomainValidator {
             DomainValueException.wrongEmailFormat(label, value, "username@domain.xxx");
 
         var userId = sysUserReaderRepository.getUserIdByEmail(value);
-        if (userId == null)
-            CreateUserException.userAlreadyExists(value);
+        if (userId == null) return;
+
+        CreateUserException.userAlreadyExists(value);
     }
 
     private void failIfWrongIdLanguage() throws DomainTypeException, DomainValueException {
