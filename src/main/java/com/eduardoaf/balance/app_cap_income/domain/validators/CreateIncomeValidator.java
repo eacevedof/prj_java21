@@ -6,12 +6,11 @@ import org.springframework.stereotype.Service;
 import com.eduardoaf.balance.shared.infrastructure.formatters.NumberFormatter;
 import com.eduardoaf.balance.shared.domain.exceptions.DomainTypeException;
 import com.eduardoaf.balance.shared.domain.validators.AbstractDomainValidator;
-import com.eduardoaf.balance.app_cap_income.application.dtos.CreateIncomeDto;
-import com.eduardoaf.balance.app_cap_income.infrastructure.repositories.AppCapIncomeReaderRepository;
-
-import com.eduardoaf.balance.app_cap_income.domain.exceptions.CreateIncomeException;
 import com.eduardoaf.balance.shared.domain.exceptions.DomainValueException;
 import com.eduardoaf.balance.shared.domain.enums.LengthsEnum;
+import com.eduardoaf.balance.app_cap_income.application.dtos.CreateIncomeDto;
+import com.eduardoaf.balance.app_cap_income.infrastructure.repositories.AppCapIncomeReaderRepository;
+import com.eduardoaf.balance.app_cap_income.domain.exceptions.CreateIncomeException;
 
 @Service
 public final class CreateIncomeValidator extends AbstractDomainValidator {
