@@ -1,5 +1,8 @@
 package com.eduardoaf.balance.sys_users.infrastructure.controllers;
 
+import com.eduardoaf.balance.app_cap_income.domain.exceptions.CreateIncomeException;
+import com.eduardoaf.balance.shared.domain.exceptions.DomainTypeException;
+import com.eduardoaf.balance.shared.domain.exceptions.DomainValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,7 +54,7 @@ public class CreateUserController {
             var createdUserDto = createUserService.invoke(createUserDto);
             return httpResponse.getResponse200("entity created", createdUserDto);
         }
-        catch (CreateUserException e) {
+        catch (DomainTypeException | DomainValueException | CreateUserException e) {
             return httpResponse.getResponse400(e.getMessage());
         }
         catch (Exception e) {

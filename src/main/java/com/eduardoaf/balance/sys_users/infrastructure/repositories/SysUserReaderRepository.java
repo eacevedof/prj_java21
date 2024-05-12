@@ -33,7 +33,7 @@ public final class SysUserReaderRepository extends AbstractMysqlRepository {
         String sql = String.format("""
         -- getUserByUserId
         SELECT * 
-        FROM sys_users
+        FROM base_users
         WHERE 1=1
         AND delete_date IS NULL
         AND id = %s
@@ -50,7 +50,7 @@ public final class SysUserReaderRepository extends AbstractMysqlRepository {
         String sql = String.format("""
         -- doesUserExistByEmail
         SELECT id
-        FROM sys_users
+        FROM base_users
         WHERE 1=1
         AND delete_date IS NULL
         AND email = '%s'
@@ -65,7 +65,7 @@ public final class SysUserReaderRepository extends AbstractMysqlRepository {
         String sql = String.format("""
         -- getUuidByUserId
         SELECT uuid
-        FROM sys_users
+        FROM base_users
         WHERE 1=1
         AND delete_date IS NULL
         AND id = %s
@@ -82,7 +82,7 @@ public final class SysUserReaderRepository extends AbstractMysqlRepository {
         String sql = String.format("""
         -- getUserIdByEmail
         SELECT id
-        FROM sys_users
+        FROM base_users
         WHERE 1=1
         AND delete_date IS NULL
         AND email = '%s'

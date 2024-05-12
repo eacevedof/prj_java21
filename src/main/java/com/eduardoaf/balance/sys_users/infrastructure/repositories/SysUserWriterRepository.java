@@ -29,7 +29,7 @@ public final class SysUserWriterRepository extends AbstractMysqlRepository {
     }
 
     public void createNewUser(SysUserEntity sysUserEntity) throws Exception {
-        var sql = InsertQuery.getInstance("sys_users")
+        var sql = InsertQuery.getInstance("base_user")
                 .addColumn("insert_platform", sysUserEntity.insertPlatform)
                 .addColumn("insert_user", sysUserEntity.insertUser)
                 .addColumn("insert_date", dateFormatter.getNow())
