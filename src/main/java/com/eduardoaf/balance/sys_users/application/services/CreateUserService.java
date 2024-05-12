@@ -37,22 +37,33 @@ public final class CreateUserService {
 
         createUserValidator.invoke(createUserDto);
 
-        var newUser = SysUserEntity.getInstance(
+
+
+
+        var newUserEntity = SysUserEntity.getInstance(
+            null,
+            null,
             createUserDto.codeErp(),
+            null,
             createUserDto.email(),
             createUserDto.secret(),
             createUserDto.phone(),
             createUserDto.fullname(),
             createUserDto.address(),
             createUserDto.birthdate(),
-            createUserDto.idParent(),
-            createUserDto.idGender(),
-            createUserDto.idNationality(),
-            createUserDto.idCountry(),
-            createUserDto.idLanguage(),
-            createUserDto.idProfile()
+
+            Integer.parseInt(createUserDto.idParent()),
+            Integer.parseInt(createUserDto.idGender()),
+            Integer.parseInt(createUserDto.idNationality()),
+            Integer.parseInt(createUserDto.idCountry()),
+            Integer.parseInt(createUserDto.idLanguage()),
+            Integer.parseInt(createUserDto.idProfile()),
+
+            null,
+            null,
+            null
         );
-        sysUserWriterRepository.createNewUser(newUser);
+        sysUserWriterRepository.createNewUser(newUserEntity);
         var lastId = sysUserWriterRepository.getLastInsertId();
         var dict = sysUserReaderRepository.getUserByUserId(lastId);
         if (dict.isEmpty()) {
@@ -61,25 +72,25 @@ public final class CreateUserService {
         }
 
         return CreatedUserDto.getInstance(
-                Integer.parseInt(dict.get("id")),
-                dict.get("uuid"),
-                dict.get("code_erp"),
-                dict.get("description"),
-                dict.get("email"),
-                dict.get("secret"),
-                dict.get("phone"),
-                dict.get("fullname"),
-                dict.get("address"),
-                dict.get("birthdate"),
-                Integer.parseInt(dict.get("id_parent")),
-                Integer.parseInt(dict.get("id_gender")),
-                Integer.parseInt(dict.get("id_nationality")),
-                Integer.parseInt(dict.get("id_country")),
-                Integer.parseInt(dict.get("id_language")),
-                Integer.parseInt(dict.get("id_profile")),
-                dict.get("url_picture"),
-                dict.get("date_validated"),
-                Integer.parseInt(dict.get("log_attempts"))
+            Integer.parseInt(dict.get("id")),
+            dict.get("uuid"),
+            dict.get("code_erp"),
+            dict.get("description"),
+            dict.get("email"),
+            dict.get("secret"),
+            dict.get("phone"),
+            dict.get("fullname"),
+            dict.get("address"),
+            dict.get("birthdate"),
+            Integer.parseInt(dict.get("id_parent")),
+            Integer.parseInt(dict.get("id_gender")),
+            Integer.parseInt(dict.get("id_nationality")),
+            Integer.parseInt(dict.get("id_country")),
+            Integer.parseInt(dict.get("id_language")),
+            Integer.parseInt(dict.get("id_profile")),
+            dict.get("url_picture"),
+            dict.get("date_validated"),
+            Integer.parseInt(dict.get("log_attempts"))
         );
     }
 }

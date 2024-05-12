@@ -33,9 +33,9 @@ public final class SysUserWriterRepository extends AbstractMysqlRepository {
                 .addColumn("insert_platform", sysUserEntity.insertPlatform)
                 .addColumn("insert_user", sysUserEntity.insertUser)
                 .addColumn("insert_date", dateFormatter.getNow())
-                .addColumn("uuid", uuid.getUuid("IN", 15))
+                .addColumn("uuid", uuid.getUuid("USR", 15))
                 .addColumn("code_erp", sysUserEntity.codeErp)
-                .addColumn("description", sysUserEntity.description)
+                //.addColumn("description", sysUserEntity.description)
                 .addColumn("email", sysUserEntity.email)
                 .addColumn("secret", sysUserEntity.secret)
                 .addColumn("phone", sysUserEntity.phone)
@@ -48,9 +48,9 @@ public final class SysUserWriterRepository extends AbstractMysqlRepository {
                 .addColumn("id_country", sysUserEntity.idCountry)
                 .addColumn("id_language", sysUserEntity.idLanguage)
                 .addColumn("id_profile", sysUserEntity.idProfile)
-                .addColumn("url_picture", sysUserEntity.urlPicture)
-                .addColumn("date_validated", sysUserEntity.dateValidated)
-                .addColumn("log_attempts", sysUserEntity.logAttempts)
+                .addColumn("url_picture", null)
+                .addColumn("date_validated", null)
+                .addColumn("log_attempts", 0)
                 .getQuery();
         log.debug(sql, "createNewUser");
         this.execute(sql);

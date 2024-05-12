@@ -4,7 +4,7 @@ import com.eduardoaf.balance.shared.domain.entities.AbstractEntity;
 
 public final class SysUserEntity extends AbstractEntity {
 
-    public final int id;
+    public final Integer id;
     public final String uuid;
     public final String codeErp;
     public final String description;
@@ -14,18 +14,18 @@ public final class SysUserEntity extends AbstractEntity {
     public final String fullname;
     public final String address;
     public final String birthdate;
-    public final int idParent;
-    public final int idGender;
-    public final int idNationality;
-    public final int idCountry;
-    public final int idLanguage;
-    public final int idProfile;
+    public final Integer idParent;
+    public final Integer idGender;
+    public final Integer idNationality;
+    public final Integer idCountry;
+    public final Integer idLanguage;
+    public final Integer idProfile;
     public final String urlPicture;
     public final String dateValidated;
-    public final int logAttempts;
+    public final Integer logAttempts;
 
     public SysUserEntity(
-        int id,
+        Integer id,
         String uuid,
         String codeErp,
         String description,
@@ -35,15 +35,17 @@ public final class SysUserEntity extends AbstractEntity {
         String fullname,
         String address,
         String birthdate,
-        int idParent,
-        int idGender,
-        int idNationality,
-        int idCountry,
-        int idLanguage,
-        int idProfile,
+
+        Integer idParent,
+        Integer idGender,
+        Integer idNationality,
+        Integer idCountry,
+        Integer idLanguage,
+        Integer idProfile,
+
         String urlPicture,
         String dateValidated,
-        int logAttempts
+        Integer logAttempts
     ) {
         this.id = id;
         this.uuid = uuid;
@@ -67,7 +69,7 @@ public final class SysUserEntity extends AbstractEntity {
     }
 
     public static SysUserEntity getInstance(
-        int id,
+        Integer id,
         String uuid,
         String codeErp,
         String description,
@@ -77,15 +79,17 @@ public final class SysUserEntity extends AbstractEntity {
         String fullname,
         String address,
         String birthdate,
-        int idParent,
-        int idGender,
-        int idNationality,
-        int idCountry,
-        int idLanguage,
-        int idProfile,
+
+        Integer idParent,
+        Integer idGender,
+        Integer idNationality,
+        Integer idCountry,
+        Integer idLanguage,
+        Integer idProfile,
+
         String urlPicture,
         String dateValidated,
-        int logAttempts
+        Integer logAttempts
     ) {
         return new SysUserEntity(
             id,
@@ -98,12 +102,14 @@ public final class SysUserEntity extends AbstractEntity {
             fullname == null ? "" : fullname.trim(),
             address == null ? "" : address.trim(),
             birthdate,
+
             idParent,
             idGender,
             idNationality,
             idCountry,
             idLanguage,
             idProfile,
+
             urlPicture == null ? "" : urlPicture.trim(),
             dateValidated,
             logAttempts
