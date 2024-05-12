@@ -51,29 +51,28 @@ public final class CreateUserService {
         String password = "Abc.1234:)";
         String hashedPassword = passwordFormatter.getHashedPassword(password);
         var newUserEntity = SysUserEntity.getInstance(
-            null,
-            null,
-            createUserDto.codeErp(),
-            null,
-            createUserDto.email(),
+            numberFormatter.getNull(),
+            stringFormatter.getNull(),
+            stringFormatter.getTrimOrNull(createUserDto.codeErp()),
+            stringFormatter.getNull(),
+            stringFormatter.getTrimOrNull(createUserDto.email()),
             hashedPassword,
-            createUserDto.phone(),
-            createUserDto.fullname(),
-            createUserDto.address(),
+            stringFormatter.getTrimOrNull(createUserDto.phone()),
+            stringFormatter.getTrimOrNull(createUserDto.fullname()),
+            stringFormatter.getTrimOrNull(createUserDto.address()),
 
             stringFormatter.getTrimOrNull(createUserDto.birthdate()),
 
+            numberFormatter.getAsInteger(createUserDto.idParent()),
+            numberFormatter.getAsInteger(createUserDto.idGender()),
+            numberFormatter.getAsInteger(createUserDto.idNationality()),
+            numberFormatter.getAsInteger(createUserDto.idCountry()),
+            numberFormatter.getAsInteger(createUserDto.idLanguage(), 1),
+            numberFormatter.getAsInteger(createUserDto.idProfile(), 1),
 
-            createUserDto.idParent() == "" ? null : Integer.parseInt(createUserDto.idParent()),
-            createUserDto.idGender() == "" ? null : Integer.parseInt(createUserDto.idGender()),
-            createUserDto.idNationality() == "" ? null : Integer.parseInt(createUserDto.idNationality()),
-            createUserDto.idCountry() == "" ? null : Integer.parseInt(createUserDto.idCountry()),
-            createUserDto.idLanguage() == "" ? 1 : Integer.parseInt(createUserDto.idLanguage()),
-            createUserDto.idProfile() == "" ? 1 : Integer.parseInt(createUserDto.idProfile()),
-
-            null,
-            null,
-            0
+            stringFormatter.getNull(),
+            stringFormatter.getNull(),
+            numberFormatter.getNull()
         );
         sysUserWriterRepository.createNewUser(newUserEntity);
         var lastId = sysUserWriterRepository.getLastInsertId();
@@ -84,17 +83,17 @@ public final class CreateUserService {
         }
 
         return CreatedUserDto.getInstance(
-            Integer.parseInt(dict.get("id")),
+            numberFormatter.getAsInteger(dict.get("id")),
 
-            dict.get("uuid"),
-            dict.get("code_erp"),
-            dict.get("description"),
-            dict.get("email"),
-            dict.get("secret"),
-            dict.get("phone"),
-            dict.get("fullname"),
-            dict.get("address"),
-            dict.get("birthdate") == null ? null : dict.get("birthdate"),
+            stringFormatter.getTrimOrNull(dict.get("uuid")),
+            stringFormatter.getTrimOrNull(dict.get("code_erp")),
+            stringFormatter.getTrimOrNull(dict.get("description")),
+            stringFormatter.getTrimOrNull(dict.get("email")),
+            stringFormatter.getTrimOrNull(dict.get("secret")),
+            stringFormatter.getTrimOrNull(dict.get("phone")),
+            stringFormatter.getTrimOrNull(dict.get("fullname")),
+            stringFormatter.getTrimOrNull(dict.get("address")),
+            stringFormatter.getTrimOrNull(dict.get("birthdate")),
 
             numberFormatter.getAsInteger(dict.get("id_parent")),
             numberFormatter.getAsInteger(dict.get("id_gender")),
@@ -103,8 +102,9 @@ public final class CreateUserService {
             numberFormatter.getAsInteger(dict.get("id_language")),
             numberFormatter.getAsInteger(dict.get("id_profile")),
 
-            dict.get("url_picture"),
-            dict.get("date_validated"),
+            stringFormatter.getTrimOrNull(dict.get("url_picture")),
+            stringFormatter.getTrimOrNull(dict.get("date_validated")),
+
             numberFormatter.getAsInteger(dict.get("log_attempts"))
         );
     }

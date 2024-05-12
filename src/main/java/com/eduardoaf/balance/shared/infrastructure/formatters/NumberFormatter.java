@@ -37,6 +37,14 @@ public final class NumberFormatter {
         return Integer.getInteger(number);
     }
 
+    public Integer getAsInteger(String number, Integer defaultValue) {
+        if (number == null)
+            return defaultValue;
+        if (number.isEmpty())
+            return defaultValue;
+        return Integer.getInteger(number);
+    }
+
     public String getAsString(Double doubleNum) {
         return doubleNum.toString();
     }
