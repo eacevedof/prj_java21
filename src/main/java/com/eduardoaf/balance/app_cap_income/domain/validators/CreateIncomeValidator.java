@@ -43,7 +43,7 @@ public final class CreateIncomeValidator extends AbstractDomainValidator {
             DomainTypeException.valueIsNotString(label, value);
 
         var length = LengthsEnum.PAYMENT_FOR.value();
-        if (isLengthGreaterThan(value, length))
+        if (isValueLenGreaterThan(value, length))
             DomainValueException.wrongMaxLength(label, value, length);
     }
 
@@ -51,7 +51,7 @@ public final class CreateIncomeValidator extends AbstractDomainValidator {
         var label = "Code ERP";
         var value = createIncomeDto.codeErp();
         var length = LengthsEnum.CODE_ERP.value();
-        if (isLengthGreaterThan(value, length))
+        if (isValueLenGreaterThan(value, length))
             DomainValueException.wrongMaxLength(label, value, length);
     }
 
@@ -62,7 +62,7 @@ public final class CreateIncomeValidator extends AbstractDomainValidator {
             DomainTypeException.valueIsNotString(label, value);
 
         var length = LengthsEnum.DESCRIPTION.value();
-        if (isLengthGreaterThan(value, length))
+        if (isValueLenGreaterThan(value, length))
             DomainValueException.wrongMaxLength(label, value, length);
     }
 
@@ -76,7 +76,7 @@ public final class CreateIncomeValidator extends AbstractDomainValidator {
             DomainValueException.valueIsEmpty(label);
 
         var length = LengthsEnum.PAYED_FROM.value();
-        if (isLengthGreaterThan(value, length))
+        if (isValueLenGreaterThan(value, length))
             DomainValueException.wrongMaxLength(label, value, length);
     }
 
@@ -90,7 +90,7 @@ public final class CreateIncomeValidator extends AbstractDomainValidator {
             DomainValueException.valueIsEmpty(label);
 
         var length = LengthsEnum.INCOME_DATE.value();
-        if (isLengthGreaterThan(value, length))
+        if (isValueLenGreaterThan(value, length))
             DomainValueException.wrongMaxLength(label, value, length);
 
         if (!isTypeDate(value))
@@ -114,7 +114,7 @@ public final class CreateIncomeValidator extends AbstractDomainValidator {
             DomainValueException.valueIsLowerThanMinimum(label, value, 0);
 
         var length = LengthsEnum.AMOUNT.value();
-        if (isLengthGreaterThan(value, length))
+        if (isValueLenGreaterThan(value, length))
             DomainValueException.wrongMaxLength(label, value, length);
     }
 
@@ -125,7 +125,7 @@ public final class CreateIncomeValidator extends AbstractDomainValidator {
             DomainTypeException.valueIsNotString(label, value);
 
         var length = LengthsEnum.NOTES.value();
-        if (isLengthGreaterThan(value, length))
+        if (isValueLenGreaterThan(value, length))
             DomainValueException.wrongMaxLength(label, value, length);
     }
 }

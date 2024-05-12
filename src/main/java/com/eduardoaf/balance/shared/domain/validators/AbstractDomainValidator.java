@@ -4,90 +4,82 @@ import java.util.List;
 
 public abstract class AbstractDomainValidator {
 
-    protected boolean isLengthGreaterThan(String string, int maxLength) {
-        return string.length() > maxLength;
+    protected boolean isValueLenGreaterThan(String strValue, int maxLength) {
+        return strValue.length() > maxLength;
     }
 
-    protected boolean isLengthLessThan(String string, int minLength) {
-        return string.length() < minLength;
+    protected boolean isValueLenLighterThan(String strValue, int minLength) {
+        return strValue.length() < minLength;
     }
 
-    protected boolean isLengthNotBetween(String string, int minLength, int maxLength) {
-        return string.length() < minLength || string.length() > maxLength;
+    protected boolean isValueLenBetween(String strValue, int minLength, int maxLength) {
+        return strValue.length() >= minLength || strValue.length() <= maxLength;
     }
 
-    protected boolean isValueGreaterThan(String string, int maxValue) {
-        return Integer.parseInt(string) > maxValue;
+    protected boolean isValueGreaterThan(String strNumber, int maxValue) {
+        return Double.parseDouble(strNumber) > maxValue;
     }
 
-    protected boolean isValueLowerThan(String string, int minValue) {
-        return Integer.parseInt(string) < minValue;
+    protected boolean isValueLowerThan(String strNumber, int minValue) {
+        return Double.parseDouble(strNumber) < minValue;
     }
 
-    protected boolean isTypeString(Object object) {
-        return (object instanceof String) || isTypeNumeric(object);
+    protected boolean isTypeString(Object anyValue) {
+        return (anyValue instanceof String) || isTypeNumeric(anyValue);
     }
 
-    protected boolean isTypeDouble(String string) {
+    protected boolean isTypeDouble(String strValue) {
         try {
-            Double.parseDouble(string);
+            Double.parseDouble(strValue);
             return true;
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             return false;
         }
     }
 
-    protected boolean isTypeInteger(String string) {
+    protected boolean isTypeInteger(String strInteger) {
         try {
-            Integer.parseInt(string);
+            Integer.parseInt(strInteger);
             return true;
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             return false;
         }
     }
 
-    protected boolean isTypeNumeric(String string) {
-        return isTypeInteger(string) || isTypeDouble(string);
+    protected boolean isTypeNumeric(String strNumber) {
+        return isTypeInteger(strNumber) || isTypeDouble(strNumber);
     }
 
-    protected boolean isTypeNumeric(Object object) {
-        return object instanceof Number;
+    protected boolean isTypeNumeric(Object anyValue) {
+        return anyValue instanceof Number;
     }
 
-    protected boolean isNullOrEmpty(String string) {
-        return string == null || string.isEmpty() || string.isBlank();
+    protected boolean isNullOrEmpty(String strValue) {
+        return strValue == null || strValue.isEmpty() || strValue.isBlank();
     }
 
-    protected boolean isTypeDate(String string) {
-        return string.matches("\\d{4}-\\d{2}-\\d{2}");
+    protected boolean isTypeDate(String strValue) {
+        return strValue.matches("\\d{4}-\\d{2}-\\d{2}");
     }
 
-    protected boolean isTypeDatetime(String string) {
-        return string.matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}");
+    protected boolean isTypeDatetime(String strValue) {
+        return strValue.matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}");
     }
 
     protected boolean isTypeTime(String string) {
         return string.matches("\\d{2}:\\d{2}:\\d{2}");
     }
 
-    protected boolean hasInvalidCharacters(String string, List<String> invalidCharacters) {
-        for (String invalidCharacter : invalidCharacters) {
-            if (string.contains(invalidCharacter)) {
+    protected boolean doesValueHaveAnyChar(String strValue, List<String> charsList) {
+        for (String invalidCharacter : charsList) {
+            if (strValue.contains(invalidCharacter)) {
                 return true;
             }
         }
         return false;
     }
 
-    protected boolean isNotInList(String string, List<String> validValues) {
-        return !validValues.contains(string);
-    }
-
-    protected boolean isNotInList(int integer, List<Integer> validValues) {
-        return !validValues.contains(integer);
-    }
-
-    protected boolean isTypeList(Object object) {
-        return object instanceof List;
+    protected boolean isTypeList(Object anyValue) {
+        return anyValue instanceof List;
     }
 }
