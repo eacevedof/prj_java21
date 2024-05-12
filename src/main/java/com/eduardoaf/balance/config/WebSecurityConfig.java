@@ -20,13 +20,16 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors(Customizer.withDefaults());
         http.csrf(csrf -> csrf.disable());
+
         http.sessionManagement(sessionManager  -> sessionManager.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        http.exceptionHandling(exceptionHandling -> exceptionHandling.authenticationEntryPoint(
-                (request, response, exception) -> {
-                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, exception.getMessage());
-                }));
+        http.exceptionHandling(
+            exceptionHandling -> exceptionHandling.authenticationEntryPoint(
+                (request, response, exception) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED, exception.getMessage())
+            )
+        );
         http.authorizeHttpRequests(authorizeHttpRequest -> authorizeHttpRequest
                 .requestMatchers(
+                        "/api/v1/income/create",
                         "/api/v1/**",
                     "/api/authentication/**"
                 ).permitAll()
