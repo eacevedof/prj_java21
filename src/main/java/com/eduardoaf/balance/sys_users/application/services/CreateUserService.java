@@ -1,7 +1,7 @@
 package com.eduardoaf.balance.sys_users.application.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.eduardoaf.balance.shared.infrastructure.file.Log;
 import com.eduardoaf.balance.sys_users.infrastructure.repositories.SysUserReaderRepository;
