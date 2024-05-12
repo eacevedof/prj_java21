@@ -22,14 +22,14 @@ public record CreateIncomeDto(
             String idOwner
     ) {
         return new CreateIncomeDto(
-                codeErp,
-                description,
-                paymentFor,
-                payedFrom,
-                incomeDate,
-                amount,
-                notes,
-                idOwner
+                codeErp==null ? "" : codeErp.trim(),
+                description==null ? "" :description.trim(),
+                paymentFor==null ? "" : paymentFor.trim(),
+                payedFrom==null ? "" : payedFrom.trim(),
+                incomeDate==null ? "" : incomeDate.trim(),
+                amount==null ? "" : amount.trim(),
+                notes==null ? "" : notes.trim(),
+                idOwner==null ? "" : idOwner.trim()
         );
     }
 

@@ -3,7 +3,7 @@ package com.eduardoaf.balance.shared.domain.enums;
 public enum LengthsEnum {
     UUID(50),
     CODE_ERP(25),
-    PAYMENT_FOR(150),
+    PAYMENT_FOR(250),
     PAYED_FROM(250),
     INCOME_DATE(10),
     AMOUNT(10),

@@ -42,6 +42,9 @@ public final class CreateIncomeValidator extends AbstractDomainValidator {
         if (!isTypeString(value))
             DomainTypeException.valueIsNotString(label, value);
 
+        if (isNullOrEmpty(value))
+            DomainValueException.valueIsEmpty(label);
+
         var length = LengthsEnum.PAYMENT_FOR.value();
         if (isValueLenGreaterThan(value, length))
             DomainValueException.wrongMaxLength(label, value, length);
