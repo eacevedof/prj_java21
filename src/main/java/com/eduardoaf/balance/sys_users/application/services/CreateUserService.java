@@ -1,5 +1,6 @@
 package com.eduardoaf.balance.sys_users.application.services;
 
+import com.eduardoaf.balance.shared.infrastructure.formatters.NumberFormatter;
 import com.eduardoaf.balance.shared.infrastructure.formatters.PasswordFormatter;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public final class CreateUserService {
     private final SysUserWriterRepository sysUserWriterRepository;
     private final SysUserReaderRepository sysUserReaderRepository;
     private final PasswordFormatter passwordFormatter;
+    private final NumberFormatter numberFormatter;
 
     @Autowired
     public CreateUserService
@@ -28,6 +30,7 @@ public final class CreateUserService {
         SysUserWriterRepository appSysUserWriterRepository,
         SysUserReaderRepository sysUserReaderRepository,
         CreateUserValidator createUserValidator,
+        NumberFormatter numberFormatter,
         PasswordFormatter passwordFormatter
     ) {
         this.log = log;
@@ -35,6 +38,7 @@ public final class CreateUserService {
         this.sysUserWriterRepository = appSysUserWriterRepository;
         this.sysUserReaderRepository = sysUserReaderRepository;
         this.passwordFormatter = passwordFormatter;
+        this.numberFormatter = numberFormatter;
     }
 
     public CreatedUserDto invoke(CreateUserDto createUserDto) throws Exception {
@@ -75,6 +79,7 @@ public final class CreateUserService {
 
         return CreatedUserDto.getInstance(
             Integer.parseInt(dict.get("id")),
+
             dict.get("uuid"),
             dict.get("code_erp"),
             dict.get("description"),
@@ -83,16 +88,18 @@ public final class CreateUserService {
             dict.get("phone"),
             dict.get("fullname"),
             dict.get("address"),
-            dict.get("birthdate"),
-            Integer.parseInt(dict.get("id_parent")),
-            Integer.parseInt(dict.get("id_gender")),
-            Integer.parseInt(dict.get("id_nationality")),
-            Integer.parseInt(dict.get("id_country")),
-            Integer.parseInt(dict.get("id_language")),
-            Integer.parseInt(dict.get("id_profile")),
+            dict.get("birthdate") == null ? null : dict.get("birthdate"),
+
+            numberFormatter.getAsInteger(dict.get("id_parent")),
+            numberFormatter.getAsInteger(dict.get("id_gender")),
+            numberFormatter.getAsInteger(dict.get("id_nationality")),
+            numberFormatter.getAsInteger(dict.get("id_country")),
+            numberFormatter.getAsInteger(dict.get("id_language")),
+            numberFormatter.getAsInteger(dict.get("id_profile")),
+
             dict.get("url_picture"),
             dict.get("date_validated"),
-            Integer.parseInt(dict.get("log_attempts"))
+            numberFormatter.getAsInteger(dict.get("log_attempts"))
         );
     }
 }

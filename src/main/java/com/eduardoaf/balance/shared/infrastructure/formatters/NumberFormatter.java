@@ -26,6 +26,10 @@ public final class NumberFormatter {
     }
 
     public Integer getAsInteger(String number) {
+        if (number == null)
+            return null;
+        if (number.isEmpty())
+            return null;
         return Integer.getInteger(number);
     }
 
