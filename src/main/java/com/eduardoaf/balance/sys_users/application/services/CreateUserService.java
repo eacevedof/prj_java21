@@ -1,11 +1,11 @@
 package com.eduardoaf.balance.sys_users.application.services;
 
-import com.eduardoaf.balance.shared.infrastructure.formatters.NumberFormatter;
-import com.eduardoaf.balance.shared.infrastructure.formatters.PasswordFormatter;
-import com.eduardoaf.balance.shared.infrastructure.formatters.StringFormatter;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.eduardoaf.balance.shared.infrastructure.formatters.NumberFormatter;
+import com.eduardoaf.balance.shared.infrastructure.formatters.PasswordFormatter;
+import com.eduardoaf.balance.shared.infrastructure.formatters.StringFormatter;
 import com.eduardoaf.balance.shared.infrastructure.file.Log;
 import com.eduardoaf.balance.sys_users.infrastructure.repositories.SysUserReaderRepository;
 import com.eduardoaf.balance.sys_users.infrastructure.repositories.SysUserWriterRepository;
