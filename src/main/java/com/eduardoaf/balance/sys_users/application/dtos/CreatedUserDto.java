@@ -1,7 +1,5 @@
 package com.eduardoaf.balance.sys_users.application.dtos;
 
-import java.time.LocalDateTime;
-
 public record CreatedUserDto(
         int id,
         String uuid,
@@ -12,7 +10,7 @@ public record CreatedUserDto(
         String phone,
         String fullname,
         String address,
-        LocalDateTime birthdate,
+        String birthdate,
         int idParent,
         int idGender,
         int idNationality,
@@ -20,7 +18,7 @@ public record CreatedUserDto(
         int idLanguage,
         int idProfile,
         String urlPicture,
-        LocalDateTime dateValidated,
+        String dateValidated,
         int logAttempts
 ) {
 
@@ -34,7 +32,7 @@ public record CreatedUserDto(
             String phone,
             String fullname,
             String address,
-            LocalDateTime birthdate,
+            String birthdate,
             int idParent,
             int idGender,
             int idNationality,
@@ -42,29 +40,29 @@ public record CreatedUserDto(
             int idLanguage,
             int idProfile,
             String urlPicture,
-            LocalDateTime dateValidated,
+            String dateValidated,
             int logAttempts
     ) {
         return new CreatedUserDto(
-                id,
-                uuid.trim(),
-                codeErp.trim(),
-                description.trim(),
-                email.trim(),
-                secret.trim(),
-                phone.trim(),
-                fullname.trim(),
-                address.trim(),
-                birthdate,
-                idParent,
-                idGender,
-                idNationality,
-                idCountry,
-                idLanguage,
-                idProfile,
-                urlPicture.trim(),
-                dateValidated,
-                logAttempts
+            id,
+            uuid.trim(),
+            codeErp.trim(),
+            description.trim(),
+            email.trim(),
+            secret.trim(),
+            phone.trim(),
+            fullname.trim(),
+            address.trim(),
+            birthdate,
+            idParent,
+            idGender,
+            idNationality,
+            idCountry,
+            idLanguage,
+            idProfile,
+            urlPicture.trim(),
+            dateValidated,
+            logAttempts
         );
     }
 }

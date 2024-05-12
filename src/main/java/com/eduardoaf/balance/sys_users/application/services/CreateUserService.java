@@ -38,24 +38,19 @@ public final class CreateUserService {
         createUserValidator.invoke(createUserDto);
 
         var newUser = SysUserEntity.getInstance(
-                createUserDto.uuid(),
-                createUserDto.codeErp(),
-                createUserDto.description(),
-                createUserDto.email(),
-                createUserDto.secret(),
-                createUserDto.phone(),
-                createUserDto.fullname(),
-                createUserDto.address(),
-                createUserDto.birthdate(),
-                createUserDto.idParent(),
-                createUserDto.idGender(),
-                createUserDto.idNationality(),
-                createUserDto.idCountry(),
-                createUserDto.idLanguage(),
-                createUserDto.idProfile(),
-                createUserDto.urlPicture(),
-                createUserDto.dateValidated(),
-                createUserDto.logAttempts()
+            createUserDto.codeErp(),
+            createUserDto.email(),
+            createUserDto.secret(),
+            createUserDto.phone(),
+            createUserDto.fullname(),
+            createUserDto.address(),
+            createUserDto.birthdate(),
+            createUserDto.idParent(),
+            createUserDto.idGender(),
+            createUserDto.idNationality(),
+            createUserDto.idCountry(),
+            createUserDto.idLanguage(),
+            createUserDto.idProfile()
         );
         sysUserWriterRepository.createNewUser(newUser);
         var lastId = sysUserWriterRepository.getLastInsertId();
@@ -75,7 +70,7 @@ public final class CreateUserService {
                 dict.get("phone"),
                 dict.get("fullname"),
                 dict.get("address"),
-                LocalDateTime.parse(dict.get("birthdate")),
+                dict.get("birthdate"),
                 Integer.parseInt(dict.get("id_parent")),
                 Integer.parseInt(dict.get("id_gender")),
                 Integer.parseInt(dict.get("id_nationality")),
@@ -83,7 +78,7 @@ public final class CreateUserService {
                 Integer.parseInt(dict.get("id_language")),
                 Integer.parseInt(dict.get("id_profile")),
                 dict.get("url_picture"),
-                LocalDateTime.parse(dict.get("date_validated")),
+                dict.get("date_validated"),
                 Integer.parseInt(dict.get("log_attempts"))
         );
     }
