@@ -18,6 +18,7 @@ public final class NumberFormatter {
     }
 
     public Double getAsDouble3dec(Double number) {
+        // 99234567.123 decimal(12,3
         DecimalFormat decFormatter = new DecimalFormat("#.###");
         String strDouble3 = decFormatter.format(number);
         strDouble3 = strDouble3.replace(",", ".");
