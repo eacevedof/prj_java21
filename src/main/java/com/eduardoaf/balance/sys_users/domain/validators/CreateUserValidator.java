@@ -33,7 +33,6 @@ public final class CreateUserValidator extends AbstractDomainValidator {
         this.createUserDto = createUserDto;
         failIfWrongEmail();
 
-
         failIfWrongIdLanguage();
         failIfWrongIdProfile();
         failIfUserExists();

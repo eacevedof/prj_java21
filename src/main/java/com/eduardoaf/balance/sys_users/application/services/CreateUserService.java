@@ -1,5 +1,6 @@
 package com.eduardoaf.balance.sys_users.application.services;
 
+import com.eduardoaf.balance.shared.infrastructure.formatters.PasswordFormatter;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,6 +19,7 @@ public final class CreateUserService {
     private final CreateUserValidator createUserValidator;
     private final SysUserWriterRepository sysUserWriterRepository;
     private final SysUserReaderRepository sysUserReaderRepository;
+    private final PasswordFormatter passwordFormatter;
 
     @Autowired
     public CreateUserService
@@ -25,24 +27,28 @@ public final class CreateUserService {
         Log log,
         SysUserWriterRepository appSysUserWriterRepository,
         SysUserReaderRepository sysUserReaderRepository,
-        CreateUserValidator createUserValidator
+        CreateUserValidator createUserValidator,
+        PasswordFormatter passwordFormatter
     ) {
         this.log = log;
         this.createUserValidator = createUserValidator;
         this.sysUserWriterRepository = appSysUserWriterRepository;
         this.sysUserReaderRepository = sysUserReaderRepository;
+        this.passwordFormatter = passwordFormatter;
     }
 
     public CreatedUserDto invoke(CreateUserDto createUserDto) throws Exception {
         createUserValidator.invoke(createUserDto);
 
+        String password = "Abc.1234:)";
+        String hashedPassword = passwordFormatter.getHashedPassword(password);
         var newUserEntity = SysUserEntity.getInstance(
             null,
             null,
             createUserDto.codeErp(),
             null,
             createUserDto.email(),
-            createUserDto.secret(),
+            hashedPassword,
             createUserDto.phone(),
             createUserDto.fullname(),
             createUserDto.address(),
