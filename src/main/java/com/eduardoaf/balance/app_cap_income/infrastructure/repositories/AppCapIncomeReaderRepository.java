@@ -3,11 +3,8 @@ package com.eduardoaf.balance.app_cap_income.infrastructure.repositories;
 import java.util.Map;
 import java.util.Collections;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-
 
 import com.eduardoaf.balance.shared.infrastructure.formatters.NumberFormatter;
 import com.eduardoaf.balance.shared.infrastructure.file.Log;
