@@ -6,8 +6,8 @@ import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.eduardoaf.balance.shared.infrastructure.formatters.NumberFormatter;
 import com.eduardoaf.balance.shared.infrastructure.file.Log;
+import com.eduardoaf.balance.shared.infrastructure.formatters.NumberFormatter;
 import com.eduardoaf.balance.shared.infrastructure.db.query_builders.SanitizeQuery;
 import com.eduardoaf.balance.shared.infrastructure.repositories.AbstractMysqlRepository;
 
