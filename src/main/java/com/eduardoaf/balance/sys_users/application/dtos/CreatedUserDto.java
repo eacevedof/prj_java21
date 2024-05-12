@@ -23,8 +23,8 @@ public record CreatedUserDto(
 ) {
 
     public static CreatedUserDto getInstance(
-            Integer id,
-            String uuid,
+        Integer id,
+        String uuid,
         String codeErp,
         String description,
         String email,
