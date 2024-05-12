@@ -1,5 +1,8 @@
 package com.eduardoaf.balance.shared.infrastructure.db.query_builders;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public final class SanitizeQuery {
 
     public static SanitizeQuery getInstance() {

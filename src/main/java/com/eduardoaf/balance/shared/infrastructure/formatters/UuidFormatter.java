@@ -7,10 +7,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
 @Component
-public final class Uuid {
+public final class UuidFormatter {
 
-    public static Uuid getInstance() {
-        return new Uuid();
+    public static UuidFormatter getInstance() {
+        return new UuidFormatter();
     }
 
     public String getUuid() {

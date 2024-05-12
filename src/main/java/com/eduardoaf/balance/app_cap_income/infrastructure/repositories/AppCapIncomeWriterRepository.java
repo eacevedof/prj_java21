@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.eduardoaf.balance.shared.infrastructure.file.Log;
-import com.eduardoaf.balance.shared.infrastructure.formatters.Uuid;
-import com.eduardoaf.balance.shared.infrastructure.formatters.Date;
+import com.eduardoaf.balance.shared.infrastructure.formatters.UuidFormatter;
+import com.eduardoaf.balance.shared.infrastructure.formatters.DateFormatter;
 import com.eduardoaf.balance.app_cap_income.domain.entities.AppCapIncomeEntity;
 import com.eduardoaf.balance.shared.infrastructure.repositories.AbstractMysqlRepository;
 import com.eduardoaf.balance.shared.infrastructure.db.query_builders.InsertQuery;
@@ -14,14 +14,14 @@ import com.eduardoaf.balance.shared.infrastructure.db.query_builders.InsertQuery
 public final class AppCapIncomeWriterRepository extends AbstractMysqlRepository {
 
     private final Log log;
-    private final Date dateFormatter;
-    private final Uuid uuid;
+    private final DateFormatter dateFormatter;
+    private final UuidFormatter uuid;
 
     @Autowired
     public AppCapIncomeWriterRepository(
         Log log,
-        Date dateFormatter,
-        Uuid uuid
+        DateFormatter dateFormatter,
+        UuidFormatter uuid
     ) {
         this.log = log;
         this.dateFormatter = dateFormatter;

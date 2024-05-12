@@ -1,4 +1,4 @@
-package com.eduardoaf.balance.app_cap_income.application.exceptions;
+package com.eduardoaf.balance.app_cap_income.domain.exceptions;
 
 import com.eduardoaf.balance.shared.infrastructure.enums.HttpStatusCodeEnum;
 import com.eduardoaf.balance.shared.infrastructure.exceptions.AbstractInfrastructureException;
@@ -9,9 +9,10 @@ public final class CreateIncomeException extends AbstractInfrastructureException
         super(message, statusCode);
     }
 
-    public static void errorOnCodeErpLength() throws CreateIncomeException {
+    public static void incomeAlreadyExists(String uuid) throws CreateIncomeException {
+
         throw new CreateIncomeException(
-                "Error on code erp length",
+                String.format("There is another income with the same amount, date, payed for and payed from %s", uuid),
                 HttpStatusCodeEnum.BAD_REQUEST.getValue()
         );
     }

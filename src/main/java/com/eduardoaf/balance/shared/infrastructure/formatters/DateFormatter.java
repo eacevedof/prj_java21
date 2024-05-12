@@ -4,14 +4,12 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 @Component
-public final class Date {
+public final class DateFormatter {
 
-    public static Date getInstance() {
-        return new Date();
+    public static DateFormatter getInstance() {
+        return new DateFormatter();
     }
 
     public String getNow() {

@@ -5,10 +5,10 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public final class Json {
+public final class JsonFormatter {
 
-    public static Json getInstance() {
-        return (new Json());
+    public static JsonFormatter getInstance() {
+        return (new JsonFormatter());
     }
 
     public <T> List<T> getJsonStringAsList(String jsonString, Class<T> entityType) {

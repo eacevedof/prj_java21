@@ -1,5 +1,6 @@
 package com.eduardoaf.balance.app_cap_income.domain.validators;
 
+import com.eduardoaf.balance.shared.infrastructure.formatters.NumberFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,24 +9,28 @@ import com.eduardoaf.balance.shared.domain.validators.AbstractDomainValidator;
 import com.eduardoaf.balance.app_cap_income.application.dtos.CreateIncomeDto;
 import com.eduardoaf.balance.app_cap_income.infrastructure.repositories.AppCapIncomeReaderRepository;
 
+import com.eduardoaf.balance.app_cap_income.domain.exceptions.CreateIncomeException;
 import com.eduardoaf.balance.shared.domain.exceptions.DomainValueException;
 import com.eduardoaf.balance.shared.domain.enums.LengthsEnum;
 
 @Service
 public final class CreateIncomeValidator extends AbstractDomainValidator {
 
+    private final NumberFormatter numberFormatter;
     private final AppCapIncomeReaderRepository appCapIncomeReaderRepository;
     private CreateIncomeDto createIncomeDto;
 
     @Autowired
     public CreateIncomeValidator
     (
+        NumberFormatter numberFormatter,
         AppCapIncomeReaderRepository appCapIncomeReaderRepository
     ) {
+        this.numberFormatter = numberFormatter;
         this.appCapIncomeReaderRepository = appCapIncomeReaderRepository;
     }
 
-    public void invoke(CreateIncomeDto createIncomeDto) throws DomainTypeException, DomainValueException {
+    public void invoke(CreateIncomeDto createIncomeDto) throws Exception{
         this.createIncomeDto = createIncomeDto;
         failIfWrongPaymentFor();
         failIfWrongCodeErp();
@@ -34,6 +39,20 @@ public final class CreateIncomeValidator extends AbstractDomainValidator {
         failIfWrongIncomeDate();
         failIfWrongAmount();
         failIfWrongNotes();
+        failIfIncomeExists();
+    }
+
+    private void failIfIncomeExists() throws Exception {
+        var incomeId = appCapIncomeReaderRepository.doesIncomeExistByAmountAndDateAndPayedForAndPaymentFrom(
+            numberFormatter.getAsDouble(createIncomeDto.amount()),
+            createIncomeDto.incomeDate(),
+            createIncomeDto.paymentFor(),
+            createIncomeDto.payedFrom()
+        );
+        if (incomeId == 0) return;
+        var uuid = appCapIncomeReaderRepository.getUuidByIncomeId(incomeId);
+        CreateIncomeException.incomeAlreadyExists(uuid);
+
     }
 
     private void failIfWrongPaymentFor() throws DomainTypeException, DomainValueException {
