@@ -2,6 +2,7 @@ package com.eduardoaf.balance.sys_users.application.services;
 
 import com.eduardoaf.balance.shared.infrastructure.formatters.NumberFormatter;
 import com.eduardoaf.balance.shared.infrastructure.formatters.PasswordFormatter;
+import com.eduardoaf.balance.shared.infrastructure.formatters.StringFormatter;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,6 +23,7 @@ public final class CreateUserService {
     private final SysUserReaderRepository sysUserReaderRepository;
     private final PasswordFormatter passwordFormatter;
     private final NumberFormatter numberFormatter;
+    private final StringFormatter stringFormatter;
 
     @Autowired
     public CreateUserService
@@ -31,6 +33,7 @@ public final class CreateUserService {
         SysUserReaderRepository sysUserReaderRepository,
         CreateUserValidator createUserValidator,
         NumberFormatter numberFormatter,
+        StringFormatter stringFormatter,
         PasswordFormatter passwordFormatter
     ) {
         this.log = log;
@@ -38,6 +41,7 @@ public final class CreateUserService {
         this.sysUserWriterRepository = appSysUserWriterRepository;
         this.sysUserReaderRepository = sysUserReaderRepository;
         this.passwordFormatter = passwordFormatter;
+        this.stringFormatter = stringFormatter;
         this.numberFormatter = numberFormatter;
     }
 

@@ -1,5 +1,7 @@
 package com.eduardoaf.balance.sys_users.application.dtos;
 
+import com.eduardoaf.balance.shared.infrastructure.formatters.StringFormatter;
+
 public record CreateUserDto(
     String codeErp,
     String email,
@@ -30,20 +32,21 @@ public record CreateUserDto(
         String idLanguage,
         String idProfile
     ) {
+        StringFormatter stringFormatter = StringFormatter.getInstance();
         return new CreateUserDto(
-            codeErp == null ? "" : codeErp.trim(),
-            email == null ? "" : email.trim(),
-            secret == null ? "" : secret.trim(),
-            phone == null ? "" : phone.trim(),
-            fullname == null ? "" : fullname.trim(),
-            address == null ? "" : address.trim(),
-            birthdate == null ? "" : birthdate.trim(),
-            idParent == null ? "" : idParent.trim(),
-            idGender == null ? "" : idGender.trim(),
-            idNationality == null ? "" : idNationality.trim(),
-            idCountry == null ? "" : idCountry.trim(),
-            idLanguage == null ? "" : idLanguage.trim(),
-            idProfile == null ? "" : idProfile.trim()
+            stringFormatter.getTrimOrNull(codeErp),
+            stringFormatter.getTrimOrNull(email),
+            stringFormatter.getTrimOrNull(secret),
+            stringFormatter.getTrimOrNull(phone),
+            stringFormatter.getTrimOrNull(fullname),
+            stringFormatter.getTrimOrNull(address),
+            stringFormatter.getTrimOrNull(birthdate),
+            stringFormatter.getTrimOrNull(idParent),
+            stringFormatter.getTrimOrNull(idGender),
+            stringFormatter.getTrimOrNull(idNationality),
+            stringFormatter.getTrimOrNull(idCountry),
+            stringFormatter.getTrimOrNull(idLanguage),
+            stringFormatter.getTrimOrNull(idProfile)
         );
     }
 }

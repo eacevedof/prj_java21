@@ -49,15 +49,15 @@ public record CreatedUserDto(
         return new CreatedUserDto(
             id,
 
-            stringFormatter.getTrimmed(uuid),
-            stringFormatter.getTrimmed(codeErp),
-            stringFormatter.getTrimmed(description),
-            stringFormatter.getTrimmed(email),
-            stringFormatter.getTrimmed(secret),
-            stringFormatter.getTrimmed(phone),
-            stringFormatter.getTrimmed(fullname),
-            stringFormatter.getTrimmed(address),
-            stringFormatter.getTrimmed(birthdate),
+            stringFormatter.getTrimOrNull(uuid),
+            stringFormatter.getTrimOrNull(codeErp),
+            stringFormatter.getTrimOrNull(description),
+            stringFormatter.getTrimOrNull(email),
+            stringFormatter.getTrimOrNull(secret),
+            stringFormatter.getTrimOrNull(phone),
+            stringFormatter.getTrimOrNull(fullname),
+            stringFormatter.getTrimOrNull(address),
+            stringFormatter.getTrimOrNull(birthdate),
 
             idParent,
             idGender,
@@ -66,8 +66,8 @@ public record CreatedUserDto(
             idLanguage,
             idProfile,
 
-            stringFormatter.getTrimmed(urlPicture),
-            stringFormatter.getTrimmed(dateValidated),
+            stringFormatter.getTrimOrNull(urlPicture),
+            stringFormatter.getTrimOrNull(dateValidated),
 
             logAttempts
         );
