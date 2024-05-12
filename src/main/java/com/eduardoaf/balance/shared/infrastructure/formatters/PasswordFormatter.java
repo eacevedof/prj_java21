@@ -15,9 +15,8 @@ public final class PasswordFormatter {
         return passwordEncoder.encode(rawPassword);
     }
 
-    public boolean isPasswordValid(String rawPassword) {
+    public boolean isPasswordValid(String rawPassword, String hashedPassword) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hashedPassword = getHashedPassword(rawPassword);
         return passwordEncoder.matches(rawPassword, hashedPassword);
     }
 }
