@@ -98,6 +98,23 @@ public final class DomainValueException extends Exception implements InterfaceDo
         );
     }
 
+    public static void wrongEmailFormat(
+        String field,
+        Object currValue,
+        String validFormat
+    ) throws DomainValueException {
+        var message = String.format(
+            "The `%s` value: `%s` does not match the format %s",
+            field,
+            getAsString(currValue),
+            validFormat
+        );
+        throw new DomainValueException(
+            message,
+            400
+        );
+    }
+
     public static void valueIsLowerThanMinimum(String field, String currValue, int minValue) throws DomainValueException {
         var message = String.format(
                 "The `%s` value: `%s` is lower than the minimum value %s",

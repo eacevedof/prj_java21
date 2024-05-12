@@ -1,5 +1,6 @@
 package com.eduardoaf.balance.sys_users.domain.validators;
 
+import com.eduardoaf.balance.shared.domain.enums.LengthsEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,8 @@ public final class CreateUserValidator extends AbstractDomainValidator {
     public void invoke(CreateUserDto createUserDto) throws Exception{
         this.createUserDto = createUserDto;
         failIfWrongEmail();
+
+
         failIfWrongIdLanguage();
         failIfWrongIdProfile();
         failIfUserExists();
@@ -43,7 +46,7 @@ public final class CreateUserValidator extends AbstractDomainValidator {
         CreateUserException.userAlreadyExists(uuid);
     }
 
-    private void failIfWrongEmail() throws DomainTypeException, DomainValueException {
+    private void failIfWrongEmail() throws Exception {
         var label = "Email";
         var value = createUserDto.email();
         if (!isTypeString(value))
@@ -52,9 +55,16 @@ public final class CreateUserValidator extends AbstractDomainValidator {
         if (isNullOrEmpty(value))
             DomainValueException.valueIsEmpty(label);
 
-        var length = 255; // Assuming max length of email is 255
+        var length = LengthsEnum.EMAIL.value();
         if (isValueLenGreaterThan(value, length))
             DomainValueException.wrongMaxLength(label, value, length);
+
+        if (!isValueEmail(value))
+            DomainValueException.wrongEmailFormat(label, value, "username@domain.xxx");
+
+        var userId = sysUserReaderRepository.getUserIdByEmail(value);
+        if (userId == null)
+            CreateUserException.userAlreadyExists(value);
     }
 
     private void failIfWrongIdLanguage() throws DomainTypeException, DomainValueException {

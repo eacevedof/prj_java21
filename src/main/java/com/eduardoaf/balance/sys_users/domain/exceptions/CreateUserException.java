@@ -11,8 +11,9 @@ public final class CreateUserException extends AbstractInfrastructureException {
 
     public static void userAlreadyExists(String email) throws CreateUserException {
         throw new CreateUserException(
-                String.format("A user with the email %s already exists", email),
-                HttpStatusCodeEnum.BAD_REQUEST.getValue()
+            String.format("A user with the email %s already exists", email),
+            HttpStatusCodeEnum.BAD_REQUEST.getValue()
         );
     }
+
 }

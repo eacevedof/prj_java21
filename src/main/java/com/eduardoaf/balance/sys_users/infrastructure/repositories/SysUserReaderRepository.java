@@ -44,7 +44,7 @@ public final class SysUserReaderRepository extends AbstractMysqlRepository {
         return list.getFirst();
     }
 
-    public int doesUserExistByEmail(String email) throws Exception {
+    public Integer doesUserExistByEmail(String email) throws Exception {
         email = sanitizeQuery.getOnlyValueSanitized(email);
 
         String sql = String.format("""
@@ -57,7 +57,7 @@ public final class SysUserReaderRepository extends AbstractMysqlRepository {
         """, email);
         log.debug(sql);
         var list = query(sql);
-        if (list.isEmpty()) return 0;
+        if (list.isEmpty()) return null;
         return getAsInt(list.getFirst().get("id"));
     }
 
@@ -76,4 +76,20 @@ public final class SysUserReaderRepository extends AbstractMysqlRepository {
         return list.getFirst().get("uuid");
     }
 
+    public Integer getUserIdByEmail(String email) throws Exception {
+        email = sanitizeQuery.getOnlyValueSanitized(email);
+
+        String sql = String.format("""
+        -- getUserIdByEmail
+        SELECT id
+        FROM sys_users
+        WHERE 1=1
+        AND delete_date IS NULL
+        AND email = '%s'
+        """, email);
+        log.debug(sql);
+        var list = query(sql);
+        if (list.isEmpty()) return null;
+        return getAsInt(list.getFirst().get("id"));
+    }
 }

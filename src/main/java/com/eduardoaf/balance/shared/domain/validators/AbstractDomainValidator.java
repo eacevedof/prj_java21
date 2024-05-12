@@ -4,6 +4,10 @@ import java.util.List;
 
 public abstract class AbstractDomainValidator {
 
+    protected boolean isValueEmail(String strEmail) {
+        return strEmail.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
+    }
+
     protected boolean isValueLenGreaterThan(String strValue, int maxLength) {
         return strValue.length() > maxLength;
     }
