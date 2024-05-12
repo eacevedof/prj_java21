@@ -8,7 +8,7 @@ public record CreateIncomeDto(
         String incomeDate,
         String amount,
         String notes,
-        int idOwner
+        String idOwner
 ) {
 
     public static CreateIncomeDto getInstance(
@@ -19,7 +19,7 @@ public record CreateIncomeDto(
             String incomeDate,
             String amount,
             String notes,
-            int idOwner
+            String idOwner
     ) {
         return new CreateIncomeDto(
                 codeErp,

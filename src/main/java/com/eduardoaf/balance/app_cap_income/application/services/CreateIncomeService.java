@@ -45,7 +45,7 @@ public final class CreateIncomeService {
                 createIncomeDto.incomeDate(),
                 Double.parseDouble(createIncomeDto.amount()),
                 createIncomeDto.notes(),
-                createIncomeDto.idOwner()
+                Integer.parseInt(createIncomeDto.idOwner())
         );
         appCapIncomeWriterRepository.createNewIncome(newIncome);
         var lastId = appCapIncomeWriterRepository.getLastInsertId();

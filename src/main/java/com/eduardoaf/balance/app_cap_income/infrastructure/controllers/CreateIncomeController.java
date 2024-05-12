@@ -43,7 +43,7 @@ public final class CreateIncomeController {
                     createIncomeDto.incomeDate(),
                     createIncomeDto.amount(),
                     createIncomeDto.notes(),
-                    1
+                    "1"
             );
             var createdIncomeDto = createIncomeService.invoke(createIncomeDto2);
             return httpResponse.getResponse200("entity created", createdIncomeDto);
