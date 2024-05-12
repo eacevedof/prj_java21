@@ -34,11 +34,7 @@ public final class CreateUserService {
     }
 
     public CreatedUserDto invoke(CreateUserDto createUserDto) throws Exception {
-
         createUserValidator.invoke(createUserDto);
-
-
-
 
         var newUserEntity = SysUserEntity.getInstance(
             null,
