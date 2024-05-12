@@ -1,29 +1,29 @@
 package com.eduardoaf.balance.sys_users.application.dtos;
 
 public record CreatedUserDto(
-        int id,
-        String uuid,
-        String codeErp,
-        String description,
-        String email,
-        String secret,
-        String phone,
-        String fullname,
-        String address,
-        String birthdate,
-        int idParent,
-        int idGender,
-        int idNationality,
-        int idCountry,
-        int idLanguage,
-        int idProfile,
-        String urlPicture,
-        String dateValidated,
-        int logAttempts
+    Integer id,
+    String uuid,
+    String codeErp,
+    String description,
+    String email,
+    String secret,
+    String phone,
+    String fullname,
+    String address,
+    String birthdate,
+    Integer idParent,
+    Integer idGender,
+    Integer idNationality,
+    Integer idCountry,
+    Integer idLanguage,
+    Integer idProfile,
+    String urlPicture,
+    String dateValidated,
+    Integer logAttempts
 ) {
 
     public static CreatedUserDto getInstance(
-            int id,
+            Integer id,
             String uuid,
             String codeErp,
             String description,
@@ -33,15 +33,15 @@ public record CreatedUserDto(
             String fullname,
             String address,
             String birthdate,
-            int idParent,
-            int idGender,
-            int idNationality,
-            int idCountry,
-            int idLanguage,
-            int idProfile,
+            Integer idParent,
+            Integer idGender,
+            Integer idNationality,
+            Integer idCountry,
+            Integer idLanguage,
+            Integer idProfile,
             String urlPicture,
             String dateValidated,
-            int logAttempts
+            Integer logAttempts
     ) {
         return new CreatedUserDto(
             id,
