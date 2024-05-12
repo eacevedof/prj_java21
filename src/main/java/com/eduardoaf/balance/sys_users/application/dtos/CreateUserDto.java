@@ -1,69 +1,49 @@
 package com.eduardoaf.balance.sys_users.application.dtos;
 
-import java.time.LocalDateTime;
-
 public record CreateUserDto(
-        Integer id,
-        String uuid,
+    String codeErp,
+    String email,
+    String secret,
+    String phone,
+    String fullname,
+    String address,
+    String birthdate,
+    String idParent,
+    String idGender,
+    String idNationality,
+    String idCountry,
+    String idLanguage,
+    String idProfile
+) {
+    public static CreateUserDto getInstance(
         String codeErp,
-        String description,
         String email,
         String secret,
         String phone,
         String fullname,
         String address,
-        LocalDateTime birthdate,
-        Integer idParent,
-        Integer idGender,
-        Integer idNationality,
-        Integer idCountry,
-        int idLanguage,
-        int idProfile,
-        String urlPicture,
-        LocalDateTime dateValidated,
-        int logAttempts
-) {
-    public static CreateUserDto getInstance(
-            Integer id,
-            String uuid,
-            String codeErp,
-            String description,
-            String email,
-            String secret,
-            String phone,
-            String fullname,
-            String address,
-            LocalDateTime birthdate,
-            Integer idParent,
-            Integer idGender,
-            Integer idNationality,
-            Integer idCountry,
-            int idLanguage,
-            int idProfile,
-            String urlPicture,
-            LocalDateTime dateValidated,
-            int logAttempts
+        String birthdate,
+        String idParent,
+        String idGender,
+        String idNationality,
+        String idCountry,
+        String idLanguage,
+        String idProfile
     ) {
         return new CreateUserDto(
-                id,
-                uuid == null ? "" : uuid.trim(),
-                codeErp == null ? "" : codeErp.trim(),
-                description == null ? "" : description.trim(),
-                email == null ? "" : email.trim(),
-                secret == null ? "" : secret.trim(),
-                phone == null ? "" : phone.trim(),
-                fullname == null ? "" : fullname.trim(),
-                address == null ? "" : address.trim(),
-                birthdate,
-                idParent,
-                idGender,
-                idNationality,
-                idCountry,
-                idLanguage,
-                idProfile,
-                urlPicture == null ? "" : urlPicture.trim(),
-                dateValidated,
-                logAttempts
+            codeErp == null ? "" : codeErp.trim(),
+            email == null ? "" : email.trim(),
+            secret == null ? "" : secret.trim(),
+            phone == null ? "" : phone.trim(),
+            fullname == null ? "" : fullname.trim(),
+            address == null ? "" : address.trim(),
+            birthdate == null ? "" : birthdate.trim(),
+            idParent == null ? "" : idParent.trim(),
+            idGender == null ? "" : idGender.trim(),
+            idNationality == null ? "" : idNationality.trim(),
+            idCountry == null ? "" : idCountry.trim(),
+            idLanguage == null ? "" : idLanguage.trim(),
+            idProfile == null ? "" : idProfile.trim()
         );
     }
 }

@@ -20,10 +20,10 @@ public final class CreateUserValidator extends AbstractDomainValidator {
 
     @Autowired
     public CreateUserValidator
-            (
-                    NumberFormatter numberFormatter,
-                    SysUserReaderRepository sysUserReaderRepository
-            ) {
+    (
+        NumberFormatter numberFormatter,
+        SysUserReaderRepository sysUserReaderRepository
+    ) {
         this.numberFormatter = numberFormatter;
         this.sysUserReaderRepository = sysUserReaderRepository;
     }
@@ -60,7 +60,7 @@ public final class CreateUserValidator extends AbstractDomainValidator {
     private void failIfWrongIdLanguage() throws DomainTypeException, DomainValueException {
         var label = "Language ID";
         var value = createUserDto.idLanguage();
-        if (!isTypeNumeric(value))
+        if (!isTypeInteger(value))
             DomainTypeException.valueIsNotNumeric(label, value);
 
         if (isValueLowerThan(value, 0))
