@@ -4,10 +4,12 @@ import java.util.Map;
 import java.util.Collections;
 
 
-import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+
+
+import com.eduardoaf.balance.shared.infrastructure.formatters.NumberFormatter;
 import com.eduardoaf.balance.shared.infrastructure.file.Log;
 import com.eduardoaf.balance.shared.infrastructure.db.query_builders.SanitizeQuery;
 import com.eduardoaf.balance.shared.infrastructure.repositories.AbstractMysqlRepository;
@@ -17,11 +19,17 @@ public final class AppCapIncomeReaderRepository extends AbstractMysqlRepository 
 
     private final Log log;
     private final SanitizeQuery sanitizeQuery;
+    private final NumberFormatter numberFormatter;
 
     @Autowired
-    public AppCapIncomeReaderRepository (Log log, SanitizeQuery sanitizeQuery) {
+    public AppCapIncomeReaderRepository (
+            Log log,
+            SanitizeQuery sanitizeQuery,
+            NumberFormatter numberFormatter
+    ) {
         this.log = log;
         this.sanitizeQuery = sanitizeQuery;
+        this.numberFormatter = numberFormatter;
     }
 
     public Map<String, String> getIncomeByIncomeId(int incomeId) throws Exception {
@@ -43,6 +51,7 @@ public final class AppCapIncomeReaderRepository extends AbstractMysqlRepository 
         double amount, String incomeDate, String payedFor, String payedFrom
     ) throws Exception {
 
+        amount = numberFormatter.getAsDouble3dec(amount);
         incomeDate = sanitizeQuery.getOnlyValueSanitized(incomeDate);
         payedFor = sanitizeQuery.getOnlyValueSanitized(payedFor);
         payedFrom = sanitizeQuery.getOnlyValueSanitized(payedFrom);
@@ -55,7 +64,7 @@ public final class AppCapIncomeReaderRepository extends AbstractMysqlRepository 
         AND delete_date IS NULL
         AND amount = %s
         AND income_date = '%s'
-        AND payed_for = '%s'
+        AND payment_for = '%s'
         AND payed_from = '%s'
         """, amount, incomeDate, payedFor, payedFrom);
         log.debug(sql);

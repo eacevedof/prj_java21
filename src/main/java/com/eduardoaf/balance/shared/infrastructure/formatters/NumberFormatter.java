@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.text.DecimalFormat;
 
 @Component
 public final class NumberFormatter {
@@ -14,6 +15,13 @@ public final class NumberFormatter {
 
     public Double getAsDouble(String number) {
         return Double.parseDouble(number);
+    }
+
+    public Double getAsDouble3dec(Double number) {
+        DecimalFormat decFormatter = new DecimalFormat("#.###");
+        String strDouble3 = decFormatter.format(number);
+        strDouble3 = strDouble3.replace(",", ".");
+        return Double.parseDouble(strDouble3);
     }
 
     public Integer getAsInteger(String number) {
