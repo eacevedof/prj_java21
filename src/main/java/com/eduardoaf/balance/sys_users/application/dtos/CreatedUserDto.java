@@ -1,5 +1,7 @@
 package com.eduardoaf.balance.sys_users.application.dtos;
 
+import com.eduardoaf.balance.shared.infrastructure.formatters.StringFormatter;
+
 public record CreatedUserDto(
     Integer id,
     String uuid,
@@ -43,25 +45,30 @@ public record CreatedUserDto(
         String dateValidated,
         Integer logAttempts
     ) {
+        var stringFormatter = StringFormatter.getInstance();
         return new CreatedUserDto(
             id,
-            uuid.trim(),
-            codeErp.trim(),
-            description.trim(),
-            email.trim(),
-            secret.trim(),
-            phone.trim(),
-            fullname.trim(),
-            address.trim(),
-            birthdate,
+
+            stringFormatter.getTrimmed(uuid),
+            stringFormatter.getTrimmed(codeErp),
+            stringFormatter.getTrimmed(description),
+            stringFormatter.getTrimmed(email),
+            stringFormatter.getTrimmed(secret),
+            stringFormatter.getTrimmed(phone),
+            stringFormatter.getTrimmed(fullname),
+            stringFormatter.getTrimmed(address),
+            stringFormatter.getTrimmed(birthdate),
+
             idParent,
             idGender,
             idNationality,
             idCountry,
             idLanguage,
             idProfile,
-            urlPicture.trim(),
-            dateValidated,
+
+            stringFormatter.getTrimmed(urlPicture),
+            stringFormatter.getTrimmed(dateValidated),
+
             logAttempts
         );
     }
