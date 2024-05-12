@@ -54,16 +54,16 @@ public final class CreateUserService {
             createUserDto.address(),
             createUserDto.birthdate(),
 
-            Integer.parseInt(createUserDto.idParent()),
-            Integer.parseInt(createUserDto.idGender()),
-            Integer.parseInt(createUserDto.idNationality()),
-            Integer.parseInt(createUserDto.idCountry()),
-            Integer.parseInt(createUserDto.idLanguage()),
-            Integer.parseInt(createUserDto.idProfile()),
+            createUserDto.idParent() == "" ? null : Integer.parseInt(createUserDto.idParent()),
+            createUserDto.idGender() == "" ? null : Integer.parseInt(createUserDto.idGender()),
+            createUserDto.idNationality() == "" ? null : Integer.parseInt(createUserDto.idNationality()),
+            createUserDto.idCountry() == "" ? null : Integer.parseInt(createUserDto.idCountry()),
+            createUserDto.idLanguage() == "" ? 1 : Integer.parseInt(createUserDto.idLanguage()),
+            createUserDto.idProfile() == "" ? 1 : Integer.parseInt(createUserDto.idProfile()),
 
             null,
             null,
-            null
+            0
         );
         sysUserWriterRepository.createNewUser(newUserEntity);
         var lastId = sysUserWriterRepository.getLastInsertId();
