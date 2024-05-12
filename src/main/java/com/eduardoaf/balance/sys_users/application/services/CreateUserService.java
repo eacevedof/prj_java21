@@ -60,7 +60,9 @@ public final class CreateUserService {
             createUserDto.phone(),
             createUserDto.fullname(),
             createUserDto.address(),
-            createUserDto.birthdate() == "" ? null : createUserDto.birthdate(),
+
+            stringFormatter.getTrimOrNull(createUserDto.birthdate()),
+
 
             createUserDto.idParent() == "" ? null : Integer.parseInt(createUserDto.idParent()),
             createUserDto.idGender() == "" ? null : Integer.parseInt(createUserDto.idGender()),

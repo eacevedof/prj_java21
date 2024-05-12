@@ -9,6 +9,18 @@ public final class StringFormatter {
         return new StringFormatter();
     }
 
+    public String getNullIfEmpty(String anyString) {
+        if (anyString == null)
+            return null;
+        if (anyString.isEmpty() || anyString.isBlank())
+            return null;
+        return anyString;
+    }
+
+    public String getNull() {
+        return null;
+    }
+
     public String getTrimOrNull(String anyString) {
         if (anyString == null)
             return null;

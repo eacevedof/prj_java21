@@ -17,6 +17,10 @@ public final class NumberFormatter {
         return Double.parseDouble(number);
     }
 
+    public Integer getNull() {
+        return null;
+    }
+
     public Double getAsDouble3dec(Double number) {
         // 99234567.123 decimal(12,3
         DecimalFormat decFormatter = new DecimalFormat("#.###");
