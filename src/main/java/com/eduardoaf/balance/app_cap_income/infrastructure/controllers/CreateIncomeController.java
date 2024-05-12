@@ -32,7 +32,7 @@ public final class CreateIncomeController {
         this.httpResponse = httpResponse;
     }
 
-    @PostMapping(value = "api/v1/create-income", consumes = {"application/json"})
+    @PostMapping(value = "api/v1/income/create", consumes = {"application/json"})
     public ResponseEntity<?> invoke(@RequestBody CreateIncomeDto createIncomeDto) {
         try {
             var createIncomeDto2 = CreateIncomeDto.getInstance(

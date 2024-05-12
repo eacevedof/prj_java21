@@ -30,7 +30,7 @@ public class CreateUserController {
         this.httpResponse = httpResponse;
     }
 
-    @PostMapping(value = "api/v1/create-user", consumes = {"application/json"})
+    @PostMapping(value = "api/v1/user/create", consumes = {"application/json"})
     public ResponseEntity<?> createUser(@RequestBody CreateUserDto createUserDto) {
         try {
             createUserDto = CreateUserDto.getInstance(
