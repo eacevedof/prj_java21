@@ -33,7 +33,7 @@ public final class CreateIncomeValidator extends AbstractDomainValidator {
         this.createIncomeDto = createIncomeDto;
         failIfWrongPaymentFor();
         failIfWrongCodeErp();
-        failIfWrongDescription();
+        //failIfWrongDescription();
         failIfWrongPayedFrom();
         failIfWrongIncomeDate();
         failIfWrongAmount();
