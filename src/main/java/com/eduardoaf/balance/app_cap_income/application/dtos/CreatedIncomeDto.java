@@ -27,14 +27,14 @@ public record CreatedIncomeDto(
     ) {
         return new CreatedIncomeDto(
             id,
-            uuid.trim(),
-            codeErp.trim(),
-            description.trim(),
-            paymentFor.trim(),
-            payedFrom.trim(),
-            incomeDate.trim(),
+            uuid,
+            codeErp,
+            description,
+            paymentFor,
+            payedFrom,
+            incomeDate,
             amount,
-            notes.trim(),
+            notes,
             idOwner
         );
     }
