@@ -1,5 +1,7 @@
 package com.eduardoaf.balance.app_cap_income.application.dtos;
 
+import com.eduardoaf.balance.shared.infrastructure.formatters.StringFormatter;
+
 public record CreateIncomeDto(
         String codeErp,
         String description,
@@ -12,24 +14,25 @@ public record CreateIncomeDto(
 ) {
 
     public static CreateIncomeDto getInstance(
-            String codeErp,
-            String description,
-            String paymentFor,
-            String payedFrom,
-            String incomeDate,
-            String amount,
-            String notes,
-            String idOwner
+        String codeErp,
+        String description,
+        String paymentFor,
+        String payedFrom,
+        String incomeDate,
+        String amount,
+        String notes,
+        String idOwner
     ) {
+        StringFormatter stringFormatter = StringFormatter.getInstance();
         return new CreateIncomeDto(
-                codeErp==null ? "" : codeErp.trim(),
-                description==null ? "" :description.trim(),
-                paymentFor==null ? "" : paymentFor.trim(),
-                payedFrom==null ? "" : payedFrom.trim(),
-                incomeDate==null ? "" : incomeDate.trim(),
-                amount==null ? "" : amount.trim(),
-                notes==null ? "" : notes.trim(),
-                idOwner==null ? "" : idOwner.trim()
+            stringFormatter.getTrimOrNull(codeErp),
+            stringFormatter.getTrimOrNull(description),
+            stringFormatter.getTrimOrNull(paymentFor),
+            stringFormatter.getTrimOrNull(payedFrom),
+            stringFormatter.getTrimOrNull(incomeDate),
+            stringFormatter.getTrimOrNull(amount),
+            stringFormatter.getTrimOrNull(notes),
+            stringFormatter.getTrimOrNull(idOwner)
         );
     }
 

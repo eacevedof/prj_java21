@@ -1,5 +1,6 @@
 package com.eduardoaf.balance.app_cap_income.infrastructure.controllers;
 
+import com.eduardoaf.balance.shared.infrastructure.formatters.StringFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,14 +21,17 @@ public final class CreateIncomeController {
     private final Log log;
     private final CreateIncomeService createIncomeService;
     private final HttpResponse httpResponse;
+    private final StringFormatter stringFormatter;
 
     @Autowired
     public CreateIncomeController(
         Log log,
+        StringFormatter stringFormatter,
         CreateIncomeService createIncomeService,
         HttpResponse httpResponse
     ) {
         this.log = log;
+        this.stringFormatter = stringFormatter;
         this.createIncomeService = createIncomeService;
         this.httpResponse = httpResponse;
     }
@@ -35,17 +39,17 @@ public final class CreateIncomeController {
     @PostMapping(value = "api/v1/income/create", consumes = {"application/json"})
     public ResponseEntity<?> invoke(@RequestBody CreateIncomeDto createIncomeDto) {
         try {
-            var createIncomeDto2 = CreateIncomeDto.getInstance(
-                    createIncomeDto.codeErp(),
-                    createIncomeDto.description(),
-                    createIncomeDto.paymentFor(),
-                    createIncomeDto.payedFrom(),
-                    createIncomeDto.incomeDate(),
-                    createIncomeDto.amount(),
-                    createIncomeDto.notes(),
+            createIncomeDto = CreateIncomeDto.getInstance(
+                createIncomeDto.codeErp(),
+                createIncomeDto.description(),
+                createIncomeDto.paymentFor(),
+                createIncomeDto.payedFrom(),
+                createIncomeDto.incomeDate(),
+                createIncomeDto.amount(),
+                createIncomeDto.notes(),
                     "1"
             );
-            var createdIncomeDto = createIncomeService.invoke(createIncomeDto2);
+            var createdIncomeDto = createIncomeService.invoke(createIncomeDto);
             return httpResponse.getResponse200("entity created", createdIncomeDto);
         }
         catch (DomainTypeException | DomainValueException | CreateIncomeException e) {
