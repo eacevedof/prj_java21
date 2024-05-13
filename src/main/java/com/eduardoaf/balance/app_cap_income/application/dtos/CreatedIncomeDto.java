@@ -1,7 +1,7 @@
 package com.eduardoaf.balance.app_cap_income.application.dtos;
 
 public record CreatedIncomeDto(
-     int id,
+     Integer id,
      String uuid,
      String codeErp,
      String description,
@@ -10,11 +10,11 @@ public record CreatedIncomeDto(
      String incomeDate,
      Double amount,
      String notes,
-     int idOwner
+     Integer idOwner
 ) {
 
     public static CreatedIncomeDto getInstance(
-        int id,
+        Integer id,
         String uuid,
         String codeErp,
         String description,
@@ -23,7 +23,7 @@ public record CreatedIncomeDto(
         String incomeDate,
         Double amount,
         String notes,
-        int idOwner
+        Integer idOwner
     ) {
         return new CreatedIncomeDto(
             id,
