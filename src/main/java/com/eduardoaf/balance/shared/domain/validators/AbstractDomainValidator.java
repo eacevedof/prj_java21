@@ -9,22 +9,27 @@ public abstract class AbstractDomainValidator {
     }
 
     protected boolean isValueLenGreaterThan(String strValue, int maxLength) {
+        if (strValue == null) return false;
         return strValue.length() > maxLength;
     }
 
     protected boolean isValueLenLighterThan(String strValue, int minLength) {
+        if (strValue == null) return true;
         return strValue.length() < minLength;
     }
 
     protected boolean isValueLenBetween(String strValue, int minLength, int maxLength) {
+        if (strValue == null) return true;
         return strValue.length() >= minLength || strValue.length() <= maxLength;
     }
 
     protected boolean isValueGreaterThan(String strNumber, int maxValue) {
+        if (strNumber == null) return false;
         return Double.parseDouble(strNumber) > maxValue;
     }
 
     protected boolean isValueLowerThan(String strNumber, int minValue) {
+        if (strNumber == null) return true;
         return Double.parseDouble(strNumber) < minValue;
     }
 
