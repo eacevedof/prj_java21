@@ -63,12 +63,12 @@ public final class CreateUserService {
 
             stringFormatter.getTrimOrNull(createUserDto.birthdate()),
 
-            numberFormatter.getAsInteger(createUserDto.idParent()),
-            numberFormatter.getAsInteger(createUserDto.idGender()),
-            numberFormatter.getAsInteger(createUserDto.idNationality()),
-            numberFormatter.getAsInteger(createUserDto.idCountry()),
-            numberFormatter.getAsInteger(createUserDto.idLanguage(), 1),
-            numberFormatter.getAsInteger(createUserDto.idProfile(), 1),
+            numberFormatter.getIntegerOrNull(createUserDto.idParent()),
+            numberFormatter.getIntegerOrNull(createUserDto.idGender()),
+            numberFormatter.getIntegerOrNull(createUserDto.idNationality()),
+            numberFormatter.getIntegerOrNull(createUserDto.idCountry()),
+            numberFormatter.getIntegerOrDefault(createUserDto.idLanguage(), 1),
+            numberFormatter.getIntegerOrDefault(createUserDto.idProfile(), 1),
 
             stringFormatter.getNull(),
             stringFormatter.getNull(),
@@ -83,7 +83,7 @@ public final class CreateUserService {
         }
 
         return CreatedUserDto.getInstance(
-            numberFormatter.getAsInteger(dict.get("id")),
+            numberFormatter.getIntegerOrNull(dict.get("id")),
 
             stringFormatter.getTrimOrNull(dict.get("uuid")),
             stringFormatter.getTrimOrNull(dict.get("code_erp")),
@@ -95,17 +95,17 @@ public final class CreateUserService {
             stringFormatter.getTrimOrNull(dict.get("address")),
             stringFormatter.getTrimOrNull(dict.get("birthdate")),
 
-            numberFormatter.getAsInteger(dict.get("id_parent")),
-            numberFormatter.getAsInteger(dict.get("id_gender")),
-            numberFormatter.getAsInteger(dict.get("id_nationality")),
-            numberFormatter.getAsInteger(dict.get("id_country")),
-            numberFormatter.getAsInteger(dict.get("id_language")),
-            numberFormatter.getAsInteger(dict.get("id_profile")),
+            numberFormatter.getIntegerOrNull(dict.get("id_parent")),
+            numberFormatter.getIntegerOrNull(dict.get("id_gender")),
+            numberFormatter.getIntegerOrNull(dict.get("id_nationality")),
+            numberFormatter.getIntegerOrNull(dict.get("id_country")),
+            numberFormatter.getIntegerOrNull(dict.get("id_language")),
+            numberFormatter.getIntegerOrNull(dict.get("id_profile")),
 
             stringFormatter.getTrimOrNull(dict.get("url_picture")),
             stringFormatter.getTrimOrNull(dict.get("date_validated")),
 
-            numberFormatter.getAsInteger(dict.get("log_attempts"))
+            numberFormatter.getIntegerOrNull(dict.get("log_attempts"))
         );
     }
 }

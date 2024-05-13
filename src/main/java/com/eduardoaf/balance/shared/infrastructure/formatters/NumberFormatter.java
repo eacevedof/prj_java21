@@ -2,8 +2,6 @@ package com.eduardoaf.balance.shared.infrastructure.formatters;
 
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.text.DecimalFormat;
 
 @Component
@@ -29,7 +27,7 @@ public final class NumberFormatter {
         return Double.parseDouble(strDouble3);
     }
 
-    public Integer getAsInteger(String number) {
+    public Integer getIntegerOrNull(String number) {
         if (number == null)
             return null;
         if (number.isEmpty())
@@ -37,7 +35,7 @@ public final class NumberFormatter {
         return Integer.getInteger(number);
     }
 
-    public Integer getAsInteger(String number, Integer defaultValue) {
+    public Integer getIntegerOrDefault(String number, Integer defaultValue) {
         if (number == null)
             return defaultValue;
         if (number.isEmpty())
