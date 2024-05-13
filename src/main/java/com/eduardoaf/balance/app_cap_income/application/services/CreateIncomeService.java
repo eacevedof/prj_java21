@@ -71,7 +71,6 @@ public final class CreateIncomeService {
             numberFormatter.getIntegerOrNull(dict.get("id")),
             stringFormatter.getTrimOrNull(dict.get("uuid")),
             stringFormatter.getTrimOrNull(dict.get("code_erp")),
-            stringFormatter.getTrimOrNull(dict.get("description")),
             stringFormatter.getTrimOrNull(dict.get("payment_for")),
             stringFormatter.getTrimOrNull(dict.get("payed_from")),
             stringFormatter.getTrimOrNull(dict.get("income_date")),
