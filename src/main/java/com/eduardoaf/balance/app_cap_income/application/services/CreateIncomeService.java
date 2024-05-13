@@ -55,7 +55,7 @@ public final class CreateIncomeService {
 
             numberFormatter.getDouble3dec(createIncomeDto.amount()),
             stringFormatter.getTrimOrNull(createIncomeDto.notes()),
-            numberFormatter.getNull()
+            1
         );
 
         appCapIncomeWriterRepository.createNewIncome(newIncome);
