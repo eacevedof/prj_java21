@@ -54,7 +54,7 @@ public final class NumberFormatter {
             return null;
         if (number.isEmpty())
             return null;
-        return Integer.getInteger(number);
+        return Integer.parseInt(number);
     }
 
     public Integer getIntegerOrDefault(String number, Integer defaultValue) {
@@ -62,7 +62,7 @@ public final class NumberFormatter {
             return defaultValue;
         if (number.isEmpty())
             return defaultValue;
-        return Integer.getInteger(number);
+        return Integer.parseInt(number);
     }
 
     public String getAsString(Double doubleNum) {
