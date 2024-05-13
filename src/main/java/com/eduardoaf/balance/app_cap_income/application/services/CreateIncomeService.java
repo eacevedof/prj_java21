@@ -67,7 +67,7 @@ public final class CreateIncomeService {
             return null;
         }
 
-        return CreatedIncomeDto.getInstance(
+        var created =  CreatedIncomeDto.getInstance(
             numberFormatter.getIntegerOrNull(dict.get("id")),
             stringFormatter.getTrimOrNull(dict.get("uuid")),
             stringFormatter.getTrimOrNull(dict.get("code_erp")),
@@ -78,5 +78,6 @@ public final class CreateIncomeService {
             stringFormatter.getTrimOrNull(dict.get("notes")),
             numberFormatter.getIntegerOrNull(dict.get("id_owner"))
         );
+        return created;
     }
 }
