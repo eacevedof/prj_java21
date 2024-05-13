@@ -1,17 +1,19 @@
 package com.eduardoaf.balance.shared.infrastructure.http.responses;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public final class  HttpResponse{
+public final class HttpResponse {
 
     public int statusCode;
     public String status;
     public String message;
     public Object data;
 
+    @Autowired
     public HttpResponse() {}
 
     public HttpResponse(
@@ -49,6 +51,17 @@ public final class  HttpResponse{
         );
         return ResponseEntity.status(HttpStatus.OK).body(httpResponse);
     }
+
+    public ResponseEntity<?> getResponse201(String message, Object data) {
+        var httpResponse = HttpResponse.getInstance(
+                HttpStatus.CREATED.value(),
+                HttpStatus.CREATED.name(),
+                message,
+                data
+        );
+        return ResponseEntity.status(HttpStatus.OK).body(httpResponse);
+    }
+
 
     public ResponseEntity<?> getResponse(int statusCode, String message) {
         var httpResponse = HttpResponse.getInstance(

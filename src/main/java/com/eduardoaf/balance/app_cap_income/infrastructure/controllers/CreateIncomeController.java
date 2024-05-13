@@ -50,7 +50,7 @@ public final class CreateIncomeController {
                     "1"
             );
             var createdIncomeDto = createIncomeService.invoke(createIncomeDto);
-            return httpResponse.getResponse200("entity created", createdIncomeDto);
+            return httpResponse.getResponse201("entity created", createdIncomeDto);
         }
         catch (DomainTypeException | DomainValueException | CreateIncomeException e) {
             return httpResponse.getResponse400(e.getMessage());

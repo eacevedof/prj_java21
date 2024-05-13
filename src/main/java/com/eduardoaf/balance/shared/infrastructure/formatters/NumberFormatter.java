@@ -11,7 +11,19 @@ public final class NumberFormatter {
         return new NumberFormatter();
     }
 
-    public Double getAsDouble(String number) {
+    public Double getDoubleOrNull(String number) {
+        if (number == null)
+            return null;
+        if (number.isEmpty())
+            return null;
+        return Double.parseDouble(number);
+    }
+
+    public Double getDoubleOrDefault(String number, Double defaultValue) {
+        if (number == null)
+            return defaultValue;
+        if (number.isEmpty())
+            return defaultValue;
         return Double.parseDouble(number);
     }
 
@@ -19,12 +31,22 @@ public final class NumberFormatter {
         return null;
     }
 
-    public Double getAsDouble3dec(Double number) {
+    public Double getDouble3dec(Double number) {
+        if (number == null)
+            return null;
         // 99234567.123 decimal(12,3
         DecimalFormat decFormatter = new DecimalFormat("#.###");
         String strDouble3 = decFormatter.format(number);
         strDouble3 = strDouble3.replace(",", ".");
         return Double.parseDouble(strDouble3);
+    }
+
+    public Double getDouble3dec(String number) {
+        if (number == null)
+            return null;
+        if (number.isEmpty())
+            return null;
+        return getDouble3dec(Double.parseDouble(number));
     }
 
     public Integer getIntegerOrNull(String number) {

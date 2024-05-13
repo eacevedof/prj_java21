@@ -48,7 +48,7 @@ public final class AppCapIncomeReaderRepository extends AbstractMysqlRepository 
         double amount, String incomeDate, String payedFor, String payedFrom
     ) throws Exception {
 
-        amount = numberFormatter.getAsDouble3dec(amount);
+        amount = numberFormatter.getDouble3dec(amount);
         incomeDate = sanitizeQuery.getOnlyValueSanitized(incomeDate);
         payedFor = sanitizeQuery.getOnlyValueSanitized(payedFor);
         payedFrom = sanitizeQuery.getOnlyValueSanitized(payedFrom);

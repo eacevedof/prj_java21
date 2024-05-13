@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eduardoaf.balance.shared.infrastructure.file.Log;
+import com.eduardoaf.balance.shared.infrastructure.formatters.NumberFormatter;
+import com.eduardoaf.balance.shared.infrastructure.formatters.StringFormatter;
 import com.eduardoaf.balance.app_cap_income.infrastructure.repositories.AppCapIncomeReaderRepository;
 import com.eduardoaf.balance.app_cap_income.infrastructure.repositories.AppCapIncomeWriterRepository;
 import com.eduardoaf.balance.app_cap_income.application.dtos.CreateIncomeDto;
@@ -15,6 +17,8 @@ import com.eduardoaf.balance.app_cap_income.domain.entities.AppCapIncomeEntity;
 public final class CreateIncomeService {
 
     private final Log log;
+    private final StringFormatter stringFormatter;
+    private final NumberFormatter numberFormatter;
     private final CreateIncomeValidator createIncomeValidator;
     private final AppCapIncomeWriterRepository appCapIncomeWriterRepository;
     private final AppCapIncomeReaderRepository appCapIncomeReaderRepository;
@@ -23,11 +27,15 @@ public final class CreateIncomeService {
     public CreateIncomeService
     (
         Log log,
+        StringFormatter stringFormatter,
+        NumberFormatter numberFormatter,
         AppCapIncomeWriterRepository appCapIncomeWriterRepository,
         AppCapIncomeReaderRepository appCapIncomeReaderRepository,
         CreateIncomeValidator createIncomeValidator
     ) {
         this.log = log;
+        this.stringFormatter = stringFormatter;
+        this.numberFormatter = numberFormatter;
         this.createIncomeValidator = createIncomeValidator;
         this.appCapIncomeWriterRepository = appCapIncomeWriterRepository;
         this.appCapIncomeReaderRepository = appCapIncomeReaderRepository;
@@ -38,16 +46,20 @@ public final class CreateIncomeService {
         createIncomeValidator.invoke(createIncomeDto);
 
         var newIncome = AppCapIncomeEntity.getInstance(
-                createIncomeDto.codeErp(),
-                createIncomeDto.description(),
-                createIncomeDto.paymentFor(),
-                createIncomeDto.payedFrom(),
-                createIncomeDto.incomeDate(),
-                Double.parseDouble(createIncomeDto.amount()),
-                createIncomeDto.notes(),
-                Integer.parseInt(createIncomeDto.idOwner())
+            stringFormatter.getTrimOrNull(createIncomeDto.codeErp()),
+            stringFormatter.getNull(),
+
+            stringFormatter.getTrimOrNull(createIncomeDto.paymentFor()),
+            stringFormatter.getTrimOrNull(createIncomeDto.payedFrom()),
+            stringFormatter.getTrimOrNull(createIncomeDto.incomeDate()),
+
+            numberFormatter.getDouble3dec(createIncomeDto.amount()),
+            stringFormatter.getTrimOrNull(createIncomeDto.notes()),
+            numberFormatter.getNull()
         );
+
         appCapIncomeWriterRepository.createNewIncome(newIncome);
+
         var lastId = appCapIncomeWriterRepository.getLastInsertId();
         var dict = appCapIncomeReaderRepository.getIncomeByIncomeId(lastId);
         if (dict.isEmpty()) {
@@ -56,16 +68,16 @@ public final class CreateIncomeService {
         }
 
         return CreatedIncomeDto.getInstance(
-            Integer.parseInt(dict.get("id")),
-            dict.get("uuid"),
-            dict.get("code_erp"),
-            dict.get("description"),
-            dict.get("payment_for"),
-            dict.get("payed_from"),
-            dict.get("income_date"),
-            Double.parseDouble(dict.get("amount")),
-            dict.get("notes"),
-            Integer.parseInt(dict.get("id_owner"))
+            numberFormatter.getIntegerOrNull(dict.get("id")),
+            stringFormatter.getTrimOrNull(dict.get("uuid")),
+            stringFormatter.getTrimOrNull(dict.get("code_erp")),
+            stringFormatter.getTrimOrNull(dict.get("description")),
+            stringFormatter.getTrimOrNull(dict.get("payment_for")),
+            stringFormatter.getTrimOrNull(dict.get("payed_from")),
+            stringFormatter.getTrimOrNull(dict.get("income_date")),
+            numberFormatter.getDoubleOrNull(dict.get("amount")),
+            stringFormatter.getTrimOrNull(dict.get("notes")),
+            numberFormatter.getIntegerOrNull(dict.get("id_owner"))
         );
     }
 }

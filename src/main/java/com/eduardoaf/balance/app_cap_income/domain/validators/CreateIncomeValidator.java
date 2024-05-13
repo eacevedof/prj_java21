@@ -43,7 +43,7 @@ public final class CreateIncomeValidator extends AbstractDomainValidator {
 
     private void failIfIncomeExists() throws Exception {
         var incomeId = appCapIncomeReaderRepository.doesIncomeExistByAmountAndDateAndPayedForAndPaymentFrom(
-            numberFormatter.getAsDouble(createIncomeDto.amount()),
+            numberFormatter.getDoubleOrNull(createIncomeDto.amount()),
             createIncomeDto.incomeDate(),
             createIncomeDto.paymentFor(),
             createIncomeDto.payedFrom()
