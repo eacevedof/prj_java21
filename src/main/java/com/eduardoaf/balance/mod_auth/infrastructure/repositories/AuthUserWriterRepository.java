@@ -36,7 +36,7 @@ public final class AuthUserWriterRepository extends AbstractMysqlRepository {
                 .addColumn("update_user", authUserEntity.getInsertUser())
                 .addColumn("update_date", dateFormatter.getNow())
                 .addColumn("log_attempts", 0)
-                .where("id", stringFormatter.getAlwaysString(authUserEntity.id))
+                .where("id", stringFormatter.getAlwaysString(authUserEntity.getI()))
                 .getQuery();
         log.debug(sql, "updateUserLogged");
         this.execute(sql);

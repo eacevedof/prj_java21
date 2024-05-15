@@ -54,9 +54,10 @@ public final class AuthUserService {
         this.jwtHelper = jwtHelper;
     }
 
-    public AuthedUserDto invoke(AuthUserDto authUserDto) throws Exception {
+    public AuthedUserDto invoke(
+        AuthUserDto authUserDto
+    ) throws Exception {
 
-        //se valida
         authUserValidator.invoke(authUserDto);
 
         var users = sysUserReaderRepository.getUsersCredentialsByEmail(authUserDto.username());
@@ -74,34 +75,13 @@ public final class AuthUserService {
 
         authUserId = numberFormatter.getIntegerOrNull(userMap.get("id"));
         userMap = sysUserReaderRepository.getUserByUserId(authUserId);
-
-        var newAuthUserEntity = AuthUserEntity.getInstance(
-            numberFormatter.getIntegerOrNull(userMap.get("id")),
-            stringFormatter.getTrimOrNull(userMap.get("uuid")),
-            stringFormatter.getTrimOrNull(userMap.get("code_erp")),
-            stringFormatter.getTrimOrNull(userMap.get("email")),
-            stringFormatter.getTrimOrNull(userMap.get("secret")),
-            stringFormatter.getTrimOrNull(userMap.get("fullname")),
-            numberFormatter.getIntegerOrNull(userMap.get("id_parent")),
-            numberFormatter.getIntegerOrNull(userMap.get("id_language")),
-            numberFormatter.getIntegerOrNull(userMap.get("id_profile")),
-            stringFormatter.getTrimOrNull(userMap.get("url_picture"))
-        );
+        var newAuthUserEntity = AuthUserEntity.fromMapRow(userMap);
 
         sysUserWriterRepository.updateUserLogged(newAuthUserEntity);
-        var jwtToken = jwtHelper.generateToken(userMap.get("email"));
+        var jwtToken = jwtHelper.generateToken(newAuthUserEntity.getEmail());
 
-        return AuthedUserDto.getInstance(
-            userMap.get("id"),
-            userMap.get("uuid"),
-            userMap.get("code_erp"),
-            userMap.get("description"),
-            userMap.get("email"),
-            userMap.get("fullname"),
-            userMap.get("id_parent"),
-            userMap.get("id_language"),
-            userMap.get("id_profile"),
-            userMap.get("url_picture"),
+        return AuthedUserDto.fromAuthUserEntityAndJwt(
+            newAuthUserEntity,
             jwtToken
         );
     }

@@ -32,7 +32,7 @@ public final class AuthUserReaderRepository extends AbstractMysqlRepository {
     public Map<String, String> getUserByUserId(int userId) throws Exception {
         String sql = String.format("""
         -- getUserByUserId
-        SELECT * 
+        SELECT *
         FROM base_user
         WHERE 1=1
         AND delete_date IS NULL
