@@ -56,6 +56,7 @@ public final class NumberFormatter {
             return null;
         return Integer.parseInt(number);
     }
+
     public Boolean getBoolean(String number) {
         if (number == null)
             return false;

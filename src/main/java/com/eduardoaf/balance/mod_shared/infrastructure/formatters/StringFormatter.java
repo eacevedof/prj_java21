@@ -36,4 +36,10 @@ public final class StringFormatter {
             return "";
         return anyString.trim();
     }
+
+    public Boolean getBoolean(String number) {
+        if (number == null)
+            return false;
+        return !number.isEmpty();
+    }
 }
