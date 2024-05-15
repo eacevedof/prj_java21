@@ -3,7 +3,10 @@ package com.eduardoaf.balance.mod_shared.domain.services;
 import com.eduardoaf.balance.mod_users.domain.entities.BaseUserEntity;
 import com.eduardoaf.balance.mod_shared.infrastructure.auth.JwtHelper;
 
+import com.eduardoaf.balance.mod_shared.domain.exceptions.AuthUserException;
 import com.eduardoaf.balance.mod_users.infrastructure.repositories.BaseUserReaderRepository;
+
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,16 +25,19 @@ public class DomainAuthService {
         this.baseUserEntity = null;
     }
 
-    public void tryToLoadAuthUserByJwt(String jwtToken) throws Exception {
+    public void tryToLoadAuthUserByJwt(
+        String jwtToken
+    ) throws Exception {
 
         var username = jwtHelper.getUsernameByJwt(jwtToken);
-
         Integer userId = sysUserReaderRepository.getUserIdByEmail(username);
         if (userId == null) {
             return;
         }
-        var user = sysUserReaderRepository.getUserByUserIdxxx(userId);
-
+        baseUserEntity = sysUserReaderRepository.getUserEntityByUserId(userId);
+        if (baseUserEntity == null) {
+            AuthUserException.unauthorizedUser(jwtToken);
+        }
     }
 
     public BaseUserEntity getAuthUser() {
