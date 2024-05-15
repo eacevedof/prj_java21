@@ -1,7 +1,7 @@
 package com.eduardoaf.balance.mod_auth.application.services;
 
 import com.eduardoaf.balance.mod_auth.application.dtos.AuthUserDto;
-import com.eduardoaf.balance.mod_auth.domain.entities.SysUserEntity;
+import com.eduardoaf.balance.mod_auth.domain.entities.AuthUserEntity;
 import com.eduardoaf.balance.mod_auth.infrastructure.repositories.AuthUserReaderRepository;
 import com.eduardoaf.balance.mod_auth.infrastructure.repositories.AuthUserWriterRepository;
 import com.eduardoaf.balance.mod_auth.application.dtos.AuthedUserDto;
@@ -24,6 +24,8 @@ public final class AuthUserService {
     private final NumberFormatter numberFormatter;
     private final StringFormatter stringFormatter;
 
+    private Integer authUserId;
+
     @Autowired
     public AuthUserService
     (
@@ -45,10 +47,19 @@ public final class AuthUserService {
     }
 
     public AuthedUserDto invoke(AuthUserDto authUserDto) throws Exception {
+
+        //se valida
         authUserValidator.invoke(authUserDto);
 
+        AuthUserEntity authUserEntity = AuthUserEntity.getInstanceByEmail(authUserDto.username());
+        var users = sysUserReaderRepository.getUsersCredentialsByEmail(
+                authUserDto.username()
+        );
+
+
+
         String hashedPassword = passwordFormatter.getHashedPassword(password);
-        var newAuthUserEntity = SysUserEntity.getInstance(
+        var newAuthUserEntity = AuthUserEntity.getInstance(
             numberFormatter.getNull(),
             stringFormatter.getNull(),
             stringFormatter.getTrimOrNull(authUserDto.codeErp()),

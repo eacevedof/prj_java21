@@ -1,6 +1,6 @@
 package com.eduardoaf.balance.mod_auth.infrastructure.repositories;
 
-import com.eduardoaf.balance.mod_auth.domain.entities.SysUserEntity;
+import com.eduardoaf.balance.mod_auth.domain.entities.AuthUserEntity;
 import com.eduardoaf.balance.mod_shared.infrastructure.db.query_builders.InsertQuery;
 import com.eduardoaf.balance.mod_shared.infrastructure.file.Log;
 import com.eduardoaf.balance.mod_shared.infrastructure.formatters.DateFormatter;
@@ -27,7 +27,7 @@ public final class AuthUserWriterRepository extends AbstractMysqlRepository {
         this.uuid = uuid;
     }
 
-    public void createNewUser(SysUserEntity sysUserEntity) throws Exception {
+    public void createNewUser(AuthUserEntity sysUserEntity) throws Exception {
         var sql = InsertQuery.getInstance("base_user")
                 .addColumn("insert_platform", sysUserEntity.insertPlatform)
                 .addColumn("insert_user", sysUserEntity.insertUser)

@@ -1,5 +1,6 @@
 package com.eduardoaf.balance.mod_auth.infrastructure.controllers;
 
+import com.eduardoaf.balance.mod_shared.infrastructure.formatters.StringFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,16 +22,19 @@ import com.eduardoaf.balance.mod_auth.infrastructure.enums.AuthOkMessage;
 public class AuthUserController {
 
     private final Log log;
+    private final StringFormatter stringFormatter;
     private final AuthUserService authUserService;
     private final HttpResponse httpResponse;
 
     @Autowired
     public AuthUserController(
         Log log,
+        StringFormatter stringFormatter,
         AuthUserService authUserService,
         HttpResponse httpResponse
     ) {
         this.log = log;
+        this.stringFormatter = stringFormatter;
         this.authUserService = authUserService;
         this.httpResponse = httpResponse;
     }
@@ -39,8 +43,8 @@ public class AuthUserController {
     public ResponseEntity<?> authUser(@RequestBody AuthUserDto authUserDto) {
         try {
             authUserDto = AuthUserDto.getInstance(
-                authUserDto.username(),
-                authUserDto.password()
+                stringFormatter.getTrimOrNull(authUserDto.username()),
+                stringFormatter.getTrimOrNull(authUserDto.password())
             );
             var createdUserDto = authUserService.invoke(authUserDto);
             return httpResponse.getResponse201(
