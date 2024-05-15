@@ -1,5 +1,7 @@
 package com.eduardoaf.balance.mod_income.application.dtos;
 
+import com.eduardoaf.balance.mod_income.domain.entities.AppCapIncomeEntity;
+
 public record CreatedIncomeDto(
      Integer id,
      String uuid,
@@ -12,27 +14,19 @@ public record CreatedIncomeDto(
      Integer idOwner
 ) {
 
-    public static CreatedIncomeDto getInstance(
-        Integer id,
-        String uuid,
-        String codeErp,
-        String paymentFor,
-        String payedFrom,
-        String incomeDate,
-        Double amount,
-        String notes,
-        Integer idOwner
+    public static CreatedIncomeDto fromIncomeEntity(
+        AppCapIncomeEntity incomeEntity
     ) {
         return new CreatedIncomeDto(
-            id,
-            uuid,
-            codeErp,
-            paymentFor,
-            payedFrom,
-            incomeDate,
-            amount,
-            notes,
-            idOwner
+            incomeEntity.getId(),
+            incomeEntity.getUuid(),
+            incomeEntity.getCodeErp(),
+            incomeEntity.getPaymentFor(),
+            incomeEntity.getPayedFrom(),
+            incomeEntity.getIncomeDate(),
+            incomeEntity.getAmount(),
+            incomeEntity.getNotes(),
+            incomeEntity.getIdOwner()
         );
     }
 }

@@ -3,6 +3,7 @@ package com.eduardoaf.balance.mod_income.infrastructure.repositories;
 import java.util.Map;
 import java.util.Collections;
 
+import com.eduardoaf.balance.mod_income.domain.entities.AppCapIncomeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +30,7 @@ public final class AppCapIncomeReaderRepository extends AbstractMysqlRepository 
         this.numberFormatter = numberFormatter;
     }
 
-    public Map<String, String> getIncomeByIncomeId(int incomeId) throws Exception {
+    public AppCapIncomeEntity getIncomeEntityByIncomeId(int incomeId) throws Exception {
         String sql = String.format("""
         -- getIncomeByIncomeId
         SELECT * 
@@ -40,8 +41,10 @@ public final class AppCapIncomeReaderRepository extends AbstractMysqlRepository 
         """, incomeId);
         log.debug(sql);
         var list = query(sql);
-        if (list.isEmpty()) return Collections.emptyMap();
-        return list.getFirst();
+        if (list.isEmpty()) return null;
+        return AppCapIncomeEntity.fromMapRow(
+            list.getFirst()
+        );
     }
 
     public int doesIncomeExistByAmountAndDateAndPayedForAndPaymentFrom(

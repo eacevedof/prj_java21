@@ -5,24 +5,23 @@ import com.eduardoaf.balance.mod_shared.infrastructure.formatters.NumberFormatte
 import com.eduardoaf.balance.mod_shared.infrastructure.formatters.StringFormatter;
 import lombok.Getter;
 
+import java.util.Map;
+
 
 @Getter
 public final class AppCapIncomeEntity extends AbstractEntity {
 
-    public final String uuid;
-    public final String codeErp;
-    public final String description;
-    public final String paymentFor;
-    public final String payedFrom;
-    public final String incomeDate;
-    public final double amount;
-    public final String notes;
-    public final Integer idOwner;
-    public final String cruCsvNote;
-    public final Integer isErpSent;
-    public final Integer isEnabled;
+    private final String uuid;
+    private final String codeErp;
+    private final String description;
+    private final String paymentFor;
+    private final String payedFrom;
+    private final String incomeDate;
+    private final double amount;
+    private final String notes;
+    private final Integer idOwner;
 
-    public AppCapIncomeEntity(
+    private AppCapIncomeEntity(
         Integer id, 
         String uuid, 
         String codeErp, 
@@ -31,11 +30,8 @@ public final class AppCapIncomeEntity extends AbstractEntity {
         String payedFrom,
         String incomeDate, 
         double amount, 
-        String notes, 
-        Integer idOwner, 
-        String cruCsvNote, 
-        Integer isErpSent,
-        Integer isEnabled
+        String notes,
+        Integer idOwner
     ) {
         this.id = id;
         this.uuid = uuid;
@@ -47,69 +43,51 @@ public final class AppCapIncomeEntity extends AbstractEntity {
         this.amount = amount;
         this.notes = notes;
         this.idOwner = idOwner;
-        this.cruCsvNote = cruCsvNote;
-        this.isErpSent = isErpSent;
-        this.isEnabled = isEnabled;
     }
 
-    public static AppCapIncomeEntity getInstance(
-        Integer id,
-        String uuid,
+    public static AppCapIncomeEntity fromMapRow(Map<String, String> mapRow) {
+        StringFormatter stringFormatter = new StringFormatter();
+        NumberFormatter numberFormatter = new NumberFormatter();
+        
+        AppCapIncomeEntity capIncomeEntity = new AppCapIncomeEntity(
+            numberFormatter.getIntegerOrNull(mapRow.get("id")),
+            stringFormatter.getTrimOrNull(mapRow.get("uuid")),
+            stringFormatter.getTrimOrNull(mapRow.get("codeErp")),
+            stringFormatter.getTrimOrNull(mapRow.get("description")),
+            stringFormatter.getTrimOrNull(mapRow.get("paymentFor")),
+            stringFormatter.getTrimOrNull(mapRow.get("payedFrom")),
+            stringFormatter.getTrimOrNull(mapRow.get("incomeDate")),
+            numberFormatter.getDoubleOrNull(mapRow.get("amount")),
+            stringFormatter.getTrimOrNull(mapRow.get("notes")),
+            numberFormatter.getIntegerOrNull(mapRow.get("idOwner"))
+        );
+        loadParentByMapRow(capIncomeEntity, mapRow);
+        return capIncomeEntity;
+    }
+
+    public static AppCapIncomeEntity fromStrings(
         String codeErp,
         String description,
         String paymentFor,
         String payedFrom,
         String incomeDate,
-        double amount,
+        String amount,
         String notes,
-        Integer idOwner,
-        String cruCsvNote,
-        Integer isErpSent,
-        Integer isEnabled
+        String idOwner
     ) {
+        StringFormatter stringFormatter = new StringFormatter();
+        NumberFormatter numberFormatter = new NumberFormatter();
         return new AppCapIncomeEntity(
-            id, 
-            uuid,
-            codeErp,
-            description, 
-            paymentFor,
-            payedFrom, 
-            incomeDate, 
-            amount,
-            notes, 
-            idOwner, 
-            cruCsvNote, 
-            isErpSent, 
-            isEnabled
-        );
-    }
-
-    public static AppCapIncomeEntity getInstance(
-        String codeErp, 
-        String description, 
-        String paymentFor, 
-        String payedFrom,
-        String incomeDate, 
-        double amount, 
-        String notes, 
-        Integer idOwner
-    ) {
-        NumberFormatter numberFormatter = NumberFormatter.getInstance();
-        StringFormatter stringFormatter = StringFormatter.getInstance();
-        return new AppCapIncomeEntity(
-            numberFormatter.getNull(), 
-            stringFormatter.getNull(), 
-            codeErp, 
-            description, 
-            paymentFor, 
-            payedFrom, 
-            incomeDate, 
-            amount,
-            notes, 
-            idOwner, 
-            stringFormatter.getNull(), 
-            0, 
-            1
+            numberFormatter.getNull(),
+            stringFormatter.getNull(),
+            stringFormatter.getTrimOrNull(codeErp),
+            stringFormatter.getTrimOrNull(description),
+            stringFormatter.getTrimOrNull(paymentFor),
+            stringFormatter.getTrimOrNull(payedFrom),
+            stringFormatter.getTrimOrNull(incomeDate),
+            numberFormatter.getDouble3dec(amount),
+            stringFormatter.getTrimOrNull(notes),
+            numberFormatter.getIntegerOrNull(idOwner)
         );
     }
 }

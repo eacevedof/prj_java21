@@ -35,13 +35,13 @@ public final class AppCapIncomeWriterRepository extends AbstractMysqlRepository 
                 .addColumn("insert_date", dateFormatter.getNow())
                 .addColumn("uuid", uuid.getUuid("IN", 15))
                 .addColumn("code_erp", appCapIncomeEntity.getCodeErp())
-                .addColumn("description", appCapIncomeEntity.description)
-                .addColumn("payment_for", appCapIncomeEntity.paymentFor)
-                .addColumn("payed_from", appCapIncomeEntity.payedFrom)
-                .addColumn("income_date", appCapIncomeEntity.incomeDate)
-                .addColumn("amount", appCapIncomeEntity.amount)
-                .addColumn("notes", appCapIncomeEntity.notes)
-                .addColumn("id_owner", appCapIncomeEntity.idOwner)
+                .addColumn("description", appCapIncomeEntity.getDescription())
+                .addColumn("payment_for", appCapIncomeEntity.getPaymentFor())
+                .addColumn("payed_from", appCapIncomeEntity.getPayedFrom())
+                .addColumn("income_date", appCapIncomeEntity.getIncomeDate())
+                .addColumn("amount", appCapIncomeEntity.getAmount())
+                .addColumn("notes", appCapIncomeEntity.getNotes())
+                .addColumn("id_owner", appCapIncomeEntity.getIdOwner())
                 .getQuery();
         log.debug(sql, "createNewIncome");
         this.execute(sql);
