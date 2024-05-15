@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class DomainAuthService {
 
     private final BaseUserReaderRepository sysUserReaderRepository;
-    private BaseUserEntity baseUserEntity;
+    private static BaseUserEntity baseUserEntity;
     private final JwtHelper jwtHelper;
 
     public DomainAuthService (
@@ -22,25 +22,24 @@ public class DomainAuthService {
     ) {
         this.sysUserReaderRepository = sysUserWriterRepository;
         this.jwtHelper = jwtHelper;
-        this.baseUserEntity = null;
     }
 
     public void tryToLoadAuthUserByJwt(
         String jwtToken
     ) throws Exception {
-
+        DomainAuthService.baseUserEntity = null;
         var username = jwtHelper.getUsernameByJwt(jwtToken);
         Integer userId = sysUserReaderRepository.getUserIdByEmail(username);
         if (userId == null) {
-            return;
+            AuthUserException.unauthorizedUser(jwtToken);
         }
-        baseUserEntity = sysUserReaderRepository.getUserEntityByUserId(userId);
+        DomainAuthService.baseUserEntity = sysUserReaderRepository.getUserEntityByUserId(userId);
         if (baseUserEntity == null) {
             AuthUserException.unauthorizedUser(jwtToken);
         }
     }
 
     public BaseUserEntity getAuthUser() {
-        return baseUserEntity;
+        return DomainAuthService.baseUserEntity;
     }
 }
