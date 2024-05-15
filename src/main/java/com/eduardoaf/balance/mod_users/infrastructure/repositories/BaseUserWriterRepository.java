@@ -6,9 +6,10 @@ import org.springframework.stereotype.Component;
 import com.eduardoaf.balance.mod_shared.infrastructure.file.Log;
 import com.eduardoaf.balance.mod_shared.infrastructure.formatters.UuidFormatter;
 import com.eduardoaf.balance.mod_shared.infrastructure.formatters.DateFormatter;
-
 import com.eduardoaf.balance.mod_shared.infrastructure.repositories.AbstractMysqlRepository;
 import com.eduardoaf.balance.mod_shared.infrastructure.db.query_builders.InsertQuery;
+
+import com.eduardoaf.balance.mod_users.domain.entities.BaseUserEntity;
 
 @Component
 public final class BaseUserWriterRepository extends AbstractMysqlRepository {
@@ -28,26 +29,26 @@ public final class BaseUserWriterRepository extends AbstractMysqlRepository {
         this.uuid = uuid;
     }
 
-    public void createNewUser(com.eduardoaf.balance.mod_users.domain.entities.BaseUserEntity sysUserEntity) throws Exception {
+    public void createNewUser(BaseUserEntity baseUserEntity) throws Exception {
         var sql = InsertQuery.getInstance("base_user")
-                .addColumn("insert_platform", sysUserEntity.insertPlatform)
-                .addColumn("insert_user", sysUserEntity.insertUser)
+                .addColumn("insert_platform", baseUserEntity.insertPlatform)
+                .addColumn("insert_user", baseUserEntity.insertUser)
                 .addColumn("insert_date", dateFormatter.getNow())
                 .addColumn("uuid", uuid.getUuid("USR", 15))
-                .addColumn("code_erp", sysUserEntity.codeErp)
+                .addColumn("code_erp", baseUserEntity.codeErp)
                 //.addColumn("description", sysUserEntity.description)
-                .addColumn("email", sysUserEntity.email)
-                .addColumn("secret", sysUserEntity.secret)
-                .addColumn("phone", sysUserEntity.phone)
-                .addColumn("fullname", sysUserEntity.fullname)
-                .addColumn("address", sysUserEntity.address)
-                .addColumn("birthdate", sysUserEntity.birthdate)
-                .addColumn("id_parent", sysUserEntity.idParent)
-                .addColumn("id_gender", sysUserEntity.idGender)
-                .addColumn("id_nationality", sysUserEntity.idNationality)
-                .addColumn("id_country", sysUserEntity.idCountry)
-                .addColumn("id_language", sysUserEntity.idLanguage)
-                .addColumn("id_profile", sysUserEntity.idProfile)
+                .addColumn("email", baseUserEntity.email)
+                .addColumn("secret", baseUserEntity.secret)
+                .addColumn("phone", baseUserEntity.phone)
+                .addColumn("fullname", baseUserEntity.fullname)
+                .addColumn("address", baseUserEntity.address)
+                .addColumn("birthdate", baseUserEntity.birthdate)
+                .addColumn("id_parent", baseUserEntity.idParent)
+                .addColumn("id_gender", baseUserEntity.idGender)
+                .addColumn("id_nationality", baseUserEntity.idNationality)
+                .addColumn("id_country", baseUserEntity.idCountry)
+                .addColumn("id_language", baseUserEntity.idLanguage)
+                .addColumn("id_profile", baseUserEntity.idProfile)
                 .addColumn("url_picture", null)
                 .addColumn("date_validated", null)
                 .addColumn("log_attempts", 0)
