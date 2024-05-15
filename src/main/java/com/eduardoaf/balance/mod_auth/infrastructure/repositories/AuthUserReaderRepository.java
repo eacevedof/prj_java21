@@ -1,15 +1,15 @@
 package com.eduardoaf.balance.mod_auth.infrastructure.repositories;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 import com.eduardoaf.balance.mod_shared.infrastructure.db.query_builders.SanitizeQuery;
 import com.eduardoaf.balance.mod_shared.infrastructure.file.Log;
 import com.eduardoaf.balance.mod_shared.infrastructure.formatters.NumberFormatter;
 import com.eduardoaf.balance.mod_shared.infrastructure.repositories.AbstractMysqlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 
 @Component
 public final class AuthUserReaderRepository extends AbstractMysqlRepository {
@@ -44,23 +44,6 @@ public final class AuthUserReaderRepository extends AbstractMysqlRepository {
         return list.getFirst();
     }
 
-    public Integer doesUserExistByEmail(String email) throws Exception {
-        email = sanitizeQuery.getOnlyValueSanitized(email);
-
-        String sql = String.format("""
-        -- doesUserExistByEmail
-        SELECT id
-        FROM base_user
-        WHERE 1=1
-        AND delete_date IS NULL
-        AND email = '%s'
-        """, email);
-        log.debug(sql);
-        var list = query(sql);
-        if (list.isEmpty()) return null;
-        return getAsInt(list.getFirst().get("id"));
-    }
-
     public String getUuidByUserId(int userId) throws Exception {
         String sql = String.format("""
         -- getUuidByUserId
@@ -81,11 +64,12 @@ public final class AuthUserReaderRepository extends AbstractMysqlRepository {
 
         String sql = String.format("""
         -- getUserIdByEmail
-        SELECT id, email, secret
+        SELECT id, email, secret, delete_date, is_enabled
         FROM base_user
         WHERE 1=1
         AND delete_date IS NULL
         AND email = '%s'
+        LIMIT 2
         """, email);
         log.debug(sql);
         var list = query(sql);

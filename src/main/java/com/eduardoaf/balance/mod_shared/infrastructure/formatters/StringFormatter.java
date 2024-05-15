@@ -28,4 +28,12 @@ public final class StringFormatter {
             return "";
         return anyString.trim();
     }
+
+    public String getEmptyIfNull(String anyString) {
+        if (anyString == null)
+            return "";
+        if (anyString.isEmpty() || anyString.isBlank())
+            return "";
+        return anyString.trim();
+    }
 }

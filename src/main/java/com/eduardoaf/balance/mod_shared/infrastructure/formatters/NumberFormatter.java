@@ -56,6 +56,13 @@ public final class NumberFormatter {
             return null;
         return Integer.parseInt(number);
     }
+    public Boolean getBoolean(String number) {
+        if (number == null)
+            return false;
+        if (number.isEmpty())
+            return false;
+        return Integer.parseInt(number) > 0;
+    }
 
     public Integer getIntegerOrDefault(String number, Integer defaultValue) {
         if (number == null)
