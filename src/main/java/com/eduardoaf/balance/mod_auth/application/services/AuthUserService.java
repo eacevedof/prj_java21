@@ -49,7 +49,7 @@ public final class AuthUserService {
 
         String password = "Abc.1234:)";
         String hashedPassword = passwordFormatter.getHashedPassword(password);
-        var newUserEntity = SysUserEntity.getInstance(
+        var newAuthUserEntity = SysUserEntity.getInstance(
             numberFormatter.getNull(),
             stringFormatter.getNull(),
             stringFormatter.getTrimOrNull(authUserDto.codeErp()),
@@ -73,7 +73,7 @@ public final class AuthUserService {
             stringFormatter.getNull(),
             numberFormatter.getNull()
         );
-        sysUserWriterRepository.createNewUser(newUserEntity);
+        sysUserWriterRepository.createNewUser(newAuthUserEntity);
         var lastId = sysUserWriterRepository.getLastInsertId();
         var dict = sysUserReaderRepository.getUserByUserId(lastId);
         if (dict.isEmpty()) {
