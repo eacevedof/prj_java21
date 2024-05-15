@@ -57,7 +57,9 @@ public final class CreateIncomeController {
                 createIncomeDto.incomeDate(),
                 createIncomeDto.amount(),
                 createIncomeDto.notes(),
-                    "1"
+                    "1",
+                domainAuthService.getAuthUser().getId().toString(),
+                createIncomeDto.insertPlatform()
             );
             var createdIncomeDto = createIncomeService.invoke(createIncomeDto);
             return httpResponse.getResponse201("entity created", createdIncomeDto);

@@ -10,7 +10,9 @@ public record CreateIncomeDto(
         String incomeDate,
         String amount,
         String notes,
-        String idOwner
+        String idOwner,
+        String authUserId,
+        String insertPlatform
 ) {
 
     public static CreateIncomeDto getInstance(
@@ -21,7 +23,9 @@ public record CreateIncomeDto(
         String incomeDate,
         String amount,
         String notes,
-        String idOwner
+        String idOwner,
+        String authUserId,
+        String insertPlatform
     ) {
         StringFormatter stringFormatter = StringFormatter.getInstance();
         return new CreateIncomeDto(
@@ -32,7 +36,9 @@ public record CreateIncomeDto(
             stringFormatter.getTrimOrNull(incomeDate),
             stringFormatter.getTrimOrNull(amount),
             stringFormatter.getTrimOrNull(notes),
-            stringFormatter.getTrimOrNull(idOwner)
+            stringFormatter.getTrimOrNull(idOwner),
+            stringFormatter.getTrimOrNull(authUserId),
+            stringFormatter.getTrimOrNull(insertPlatform)
         );
     }
 
