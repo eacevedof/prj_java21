@@ -15,7 +15,7 @@ import com.eduardoaf.balance.mod_shared.infrastructure.enums.NokMessageEnum;
 import com.eduardoaf.balance.mod_auth.application.dtos.AuthUserDto;
 import com.eduardoaf.balance.mod_auth.application.services.AuthUserService;
 import com.eduardoaf.balance.mod_auth.domain.exceptions.AuthUserException;
-import com.eduardoaf.balance.mod_auth.infrastructure.enums.AuthOkMessages;
+import com.eduardoaf.balance.mod_auth.infrastructure.enums.AuthOkMessage;
 
 @RestController
 public class AuthUserController {
@@ -43,7 +43,10 @@ public class AuthUserController {
                 authUserDto.password()
             );
             var createdUserDto = authUserService.invoke(authUserDto);
-            return httpResponse.getResponse201(AuthOkMessages.USER_SUCCESSFULLY_AUTHENTICATED, createdUserDto);
+            return httpResponse.getResponse201(
+                    AuthOkMessage.USER_SUCCESSFULLY_AUTHENTICATED.getValue(),
+                    createdUserDto
+            );
         }
         catch (DomainTypeException | DomainValueException | AuthUserException e) {
             return httpResponse.getResponse400(e.getMessage());

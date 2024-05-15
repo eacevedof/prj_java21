@@ -4,13 +4,13 @@ public enum NokMessageEnum {
     UNEXPECTED_ERROR_OCCURRED(
     "Sorry, an unexpected error occurred. Please try again later. If the problem persists, please contact the support team"
     );
-    private final String envKey;
+    private final String messageKey;
 
-    NokMessageEnum(String envKey) {
-        this.envKey = envKey;
+    NokMessageEnum(String messageKey) {
+        this.messageKey = messageKey;
     }
 
     public String getValue() {
-        return envKey;
+        return messageKey;
     }
 }
