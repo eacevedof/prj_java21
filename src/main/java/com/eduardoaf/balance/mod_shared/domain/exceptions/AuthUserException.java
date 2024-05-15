@@ -2,9 +2,8 @@ package com.eduardoaf.balance.mod_shared.domain.exceptions;
 
 import com.eduardoaf.balance.mod_auth.domain.enums.AuthNokMessage;
 import com.eduardoaf.balance.mod_shared.infrastructure.enums.HttpStatusCodeEnum;
-import com.eduardoaf.balance.mod_shared.infrastructure.exceptions.AbstractInfrastructureException;
 
-public final class AuthUserException extends AbstractInfrastructureException {
+public final class AuthUserException extends AbstractDomainException {
 
     public AuthUserException(String message, int statusCode) {
         super(message, statusCode);

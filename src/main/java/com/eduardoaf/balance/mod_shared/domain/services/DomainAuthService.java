@@ -6,7 +6,6 @@ import com.eduardoaf.balance.mod_shared.infrastructure.auth.JwtHelper;
 import com.eduardoaf.balance.mod_shared.domain.exceptions.AuthUserException;
 import com.eduardoaf.balance.mod_users.infrastructure.repositories.BaseUserReaderRepository;
 
-
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,7 +23,7 @@ public class DomainAuthService {
         this.jwtHelper = jwtHelper;
     }
 
-    public void tryToLoadAuthUserByJwt(
+    public void tryToLoadAuthUserByJwtOrFail(
         String jwtToken
     ) throws Exception {
         DomainAuthService.baseUserEntity = null;

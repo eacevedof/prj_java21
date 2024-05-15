@@ -1,5 +1,7 @@
 package com.eduardoaf.balance.mod_users.infrastructure.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +12,8 @@ import com.eduardoaf.balance.mod_shared.infrastructure.file.Log;
 import com.eduardoaf.balance.mod_shared.infrastructure.http.responses.HttpResponse;
 import com.eduardoaf.balance.mod_shared.domain.exceptions.DomainTypeException;
 import com.eduardoaf.balance.mod_shared.domain.exceptions.DomainValueException;
+import com.eduardoaf.balance.mod_shared.domain.services.DomainAuthService;
+
 import com.eduardoaf.balance.mod_users.application.dtos.CreateUserDto;
 import com.eduardoaf.balance.mod_users.application.services.CreateUserService;
 import com.eduardoaf.balance.mod_users.domain.exceptions.CreateUserException;
@@ -18,23 +22,32 @@ import com.eduardoaf.balance.mod_users.domain.exceptions.CreateUserException;
 public class CreateUserController {
 
     private final Log log;
+    private final DomainAuthService domainAuthService;
     private final CreateUserService createUserService;
     private final HttpResponse httpResponse;
 
     @Autowired
     public CreateUserController(
         Log log,
+        DomainAuthService domainAuthService,
         CreateUserService createUserService,
         HttpResponse httpResponse
     ) {
         this.log = log;
+        this.domainAuthService = domainAuthService;
         this.createUserService = createUserService;
         this.httpResponse = httpResponse;
     }
 
     @PostMapping(value = "api/v1/user/create", consumes = {"application/json"})
-    public ResponseEntity<?> createUser(@RequestBody CreateUserDto createUserDto) {
+    public ResponseEntity<?> createUser(
+        HttpServletRequest httpRequest,
+        @RequestBody CreateUserDto createUserDto
+    ) {
         try {
+            var jwt = httpRequest.getHeader("Authorization");
+            domainAuthService.tryToLoadAuthUserByJwtOrFail(jwt);
+
             createUserDto = CreateUserDto.getInstance(
                 createUserDto.codeErp(),
                 createUserDto.email(),
