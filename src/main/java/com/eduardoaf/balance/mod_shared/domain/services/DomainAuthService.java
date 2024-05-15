@@ -32,9 +32,11 @@ public class DomainAuthService {
         String jwtToken
     ) throws Exception {
         DomainAuthService.baseUserEntity = null;
-        if (jwtToken == null) {
+        jwtToken = getBearerToken(jwtToken);
+        if (jwtToken.isEmpty()) {
             AuthUserException.unauthorizedUser(jwtToken);
         }
+
         String username = "";
         try {
             username = jwtHelper.getUsernameByJwt(jwtToken);
@@ -48,10 +50,22 @@ public class DomainAuthService {
         if (userId == null) {
             AuthUserException.unauthorizedUser(jwtToken);
         }
-        DomainAuthService.baseUserEntity = sysUserReaderRepository.getUserEntityByUserId(userId);
-        if (baseUserEntity == null) {
-            AuthUserException.unauthorizedUser(jwtToken);
-        }
+        DomainAuthService.baseUserEntity = sysUserReaderRepository.getUserMinByUserId(userId);
+        if (baseUserEntity == null)
+            AuthUserException.unauthorizedUser("not found");
+
+        if (!baseUserEntity.getDeleteDate().isEmpty())
+            AuthUserException.unauthorizedUser("deleted user");
+
+        if (baseUserEntity.getIsEnabled() != "0")
+            AuthUserException.unauthorizedUser( "disabled user");
+    }
+
+    private String getBearerToken(
+        String jwtToken
+    ) {
+        if (jwtToken == null) return "";
+        return jwtToken.substring(7);
     }
 
     public BaseUserEntity getAuthUser() {

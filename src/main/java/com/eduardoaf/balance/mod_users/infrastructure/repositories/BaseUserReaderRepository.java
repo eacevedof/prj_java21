@@ -58,7 +58,26 @@ public final class BaseUserReaderRepository extends AbstractMysqlRepository {
         var list = query(sql);
         if (list.isEmpty()) return null;
         return BaseUserEntity.fromMapRow(
-                list.getFirst()
+            list.getFirst()
+        );
+    }
+
+    public BaseUserEntity getUserMinByUserId(
+        Integer userId
+    ) throws Exception
+    {
+        String sql = String.format("""
+        -- getUserMinByUserId
+        SELECT id, is_enabled, delete_date
+        FROM base_user
+        WHERE 1=1
+        AND id = %s
+        """, userId);
+        log.debug(sql);
+        var list = query(sql);
+        if (list.isEmpty()) return null;
+        return BaseUserEntity.fromMapRow(
+            list.getFirst()
         );
     }
 
