@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import com.eduardoaf.balance.mod_shared.infrastructure.file.Log;
 import com.eduardoaf.balance.mod_shared.infrastructure.formatters.UuidFormatter;
 import com.eduardoaf.balance.mod_shared.infrastructure.formatters.DateFormatter;
-import com.eduardoaf.balance.mod_users.domain.entities.SysUserEntity;
+import com.eduardoaf.balance.mod_users.domain.entities.BaseUserEntity;
 import com.eduardoaf.balance.mod_shared.infrastructure.repositories.AbstractMysqlRepository;
 import com.eduardoaf.balance.mod_shared.infrastructure.db.query_builders.InsertQuery;
 
@@ -28,7 +28,7 @@ public final class SysUserWriterRepository extends AbstractMysqlRepository {
         this.uuid = uuid;
     }
 
-    public void createNewUser(SysUserEntity sysUserEntity) throws Exception {
+    public void createNewUser(com.eduardoaf.balance.mod_users.domain.entities.BaseUserEntity sysUserEntity) throws Exception {
         var sql = InsertQuery.getInstance("base_user")
                 .addColumn("insert_platform", sysUserEntity.insertPlatform)
                 .addColumn("insert_user", sysUserEntity.insertUser)

@@ -12,7 +12,7 @@ import com.eduardoaf.balance.mod_users.infrastructure.repositories.SysUserWriter
 import com.eduardoaf.balance.mod_users.application.dtos.CreateUserDto;
 import com.eduardoaf.balance.mod_users.application.dtos.CreatedUserDto;
 import com.eduardoaf.balance.mod_users.domain.validators.CreateUserValidator;
-import com.eduardoaf.balance.mod_users.domain.entities.SysUserEntity;
+import com.eduardoaf.balance.mod_users.domain.entities.BaseUserEntity;
 
 @Service
 public final class CreateUserService {
@@ -50,7 +50,7 @@ public final class CreateUserService {
 
         String password = "Abc.1234:)";
         String hashedPassword = passwordFormatter.getHashedPassword(password);
-        var newUserEntity = SysUserEntity.getInstance(
+        var newUserEntity = com.eduardoaf.balance.mod_users.domain.entities.BaseUserEntity.getInstance(
             numberFormatter.getNull(),
             stringFormatter.getNull(),
             stringFormatter.getTrimOrNull(createUserDto.codeErp()),

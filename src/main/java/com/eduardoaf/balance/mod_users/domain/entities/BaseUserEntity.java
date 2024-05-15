@@ -2,7 +2,7 @@ package com.eduardoaf.balance.mod_users.domain.entities;
 
 import com.eduardoaf.balance.mod_shared.domain.entities.AbstractEntity;
 
-public final class SysUserEntity extends AbstractEntity {
+public final class BaseUserEntity extends AbstractEntity {
 
     public final Integer id;
     public final String uuid;
@@ -24,7 +24,7 @@ public final class SysUserEntity extends AbstractEntity {
     public final String dateValidated;
     public final Integer logAttempts;
 
-    public SysUserEntity(
+    public BaseUserEntity(
         Integer id,
         String uuid,
         String codeErp,
@@ -68,7 +68,7 @@ public final class SysUserEntity extends AbstractEntity {
         this.logAttempts = logAttempts;
     }
 
-    public static SysUserEntity getInstance(
+    public static BaseUserEntity getInstance(
         Integer id,
         String uuid,
         String codeErp,
@@ -91,7 +91,7 @@ public final class SysUserEntity extends AbstractEntity {
         String dateValidated,
         Integer logAttempts
     ) {
-        return new SysUserEntity(
+        return new BaseUserEntity(
             id,
             uuid == null ? "" : uuid.trim(),
             codeErp == null ? "" : codeErp.trim(),

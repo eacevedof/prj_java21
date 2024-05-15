@@ -29,29 +29,29 @@ public class JwtHelper {
                 .compact();
     }
 
-    public String extractUsername(String jwtToken) {
-        return extractClaim(jwtToken, Claims::getSubject);
+    public String getUsernameByJwt(String jwtToken) {
+        return getAllClaims(jwtToken, Claims::getSubject);
     }
 
-    public Date extractExpiration(String jwtToken) {
-        return extractClaim(jwtToken, Claims::getExpiration);
+    public Date getExpirationDateByJwt(String jwtToken) {
+        return getAllClaims(jwtToken, Claims::getExpiration);
     }
 
-    private  <T> T extractClaim(String jwtToken, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(jwtToken);
+    private  <T> T getAllClaims(String jwtToken, Function<Claims, T> claimsResolver) {
+        final Claims claims = getAllClaimsFromJwt(jwtToken);
         return claimsResolver.apply(claims);
     }
 
-    private Claims extractAllClaims(String jwtToken) {
+    private Claims getAllClaimsFromJwt(String jwtToken) {
         return Jwts.parser().setSigningKey(SECRET_KEY).build().parseClaimsJws(jwtToken).getBody();
     }
 
     private Boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
+        return getExpirationDateByJwt(token).before(new Date());
     }
 
     public Boolean isValidJwtByUsername(String jwtToken, String username) {
-        final String extractedUsername = extractUsername(jwtToken);
+        final String extractedUsername = getUsernameByJwt(jwtToken);
         return (extractedUsername.equals(username) && !isTokenExpired(jwtToken));
     }
 }
