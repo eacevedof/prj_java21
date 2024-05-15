@@ -1,7 +1,7 @@
 package com.eduardoaf.balance.mod_users.infrastructure.controllers;
 
 import javax.servlet.http.HttpServletRequest;
-
+//
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,8 +45,9 @@ public class CreateUserController {
         @RequestBody CreateUserDto createUserDto
     ) {
         try {
-            var jwt = httpRequest.getHeader("Authorization");
-            domainAuthService.tryToLoadAuthUserByJwtOrFail(jwt);
+            //var jwt = httpRequest.getHeaders().get("Authorization").get(0);
+            //var jwt = httpRequest.getHeader("Authorization");
+            //domainAuthService.tryToLoadAuthUserByJwtOrFail(jwt);
 
             createUserDto = CreateUserDto.getInstance(
                 createUserDto.codeErp(),
