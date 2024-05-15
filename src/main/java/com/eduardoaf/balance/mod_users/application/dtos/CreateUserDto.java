@@ -15,7 +15,9 @@ public record CreateUserDto(
     String idNationality,
     String idCountry,
     String idLanguage,
-    String idProfile
+    String idProfile,
+    String idAuthUser,
+    String idPlatform
 ) {
     public static CreateUserDto getInstance(
         String codeErp,
@@ -30,7 +32,9 @@ public record CreateUserDto(
         String idNationality,
         String idCountry,
         String idLanguage,
-        String idProfile
+        String idProfile,
+        String idAuthUser,
+        String idPlatform
     ) {
         StringFormatter stringFormatter = StringFormatter.getInstance();
         return new CreateUserDto(
@@ -46,7 +50,9 @@ public record CreateUserDto(
             stringFormatter.getTrimOrNull(idNationality),
             stringFormatter.getTrimOrNull(idCountry),
             stringFormatter.getTrimOrNull(idLanguage),
-            stringFormatter.getTrimOrNull(idProfile)
+            stringFormatter.getTrimOrNull(idProfile),
+            stringFormatter.getTrimOrNull(idAuthUser),
+            stringFormatter.getTrimOrNull(idPlatform)
         );
     }
 }

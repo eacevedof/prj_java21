@@ -62,7 +62,9 @@ public class CreateUserController {
                 createUserDto.idNationality(),
                 createUserDto.idCountry(),
                 createUserDto.idLanguage(),
-                createUserDto.idProfile()
+                createUserDto.idProfile(),
+                domainAuthService.getAuthUser().getId().toString(),
+                "1"
             );
             var createdUserDto = createUserService.invoke(createUserDto);
             return httpResponse.getResponse201("User created", createdUserDto);

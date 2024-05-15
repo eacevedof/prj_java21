@@ -30,6 +30,7 @@ public class BaseUserEntity extends AbstractEntity {
     private final String dateValidated;
     private final Integer logAttempts;
 
+
     public BaseUserEntity(
         Integer id,
         String uuid,
@@ -51,7 +52,9 @@ public class BaseUserEntity extends AbstractEntity {
 
         String urlPicture,
         String dateValidated,
-        Integer logAttempts
+        Integer logAttempts,
+        String insertUser,
+        String insertPlatform
     ) {
         this.id = id;
         this.uuid = uuid;
@@ -72,6 +75,8 @@ public class BaseUserEntity extends AbstractEntity {
         this.urlPicture = urlPicture;
         this.dateValidated = dateValidated;
         this.logAttempts = logAttempts;
+        this.insertUser = insertUser;
+        this.insertPlatform = insertPlatform;
     }
 
     public static BaseUserEntity fromMapRow(Map<String, String> mapRow) {
@@ -97,12 +102,13 @@ public class BaseUserEntity extends AbstractEntity {
             numberFormatter.getIntegerOrNull(mapRow.get("id_profile")),
             stringFormatter.getTrimOrNull(mapRow.get("url_picture")),
             stringFormatter.getTrimOrNull(mapRow.get("date_validated")),
-            numberFormatter.getIntegerOrNull(mapRow.get("log_attempts"))
+            numberFormatter.getIntegerOrNull(mapRow.get("log_attempts")),
+            stringFormatter.getTrimOrNull(mapRow.get("insert_user")),
+            stringFormatter.getTrimOrNull(mapRow.get("insert_platform"))
         );
         loadParentByMapRow(baseUserEntity, mapRow);
         return baseUserEntity;
     }
-
 
     public static BaseUserEntity fromStrings(
         String id,
@@ -125,7 +131,9 @@ public class BaseUserEntity extends AbstractEntity {
 
         String urlPicture,
         String dateValidated,
-        String logAttempts
+        String logAttempts,
+        String insertUser,
+        String insertPlatform
     ) {
         StringFormatter stringFormatter = new StringFormatter();
         NumberFormatter numberFormatter = new NumberFormatter();
@@ -148,7 +156,9 @@ public class BaseUserEntity extends AbstractEntity {
             numberFormatter.getIntegerOrNull(idProfile),
             stringFormatter.getTrimOrNull(urlPicture),
             stringFormatter.getTrimOrNull(dateValidated),
-            numberFormatter.getIntegerOrNull(logAttempts)
+            numberFormatter.getIntegerOrNull(logAttempts),
+            stringFormatter.getTrimOrNull(insertUser),
+            stringFormatter.getTrimOrNull(insertPlatform)
         );
     }
 }

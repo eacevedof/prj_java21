@@ -46,7 +46,9 @@ public final class CreateUserService {
         this.numberFormatter = numberFormatter;
     }
 
-    public CreatedUserDto invoke(CreateUserDto createUserDto) throws Exception {
+    public CreatedUserDto invoke(
+        CreateUserDto createUserDto
+    ) throws Exception {
         createUserValidator.invoke(createUserDto);
 
         String password = "Abc.1234:)";
@@ -72,7 +74,9 @@ public final class CreateUserService {
             stringFormatter.getTrimOrDefault(createUserDto.idProfile(), "1"),
             stringFormatter.getNull(),
             stringFormatter.getNull(),
-            stringFormatter.getNull()
+            stringFormatter.getNull(),
+            createUserDto.idAuthUser(),
+            createUserDto.idPlatform()
         );
         sysUserWriterRepository.createNewUser(newUserEntity);
         Integer lastId = sysUserWriterRepository.getLastInsertId();
@@ -82,6 +86,8 @@ public final class CreateUserService {
             log.debug("not found by id:"+lastId);
             return null;
         }
-        return CreatedUserDto.fromBaseUserEntity(baseUserEntity);
+        return CreatedUserDto.fromBaseUserEntity(
+            baseUserEntity
+        );
     }
 }
