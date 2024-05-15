@@ -51,7 +51,7 @@ public class UpdateQuery {
         }
 
         StringBuilder sqlUpdate = new StringBuilder()
-                .append("/*").append(comment).append("*/")
+                .append("/*").append(comment).append("*/\n")
                 .append("UPDATE ")
                 .append(updateTable)
                 .append(" SET ");
