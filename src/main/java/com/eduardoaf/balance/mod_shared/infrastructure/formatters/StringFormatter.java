@@ -29,6 +29,14 @@ public final class StringFormatter {
         return anyString.trim();
     }
 
+    public String getTrimOrDefault(String anyString, String defaultValue) {
+        if (anyString == null)
+            return defaultValue;
+        if (anyString.isEmpty() || anyString.isBlank())
+            return defaultValue;
+        return anyString.trim();
+    }
+
     public String getAlwaysString(String anyString) {
         if (anyString == null)
             return "";

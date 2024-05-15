@@ -57,7 +57,7 @@ public final class BaseUserReaderRepository extends AbstractMysqlRepository {
         log.debug(sql);
         var list = query(sql);
         if (list.isEmpty()) return null;
-        return BaseUserEntity.getInstanceByMapRow(
+        return BaseUserEntity.fromMapRow(
                 list.getFirst()
         );
     }

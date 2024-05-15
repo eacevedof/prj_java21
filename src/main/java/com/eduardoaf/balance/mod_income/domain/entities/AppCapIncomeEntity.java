@@ -52,14 +52,14 @@ public final class AppCapIncomeEntity extends AbstractEntity {
         AppCapIncomeEntity capIncomeEntity = new AppCapIncomeEntity(
             numberFormatter.getIntegerOrNull(mapRow.get("id")),
             stringFormatter.getTrimOrNull(mapRow.get("uuid")),
-            stringFormatter.getTrimOrNull(mapRow.get("codeErp")),
+            stringFormatter.getTrimOrNull(mapRow.get("code_erp")),
             stringFormatter.getTrimOrNull(mapRow.get("description")),
-            stringFormatter.getTrimOrNull(mapRow.get("paymentFor")),
-            stringFormatter.getTrimOrNull(mapRow.get("payedFrom")),
-            stringFormatter.getTrimOrNull(mapRow.get("incomeDate")),
+            stringFormatter.getTrimOrNull(mapRow.get("payment_for")),
+            stringFormatter.getTrimOrNull(mapRow.get("payed_from")),
+            stringFormatter.getTrimOrNull(mapRow.get("income_date")),
             numberFormatter.getDoubleOrNull(mapRow.get("amount")),
             stringFormatter.getTrimOrNull(mapRow.get("notes")),
-            numberFormatter.getIntegerOrNull(mapRow.get("idOwner"))
+            numberFormatter.getIntegerOrNull(mapRow.get("id_owner"))
         );
         loadParentByMapRow(capIncomeEntity, mapRow);
         return capIncomeEntity;

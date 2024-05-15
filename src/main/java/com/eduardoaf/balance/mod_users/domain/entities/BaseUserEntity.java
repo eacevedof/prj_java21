@@ -74,7 +74,7 @@ public class BaseUserEntity extends AbstractEntity {
         this.logAttempts = logAttempts;
     }
 
-    public static BaseUserEntity getInstanceByMapRow(Map<String, String> mapRow) {
+    public static BaseUserEntity fromMapRow(Map<String, String> mapRow) {
         StringFormatter stringFormatter = new StringFormatter();
         NumberFormatter numberFormatter = new NumberFormatter();
 
@@ -104,51 +104,51 @@ public class BaseUserEntity extends AbstractEntity {
     }
 
 
-    public static BaseUserEntity getInstance(
-            Integer id,
-            String uuid,
-            String codeErp,
-            String description,
-            String email,
-            String secret,
-            String phone,
-            String fullname,
-            String address,
-            String birthdate,
+    public static BaseUserEntity fromStrings(
+        String id,
+        String uuid,
+        String codeErp,
+        String description,
+        String email,
+        String secret,
+        String phone,
+        String fullname,
+        String address,
+        String birthdate,
 
-            Integer idParent,
-            Integer idGender,
-            Integer idNationality,
-            Integer idCountry,
-            Integer idLanguage,
-            Integer idProfile,
+        String idParent,
+        String idGender,
+        String idNationality,
+        String idCountry,
+        String idLanguage,
+        String idProfile,
 
-            String urlPicture,
-            String dateValidated,
-            Integer logAttempts
+        String urlPicture,
+        String dateValidated,
+        String logAttempts
     ) {
+        StringFormatter stringFormatter = new StringFormatter();
+        NumberFormatter numberFormatter = new NumberFormatter();
         return new BaseUserEntity(
-                id,
-                uuid == null ? "" : uuid.trim(),
-                codeErp == null ? "" : codeErp.trim(),
-                description == null ? "" : description.trim(),
-                email == null ? "" : email.trim(),
-                secret == null ? "" : secret.trim(),
-                phone == null ? "" : phone.trim(),
-                fullname == null ? "" : fullname.trim(),
-                address == null ? "" : address.trim(),
-                birthdate,
-
-                idParent,
-                idGender,
-                idNationality,
-                idCountry,
-                idLanguage,
-                idProfile,
-
-                urlPicture == null ? "" : urlPicture.trim(),
-                dateValidated,
-                logAttempts
+            numberFormatter.getIntegerOrNull(id),
+            stringFormatter.getTrimOrNull(uuid),
+            stringFormatter.getTrimOrNull(codeErp),
+            stringFormatter.getTrimOrNull(description),
+            stringFormatter.getTrimOrNull(email),
+            stringFormatter.getTrimOrNull(secret),
+            stringFormatter.getTrimOrNull(phone),
+            stringFormatter.getTrimOrNull(fullname),
+            stringFormatter.getTrimOrNull(address),
+            stringFormatter.getTrimOrNull(birthdate),
+            numberFormatter.getIntegerOrNull(idParent),
+            numberFormatter.getIntegerOrNull(idGender),
+            numberFormatter.getIntegerOrNull(idNationality),
+            numberFormatter.getIntegerOrNull(idCountry),
+            numberFormatter.getIntegerOrNull(idLanguage),
+            numberFormatter.getIntegerOrNull(idProfile),
+            stringFormatter.getTrimOrNull(urlPicture),
+            stringFormatter.getTrimOrNull(dateValidated),
+            numberFormatter.getIntegerOrNull(logAttempts)
         );
     }
 }
