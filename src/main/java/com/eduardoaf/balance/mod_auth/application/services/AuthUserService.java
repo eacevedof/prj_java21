@@ -47,7 +47,6 @@ public final class AuthUserService {
     public AuthedUserDto invoke(AuthUserDto authUserDto) throws Exception {
         authUserValidator.invoke(authUserDto);
 
-        String password = "Abc.1234:)";
         String hashedPassword = passwordFormatter.getHashedPassword(password);
         var newAuthUserEntity = SysUserEntity.getInstance(
             numberFormatter.getNull(),

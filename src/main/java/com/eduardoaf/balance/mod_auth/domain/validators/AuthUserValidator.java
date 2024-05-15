@@ -30,23 +30,14 @@ public final class AuthUserValidator extends AbstractDomainValidator {
 
     public void invoke(AuthUserDto authUserDto) throws Exception{
         this.authUserDto = authUserDto;
-        failIfWrongEmail();
 
-        //failIfWrongIdLanguage();
-        //failIfWrongIdProfile();
+        failIfWrongUsername();
         failIfUserExists();
     }
 
-    private void failIfUserExists() throws Exception {
-        var userId = sysUserReaderRepository.doesUserExistByEmail(authUserDto.email());
-        if (userId == null) return;
-        var uuid = sysUserReaderRepository.getUuidByUserId(userId);
-        AuthUserException.userAlreadyExists(uuid);
-    }
-
-    private void failIfWrongEmail() throws Exception {
+    private void failIfWrongUsername() throws Exception {
         var label = "Email";
-        var value = authUserDto.email();
+        var value = authUserDto.username();
         if (!isTypeString(value))
             DomainTypeException.valueIsNotString(label, value);
 
@@ -55,34 +46,19 @@ public final class AuthUserValidator extends AbstractDomainValidator {
 
         var length = LengthsEnum.EMAIL.value();
         if (isValueLenGreaterThan(value, length))
-            DomainValueException.wrongMaxLength(label, value, length);
-
-        if (!isValueEmail(value))
-            DomainValueException.wrongEmailFormat(label, value, "username@domain.xxx");
+            AuthUserException.wrongAccountOrPassword("U001");
 
         var userId = sysUserReaderRepository.getUserIdByEmail(value);
+        if (userId == null)
+            AuthUserException.wrongAccountOrPassword("U002");
+    }
+
+
+    private void failIfUserExists() throws Exception {
+        var userId = sysUserReaderRepository.doesUserExistByEmail(authUserDto.username());
         if (userId == null) return;
-
-        AuthUserException.userAlreadyExists(value);
+        var uuid = sysUserReaderRepository.getUuidByUserId(userId);
+        AuthUserException.wrongAccountOrPassword(uuid);
     }
 
-    private void failIfWrongIdLanguage() throws DomainTypeException, DomainValueException {
-        var label = "Language ID";
-        var value = authUserDto.idLanguage();
-        if (!isTypeInteger(value))
-            DomainTypeException.valueIsNotNumeric(label, value);
-
-        if (isValueLowerThan(value, 0))
-            DomainValueException.valueIsLowerThanMinimum(label, value, 0);
-    }
-
-    private void failIfWrongIdProfile() throws DomainTypeException, DomainValueException {
-        var label = "Profile ID";
-        var value = authUserDto.idProfile();
-        if (!isTypeNumeric(value))
-            DomainTypeException.valueIsNotNumeric(label, value);
-
-        if (isValueLowerThan(value, 0))
-            DomainValueException.valueIsLowerThanMinimum(label, value, 0);
-    }
 }
