@@ -1,17 +1,21 @@
 package com.eduardoaf.balance.mod_auth.infrastructure.controllers;
 
-import com.eduardoaf.balance.mod_auth.application.dtos.AuthUserDto;
-import com.eduardoaf.balance.mod_auth.application.services.AuthUserService;
-import com.eduardoaf.balance.mod_auth.domain.exceptions.AuthUserException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+
 import com.eduardoaf.balance.mod_shared.domain.exceptions.DomainTypeException;
 import com.eduardoaf.balance.mod_shared.domain.exceptions.DomainValueException;
 import com.eduardoaf.balance.mod_shared.infrastructure.file.Log;
 import com.eduardoaf.balance.mod_shared.infrastructure.http.responses.HttpResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.eduardoaf.balance.mod_shared.infrastructure.enums.NokMessageEnum;
+
+import com.eduardoaf.balance.mod_auth.application.dtos.AuthUserDto;
+import com.eduardoaf.balance.mod_auth.application.services.AuthUserService;
+import com.eduardoaf.balance.mod_auth.domain.exceptions.AuthUserException;
+import com.eduardoaf.balance.mod_auth.infrastructure.enums.AuthOkMessages;
 
 @RestController
 public class AuthUserController {
@@ -39,14 +43,16 @@ public class AuthUserController {
                 authUserDto.password()
             );
             var createdUserDto = authUserService.invoke(authUserDto);
-            return httpResponse.getResponse201("User logged", createdUserDto);
+            return httpResponse.getResponse201(AuthOkMessages.USER_SUCCESSFULLY_AUTHENTICATED, createdUserDto);
         }
         catch (DomainTypeException | DomainValueException | AuthUserException e) {
             return httpResponse.getResponse400(e.getMessage());
         }
         catch (Exception e) {
             log.exception(e);
-            return httpResponse.getResponse500("some unexpected error occurred");
+            return httpResponse.getResponse500(
+                NokMessageEnum.UNEXPECTED_ERROR_OCCURRED.getValue()
+            );
         }
     }
 }
