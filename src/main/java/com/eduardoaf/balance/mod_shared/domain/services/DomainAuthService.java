@@ -27,6 +27,9 @@ public class DomainAuthService {
         String jwtToken
     ) throws Exception {
         DomainAuthService.baseUserEntity = null;
+        if (jwtToken == null) {
+            AuthUserException.unauthorizedUser(jwtToken);
+        }
         var username = jwtHelper.getUsernameByJwt(jwtToken);
         Integer userId = sysUserReaderRepository.getUserIdByEmail(username);
         if (userId == null) {

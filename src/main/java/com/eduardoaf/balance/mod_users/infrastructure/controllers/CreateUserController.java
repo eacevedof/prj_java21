@@ -1,7 +1,7 @@
 package com.eduardoaf.balance.mod_users.infrastructure.controllers;
 
-import javax.servlet.http.HttpServletRequest;
-//
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.eduardoaf.balance.mod_shared.infrastructure.file.Log;
 import com.eduardoaf.balance.mod_shared.infrastructure.http.responses.HttpResponse;
+import com.eduardoaf.balance.mod_shared.domain.exceptions.AbstractDomainException;
 import com.eduardoaf.balance.mod_shared.domain.exceptions.DomainTypeException;
 import com.eduardoaf.balance.mod_shared.domain.exceptions.DomainValueException;
 import com.eduardoaf.balance.mod_shared.domain.services.DomainAuthService;
@@ -45,9 +46,8 @@ public class CreateUserController {
         @RequestBody CreateUserDto createUserDto
     ) {
         try {
-            //var jwt = httpRequest.getHeaders().get("Authorization").get(0);
-            //var jwt = httpRequest.getHeader("Authorization");
-            //domainAuthService.tryToLoadAuthUserByJwtOrFail(jwt);
+            var jwt = httpRequest.getHeader("Authorization");
+            domainAuthService.tryToLoadAuthUserByJwtOrFail(jwt);
 
             createUserDto = CreateUserDto.getInstance(
                 createUserDto.codeErp(),
@@ -67,7 +67,7 @@ public class CreateUserController {
             var createdUserDto = createUserService.invoke(createUserDto);
             return httpResponse.getResponse201("User created", createdUserDto);
         }
-        catch (DomainTypeException | DomainValueException | CreateUserException e) {
+        catch (AbstractDomainException | DomainTypeException | DomainValueException | CreateUserException e) {
             return httpResponse.getResponse400(e.getMessage());
         }
         catch (Exception e) {
