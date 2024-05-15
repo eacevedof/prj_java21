@@ -48,8 +48,8 @@ public class AuthUserController {
             );
             var createdUserDto = authUserService.invoke(authUserDto);
             return httpResponse.getResponse201(
-                    AuthOkMessage.USER_SUCCESSFULLY_AUTHENTICATED.getValue(),
-                    createdUserDto
+                AuthOkMessage.USER_SUCCESSFULLY_AUTHENTICATED.getValue(),
+                createdUserDto
             );
         }
         catch (DomainTypeException | DomainValueException | AuthUserException e) {
