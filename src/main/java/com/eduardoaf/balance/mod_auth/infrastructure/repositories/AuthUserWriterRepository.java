@@ -41,4 +41,34 @@ public final class AuthUserWriterRepository extends AbstractMysqlRepository {
         log.debug(sql, "updateUserLogged");
         this.execute(sql);
     }
+
+    public void updateLogAttemptByEmail(AuthUserEntity authUserEntity) throws Exception {
+        var totalAttempts = getTotalAttemptsByEmail(
+            authUserEntity.getEmail()
+        );
+        var sql = UpdateQuery.getInstance("base_user")
+                .addColumn("update_platform", authUserEntity.getInsertPlatform())
+                .addColumn("update_user", authUserEntity.getInsertUser())
+                .addColumn("update_date", dateFormatter.getNow())
+                .addColumn("log_attempts", totalAttempts)
+                .where("email", authUserEntity.getEmail())
+                .getQuery();
+        log.debug(sql, "updateUserLogged");
+        this.execute(sql);
+    }
+
+    private Integer getTotalAttemptsByEmail(String email) throws Exception {
+        var sql = String.format("""
+        -- getTotalAttemptsByEmail
+        SELECT log_attempts
+        FROM base_user
+        WHERE 1=1
+        AND delete_date IS NULL
+        AND email = '%s'
+        """, email);
+        log.debug(sql);
+        var list = query(sql);
+        if (list.isEmpty()) return 0;
+        return Integer.parseInt(list.getFirst().get("log_attempts"));
+    }
 }

@@ -62,26 +62,29 @@ public final class AuthUserService {
 
         var users = authUserReaderRepository.getUsersCredentialsByEmail(authUserDto.username());
         if (users.isEmpty()) {
-            log.debug("not found by email:"+authUserDto.username());
+            log.debug("not found by email: "+authUserDto.username());
             return null;
         }
 
         var userMap = users.getFirst();
-        String hashedPassword = stringFormatter.getAlwaysString(userMap.get("secret"));
+        //esta entidad debe crearse con los datos del dto platform
+        var authUserEntity = AuthUserEntity.fromMapRow(userMap);
+        String hashedPassword = stringFormatter.getAlwaysString(authUserEntity.getSecret());
+
         if (!passwordFormatter.isPasswordValid(authUserDto.password(), hashedPassword)) {
-            //update attempt
+            authUserWriterRepository.updateLogAttemptByEmail(authUserEntity);
             AuthUserException.wrongAccountOrPassword("US006");
         }
 
         authUserId = numberFormatter.getIntegerOrNull(userMap.get("id"));
         userMap = authUserReaderRepository.getUserByUserId(authUserId);
-        var newAuthUserEntity = AuthUserEntity.fromMapRow(userMap);
+        authUserEntity = AuthUserEntity.fromMapRow(userMap);
 
-        authUserWriterRepository.updateUserLogged(newAuthUserEntity);
-        var jwtToken = jwtHelper.generateToken(newAuthUserEntity.getEmail());
+        authUserWriterRepository.updateUserLogged(authUserEntity);
+        var jwtToken = jwtHelper.generateToken(authUserEntity.getEmail());
 
         return AuthedUserDto.fromAuthUserEntityAndJwt(
-            newAuthUserEntity,
+                authUserEntity,
             jwtToken
         );
     }
