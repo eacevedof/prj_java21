@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -75,12 +76,12 @@ public final class AuthUserReaderRepository extends AbstractMysqlRepository {
         return list.getFirst().get("uuid");
     }
 
-    public Integer getUserIdByEmail(String email) throws Exception {
+    public List<Map<String, String>> getUsersCredentialsByEmail(String email) throws Exception {
         email = sanitizeQuery.getOnlyValueSanitized(email);
 
         String sql = String.format("""
         -- getUserIdByEmail
-        SELECT id
+        SELECT id, email, secret
         FROM base_user
         WHERE 1=1
         AND delete_date IS NULL
@@ -88,7 +89,8 @@ public final class AuthUserReaderRepository extends AbstractMysqlRepository {
         """, email);
         log.debug(sql);
         var list = query(sql);
-        if (list.isEmpty()) return null;
-        return getAsInt(list.getFirst().get("id"));
+        if (list.isEmpty())
+            return Collections.emptyList();
+        return list;
     }
 }

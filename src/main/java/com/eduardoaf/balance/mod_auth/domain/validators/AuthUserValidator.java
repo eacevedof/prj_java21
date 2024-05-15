@@ -48,7 +48,7 @@ public final class AuthUserValidator extends AbstractDomainValidator {
         if (isValueLenGreaterThan(value, length))
             AuthUserException.wrongAccountOrPassword("U001");
 
-        var userId = sysUserReaderRepository.getUserIdByEmail(value);
+        var userId = sysUserReaderRepository.getUsersCredentialsByEmail(value);
         if (userId == null)
             AuthUserException.wrongAccountOrPassword("U002");
     }
