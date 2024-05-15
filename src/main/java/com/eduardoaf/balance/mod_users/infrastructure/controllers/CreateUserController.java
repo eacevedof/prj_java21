@@ -41,7 +41,7 @@ public class CreateUserController {
     }
 
     @PostMapping(value = "api/v1/user/create", consumes = {"application/json"})
-    public ResponseEntity<?> createUser(
+    public ResponseEntity<?> invoke(
         HttpServletRequest httpRequest,
         @RequestBody CreateUserDto createUserDto
     ) {

@@ -1,16 +1,20 @@
 package com.eduardoaf.balance.mod_income.infrastructure.controllers;
 
-import com.eduardoaf.balance.mod_shared.infrastructure.formatters.StringFormatter;
+
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 
+import com.eduardoaf.balance.mod_shared.domain.exceptions.AbstractDomainException;
+import com.eduardoaf.balance.mod_shared.domain.services.DomainAuthService;
 import com.eduardoaf.balance.mod_shared.domain.exceptions.DomainTypeException;
 import com.eduardoaf.balance.mod_shared.domain.exceptions.DomainValueException;
 import com.eduardoaf.balance.mod_shared.infrastructure.file.Log;
 import com.eduardoaf.balance.mod_shared.infrastructure.http.responses.HttpResponse;
+
 import com.eduardoaf.balance.mod_income.domain.exceptions.CreateIncomeException;
 import com.eduardoaf.balance.mod_income.application.dtos.CreateIncomeDto;
 import com.eduardoaf.balance.mod_income.application.services.CreateIncomeService;
@@ -19,26 +23,32 @@ import com.eduardoaf.balance.mod_income.application.services.CreateIncomeService
 public final class CreateIncomeController {
 
     private final Log log;
+    private final DomainAuthService domainAuthService;
     private final CreateIncomeService createIncomeService;
     private final HttpResponse httpResponse;
-    private final StringFormatter stringFormatter;
 
     @Autowired
     public CreateIncomeController(
         Log log,
-        StringFormatter stringFormatter,
+        DomainAuthService domainAuthService,
         CreateIncomeService createIncomeService,
         HttpResponse httpResponse
     ) {
         this.log = log;
-        this.stringFormatter = stringFormatter;
+        this.domainAuthService = domainAuthService;
         this.createIncomeService = createIncomeService;
         this.httpResponse = httpResponse;
     }
 
     @PostMapping(value = "api/v1/income/create", consumes = {"application/json"})
-    public ResponseEntity<?> invoke(@RequestBody CreateIncomeDto createIncomeDto) {
+    public ResponseEntity<?> invoke(
+        HttpServletRequest httpRequest,
+        @RequestBody CreateIncomeDto createIncomeDto
+    ) {
         try {
+            var jwt = httpRequest.getHeader("Authorization");
+            domainAuthService.tryToLoadAuthUserByJwtOrFail(jwt);
+
             createIncomeDto = CreateIncomeDto.getInstance(
                 createIncomeDto.codeErp(),
                 createIncomeDto.description(),
@@ -52,7 +62,7 @@ public final class CreateIncomeController {
             var createdIncomeDto = createIncomeService.invoke(createIncomeDto);
             return httpResponse.getResponse201("entity created", createdIncomeDto);
         }
-        catch (DomainTypeException | DomainValueException | CreateIncomeException e) {
+        catch (AbstractDomainException | DomainTypeException | DomainValueException | CreateIncomeException e) {
             return httpResponse.getResponse400(e.getMessage());
         }
         catch (Exception e) {
