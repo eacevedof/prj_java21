@@ -3,7 +3,11 @@ package com.eduardoaf.balance.mod_auth.domain.enums;
 public enum AuthNokMessage {
     WRONG_ACCOUNT_OR_PASSWORD(
     "Wrong user or email: %s"
-    );
+    ),
+    UNAUTHORIZED(
+    "Unauthorized: %s"
+    )
+    ;
 
     private final String messageKey;
 

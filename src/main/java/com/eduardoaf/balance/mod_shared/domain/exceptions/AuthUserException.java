@@ -14,7 +14,7 @@ public final class AuthUserException extends AbstractDomainException {
     ) throws AuthUserException {
         throw new AuthUserException(
             String.format(
-                AuthNokMessage.WRONG_ACCOUNT_OR_PASSWORD.getValue(),
+                AuthNokMessage.UNAUTHORIZED.getValue(),
                 jwtToken
             ),
             HttpStatusCodeEnum.UNAUTHORIZED.getValue()
