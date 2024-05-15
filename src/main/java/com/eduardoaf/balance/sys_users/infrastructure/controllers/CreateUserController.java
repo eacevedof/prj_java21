@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 
 import com.eduardoaf.balance.shared.infrastructure.file.Log;
+import com.eduardoaf.balance.shared.infrastructure.http.responses.HttpResponse;
 import com.eduardoaf.balance.shared.domain.exceptions.DomainTypeException;
 import com.eduardoaf.balance.shared.domain.exceptions.DomainValueException;
-import com.eduardoaf.balance.shared.infrastructure.http.responses.HttpResponse;
 import com.eduardoaf.balance.sys_users.application.dtos.CreateUserDto;
 import com.eduardoaf.balance.sys_users.application.services.CreateUserService;
 import com.eduardoaf.balance.sys_users.domain.exceptions.CreateUserException;
@@ -51,7 +51,7 @@ public class CreateUserController {
                 createUserDto.idProfile()
             );
             var createdUserDto = createUserService.invoke(createUserDto);
-            return httpResponse.getResponse201("entity created", createdUserDto);
+            return httpResponse.getResponse201("User created", createdUserDto);
         }
         catch (DomainTypeException | DomainValueException | CreateUserException e) {
             return httpResponse.getResponse400(e.getMessage());
