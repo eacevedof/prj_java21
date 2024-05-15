@@ -57,7 +57,7 @@ public class DomainAuthService {
         if (baseUserEntity.getDeleteDate() != null && !baseUserEntity.getDeleteDate().isEmpty())
             AuthUserException.unauthorizedUser("deleted user");
 
-        if (baseUserEntity.getIsEnabled() == "0")
+        if (baseUserEntity.getIsEnabled().equals("0"))
             AuthUserException.unauthorizedUser( "disabled user");
     }
 
