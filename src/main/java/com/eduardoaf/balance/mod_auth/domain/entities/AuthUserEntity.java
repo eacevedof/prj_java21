@@ -76,7 +76,9 @@ public final class AuthUserEntity extends AbstractEntity {
         );
     }
 
-    public static AuthUserEntity fromMapRow(Map<String, String> mapRow) {
+    public static AuthUserEntity fromMapRow(
+        Map<String, String> mapRow
+    ) {
         StringFormatter stringFormatter = StringFormatter.getInstance();
         NumberFormatter numberFormatter = NumberFormatter.getInstance();
 

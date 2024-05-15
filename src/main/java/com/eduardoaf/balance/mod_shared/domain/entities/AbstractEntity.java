@@ -26,6 +26,7 @@ public abstract class AbstractEntity {
     protected String isEnabled;
     protected Integer i;
     protected Integer id;
+    protected String description;
 
     protected static void loadParentByMapRow(
         AbstractEntity abstractEntity,
@@ -49,6 +50,7 @@ public abstract class AbstractEntity {
         abstractEntity.isEnabled =  stringFormatter.getTrimOrNull(mapRow.get("is_enabled"));
         abstractEntity.i =  numberFormatter.getIntegerOrNull(mapRow.get("i"));
         abstractEntity.id =  numberFormatter.getIntegerOrNull(mapRow.get("id"));
+        abstractEntity.description =  stringFormatter.getTrimOrNull(mapRow.get("description"));
     }
 
 }
