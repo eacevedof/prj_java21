@@ -84,7 +84,7 @@ public final class AuthUserService {
         var jwtToken = jwtHelper.generateToken(authUserEntity.getEmail());
 
         return AuthedUserDto.fromAuthUserEntityAndJwt(
-                authUserEntity,
+            authUserEntity,
             jwtToken
         );
     }
