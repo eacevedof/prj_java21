@@ -71,4 +71,14 @@ public class DomainAuthService {
     public BaseUserEntity getAuthUser() {
         return DomainAuthService.baseUserEntity;
     }
+
+    public Integer getIntegerAuthUserId() {
+        return DomainAuthService.baseUserEntity.getId();
+    }
+
+    public String getStringAuthUserId() {
+        if (DomainAuthService.baseUserEntity.getId() == null)
+            return null;
+        return DomainAuthService.baseUserEntity.getId().toString();
+    }
 }
