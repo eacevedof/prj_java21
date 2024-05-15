@@ -11,14 +11,14 @@ import java.util.Collections;
 import java.util.Map;
 
 @Component
-public final class SysUserReaderRepository extends AbstractMysqlRepository {
+public final class AuthUserReaderRepository extends AbstractMysqlRepository {
 
     private final Log log;
     private final SanitizeQuery sanitizeQuery;
     private final NumberFormatter numberFormatter;
 
     @Autowired
-    public SysUserReaderRepository (
+    public AuthUserReaderRepository(
             Log log,
             SanitizeQuery sanitizeQuery,
             NumberFormatter numberFormatter

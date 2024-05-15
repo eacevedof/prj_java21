@@ -10,14 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public final class SysUserWriterRepository extends AbstractMysqlRepository {
+public final class AuthUserWriterRepository extends AbstractMysqlRepository {
 
     private final Log log;
     private final DateFormatter dateFormatter;
     private final UuidFormatter uuid;
 
     @Autowired
-    public SysUserWriterRepository(
+    public AuthUserWriterRepository(
             Log log,
             DateFormatter dateFormatter,
             UuidFormatter uuid

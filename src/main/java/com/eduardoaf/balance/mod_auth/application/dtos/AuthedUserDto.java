@@ -2,7 +2,7 @@ package com.eduardoaf.balance.mod_auth.application.dtos;
 
 import com.eduardoaf.balance.mod_shared.infrastructure.formatters.StringFormatter;
 
-public record AuthdUserDto(
+public record AuthedUserDto(
     Integer id,
     String uuid,
     String codeErp,
@@ -24,7 +24,7 @@ public record AuthdUserDto(
     Integer logAttempts
 ) {
 
-    public static AuthdUserDto getInstance(
+    public static AuthedUserDto getInstance(
         Integer id,
         String uuid,
         String codeErp,
@@ -46,7 +46,7 @@ public record AuthdUserDto(
         Integer logAttempts
     ) {
         var stringFormatter = StringFormatter.getInstance();
-        return new AuthdUserDto(
+        return new AuthedUserDto(
             id,
 
             stringFormatter.getTrimOrNull(uuid),

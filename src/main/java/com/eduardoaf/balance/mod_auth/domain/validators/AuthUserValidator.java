@@ -2,7 +2,7 @@ package com.eduardoaf.balance.mod_auth.domain.validators;
 
 import com.eduardoaf.balance.mod_auth.application.dtos.AuthUserDto;
 import com.eduardoaf.balance.mod_auth.domain.exceptions.AuthUserException;
-import com.eduardoaf.balance.mod_auth.infrastructure.repositories.SysUserReaderRepository;
+import com.eduardoaf.balance.mod_auth.infrastructure.repositories.AuthUserReaderRepository;
 import com.eduardoaf.balance.mod_shared.domain.enums.LengthsEnum;
 import com.eduardoaf.balance.mod_shared.domain.exceptions.DomainTypeException;
 import com.eduardoaf.balance.mod_shared.domain.exceptions.DomainValueException;
@@ -15,14 +15,14 @@ import org.springframework.stereotype.Service;
 public final class AuthUserValidator extends AbstractDomainValidator {
 
     private final NumberFormatter numberFormatter;
-    private final SysUserReaderRepository sysUserReaderRepository;
+    private final AuthUserReaderRepository sysUserReaderRepository;
     private AuthUserDto createUserDto;
 
     @Autowired
     public AuthUserValidator
     (
         NumberFormatter numberFormatter,
-        SysUserReaderRepository sysUserReaderRepository
+        AuthUserReaderRepository sysUserReaderRepository
     ) {
         this.numberFormatter = numberFormatter;
         this.sysUserReaderRepository = sysUserReaderRepository;

@@ -2,9 +2,9 @@ package com.eduardoaf.balance.mod_auth.application.services;
 
 import com.eduardoaf.balance.mod_auth.application.dtos.AuthUserDto;
 import com.eduardoaf.balance.mod_auth.domain.entities.SysUserEntity;
-import com.eduardoaf.balance.mod_auth.infrastructure.repositories.SysUserReaderRepository;
-import com.eduardoaf.balance.mod_auth.infrastructure.repositories.SysUserWriterRepository;
-import com.eduardoaf.balance.mod_auth.application.dtos.AuthdUserDto;
+import com.eduardoaf.balance.mod_auth.infrastructure.repositories.AuthUserReaderRepository;
+import com.eduardoaf.balance.mod_auth.infrastructure.repositories.AuthUserWriterRepository;
+import com.eduardoaf.balance.mod_auth.application.dtos.AuthedUserDto;
 import com.eduardoaf.balance.mod_auth.domain.validators.AuthUserValidator;
 import com.eduardoaf.balance.mod_shared.infrastructure.file.Log;
 import com.eduardoaf.balance.mod_shared.infrastructure.formatters.NumberFormatter;
@@ -18,8 +18,8 @@ public final class AuthUserService {
 
     private final Log log;
     private final AuthUserValidator createUserValidator;
-    private final SysUserWriterRepository sysUserWriterRepository;
-    private final SysUserReaderRepository sysUserReaderRepository;
+    private final AuthUserWriterRepository sysUserWriterRepository;
+    private final AuthUserReaderRepository sysUserReaderRepository;
     private final PasswordFormatter passwordFormatter;
     private final NumberFormatter numberFormatter;
     private final StringFormatter stringFormatter;
@@ -28,8 +28,8 @@ public final class AuthUserService {
     public AuthUserService
     (
         Log log,
-        SysUserWriterRepository appSysUserWriterRepository,
-        SysUserReaderRepository sysUserReaderRepository,
+        AuthUserWriterRepository appSysUserWriterRepository,
+        AuthUserReaderRepository sysUserReaderRepository,
         AuthUserValidator createUserValidator,
         NumberFormatter numberFormatter,
         StringFormatter stringFormatter,
@@ -44,7 +44,7 @@ public final class AuthUserService {
         this.numberFormatter = numberFormatter;
     }
 
-    public AuthdUserDto invoke(AuthUserDto createUserDto) throws Exception {
+    public AuthedUserDto invoke(AuthUserDto createUserDto) throws Exception {
         createUserValidator.invoke(createUserDto);
 
         String password = "Abc.1234:)";
@@ -81,7 +81,7 @@ public final class AuthUserService {
             return null;
         }
 
-        return AuthdUserDto.getInstance(
+        return AuthedUserDto.getInstance(
             numberFormatter.getIntegerOrNull(dict.get("id")),
 
             stringFormatter.getTrimOrNull(dict.get("uuid")),
