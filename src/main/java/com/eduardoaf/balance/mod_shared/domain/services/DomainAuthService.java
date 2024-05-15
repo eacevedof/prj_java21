@@ -17,8 +17,8 @@ public class DomainAuthService {
     private final JwtHelper jwtHelper;
 
     public DomainAuthService (
-            BaseUserReaderRepository sysUserWriterRepository,
-            JwtHelper jwtHelper
+        BaseUserReaderRepository sysUserWriterRepository,
+        JwtHelper jwtHelper
     ) {
         this.sysUserReaderRepository = sysUserWriterRepository;
         this.jwtHelper = jwtHelper;
