@@ -3,6 +3,7 @@ package com.eduardoaf.balance.mod_users.infrastructure.repositories;
 import java.util.Map;
 import java.util.Collections;
 
+import com.eduardoaf.balance.mod_users.domain.entities.BaseUserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +30,7 @@ public final class BaseUserReaderRepository extends AbstractMysqlRepository {
         this.numberFormatter = numberFormatter;
     }
 
-    public Map<String, String> getUserByUserId(int userId) throws Exception {
+    public Map<String, String> getUserByUserIdxxx(int userId) throws Exception {
         String sql = String.format("""
         -- getUserByUserId
         SELECT * 
@@ -42,6 +43,23 @@ public final class BaseUserReaderRepository extends AbstractMysqlRepository {
         var list = query(sql);
         if (list.isEmpty()) return Collections.emptyMap();
         return list.getFirst();
+    }
+
+    public BaseUserEntity getUserEntityByUserId(Integer userId) throws Exception {
+        String sql = String.format("""
+        -- getUserEntityByUserId
+        SELECT *
+        FROM base_user
+        WHERE 1=1
+        AND delete_date IS NULL
+        AND id = %s
+        """, userId);
+        log.debug(sql);
+        var list = query(sql);
+        if (list.isEmpty()) return null;
+        return BaseUserEntity.getInstanceByMapRow(
+                list.getFirst()
+        );
     }
 
     public Integer doesUserExistByEmail(String email) throws Exception {

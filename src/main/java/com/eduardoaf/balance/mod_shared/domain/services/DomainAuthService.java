@@ -30,7 +30,7 @@ public class DomainAuthService {
         if (userId == null) {
             return;
         }
-        var user = sysUserReaderRepository.getUserByUserId(userId);
+        var user = sysUserReaderRepository.getUserByUserIdxxx(userId);
 
     }
 

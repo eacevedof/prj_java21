@@ -12,7 +12,6 @@ import com.eduardoaf.balance.mod_users.infrastructure.repositories.BaseUserWrite
 import com.eduardoaf.balance.mod_users.application.dtos.CreateUserDto;
 import com.eduardoaf.balance.mod_users.application.dtos.CreatedUserDto;
 import com.eduardoaf.balance.mod_users.domain.validators.CreateUserValidator;
-import com.eduardoaf.balance.mod_users.domain.entities.BaseUserEntity;
 
 @Service
 public final class CreateUserService {
@@ -76,8 +75,8 @@ public final class CreateUserService {
         );
         sysUserWriterRepository.createNewUser(newUserEntity);
         var lastId = sysUserWriterRepository.getLastInsertId();
-        var dict = sysUserReaderRepository.getUserByUserId(lastId);
-        if (dict.isEmpty()) {
+        var baseUserEntity = sysUserReaderRepository.getUserEntityByUserId(lastId);
+        if (baseUserEntity == null) {
             log.debug("not found by id:"+lastId);
             return null;
         }

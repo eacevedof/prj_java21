@@ -1,6 +1,7 @@
 package com.eduardoaf.balance.mod_users.application.dtos;
 
 import com.eduardoaf.balance.mod_shared.infrastructure.formatters.StringFormatter;
+import com.eduardoaf.balance.mod_users.domain.entities.BaseUserEntity;
 
 public record CreatedUserDto(
     Integer id,
@@ -23,6 +24,33 @@ public record CreatedUserDto(
     String dateValidated,
     Integer logAttempts
 ) {
+
+    public static CreatedUserDto fromBaseUserEntity(
+        BaseUserEntity baseUserEntity
+    ) {
+        return new CreatedUserDto(
+            baseUserEntity.id(),
+            baseUserEntity.uuid(),
+            baseUserEntity.codeErp(),
+            baseUserEntity.description(),
+            baseUserEntity.email(),
+            baseUserEntity.secret(),
+            baseUserEntity.phone(),
+            baseUserEntity.fullname(),
+            baseUserEntity.address(),
+            baseUserEntity.birthdate(),
+            baseUserEntity.idParent(),
+            baseUserEntity.idGender(),
+            baseUserEntity.idNationality(),
+            baseUserEntity.idCountry(),
+            baseUserEntity.idLanguage(),
+            baseUserEntity.idProfile(),
+            baseUserEntity.urlPicture(),
+            baseUserEntity.dateValidated(),
+            baseUserEntity.logAttempts()
+        );
+    }
+
 
     public static CreatedUserDto getInstance(
         Integer id,

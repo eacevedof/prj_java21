@@ -6,9 +6,11 @@ import com.eduardoaf.balance.mod_shared.infrastructure.formatters.StringFormatte
 
 import java.util.Map;
 
+import lombok.Getter;
+
+@Getter
 public final class BaseUserEntity extends AbstractEntity {
 
-    public final Integer id;
     public final String uuid;
     public final String codeErp;
     public final String description;
