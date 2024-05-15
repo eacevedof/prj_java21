@@ -40,7 +40,9 @@ public class AuthUserController {
     }
 
     @PostMapping(value = "api/v1/user/auth", consumes = {"application/json"})
-    public ResponseEntity<?> authUser(@RequestBody AuthUserDto authUserDto) {
+    public ResponseEntity<?> authUser(
+        @RequestBody AuthUserDto authUserDto
+    ) {
         try {
             authUserDto = AuthUserDto.getInstance(
                 stringFormatter.getTrimOrNull(authUserDto.username()),
