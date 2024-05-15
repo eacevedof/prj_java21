@@ -54,10 +54,10 @@ public class DomainAuthService {
         if (baseUserEntity == null)
             AuthUserException.unauthorizedUser("not found");
 
-        if (!baseUserEntity.getDeleteDate().isEmpty())
+        if (baseUserEntity.getDeleteDate() != null && !baseUserEntity.getDeleteDate().isEmpty())
             AuthUserException.unauthorizedUser("deleted user");
 
-        if (baseUserEntity.getIsEnabled() != "0")
+        if (baseUserEntity.getIsEnabled() == "0")
             AuthUserException.unauthorizedUser( "disabled user");
     }
 
