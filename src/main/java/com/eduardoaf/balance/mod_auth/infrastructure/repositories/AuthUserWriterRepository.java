@@ -1,20 +1,21 @@
 package com.eduardoaf.balance.mod_auth.infrastructure.repositories;
 
-import com.eduardoaf.balance.mod_auth.domain.entities.AuthUserEntity;
-import com.eduardoaf.balance.mod_shared.infrastructure.db.query_builders.InsertQuery;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.eduardoaf.balance.mod_shared.infrastructure.db.query_builders.UpdateQuery;
 import com.eduardoaf.balance.mod_shared.infrastructure.file.Log;
 import com.eduardoaf.balance.mod_shared.infrastructure.formatters.DateFormatter;
 import com.eduardoaf.balance.mod_shared.infrastructure.formatters.UuidFormatter;
 import com.eduardoaf.balance.mod_shared.infrastructure.repositories.AbstractMysqlRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+
+import com.eduardoaf.balance.mod_auth.domain.entities.AuthUserEntity;
 
 @Component
 public final class AuthUserWriterRepository extends AbstractMysqlRepository {
 
     private final Log log;
     private final DateFormatter dateFormatter;
-    private final UuidFormatter uuid;
 
     @Autowired
     public AuthUserWriterRepository(
@@ -24,34 +25,16 @@ public final class AuthUserWriterRepository extends AbstractMysqlRepository {
     ) {
         this.log = log;
         this.dateFormatter = dateFormatter;
-        this.uuid = uuid;
     }
 
-    public void createNewUser(AuthUserEntity sysUserEntity) throws Exception {
-        var sql = InsertQuery.getInstance("base_user")
-                .addColumn("insert_platform", sysUserEntity.insertPlatform)
-                .addColumn("insert_user", sysUserEntity.insertUser)
-                .addColumn("insert_date", dateFormatter.getNow())
-                .addColumn("uuid", uuid.getUuid("USR", 15))
-                .addColumn("code_erp", sysUserEntity.codeErp)
-                //.addColumn("description", sysUserEntity.description)
-                .addColumn("email", sysUserEntity.email)
-                .addColumn("secret", sysUserEntity.secret)
-                .addColumn("phone", sysUserEntity.phone)
-                .addColumn("fullname", sysUserEntity.fullname)
-                .addColumn("address", sysUserEntity.address)
-                .addColumn("birthdate", sysUserEntity.birthdate)
-                .addColumn("id_parent", sysUserEntity.idParent)
-                .addColumn("id_gender", sysUserEntity.idGender)
-                .addColumn("id_nationality", sysUserEntity.idNationality)
-                .addColumn("id_country", sysUserEntity.idCountry)
-                .addColumn("id_language", sysUserEntity.idLanguage)
-                .addColumn("id_profile", sysUserEntity.idProfile)
-                .addColumn("url_picture", null)
-                .addColumn("date_validated", null)
+    public void updateUserLogged(AuthUserEntity authUserEntity) throws Exception {
+        var sql = UpdateQuery.getInstance("base_user")
+                .addColumn("update_platform", authUserEntity.insertPlatform)
+                .addColumn("update_user", authUserEntity.insertUser)
+                .addColumn("update_date", dateFormatter.getNow())
                 .addColumn("log_attempts", 0)
                 .getQuery();
-        log.debug(sql, "createNewUser");
+        log.debug(sql, "updateUserLogged");
         this.execute(sql);
     }
 }

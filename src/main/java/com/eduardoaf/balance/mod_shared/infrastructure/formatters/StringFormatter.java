@@ -29,7 +29,7 @@ public final class StringFormatter {
         return anyString.trim();
     }
 
-    public String getEmptyIfNull(String anyString) {
+    public String getAlwaysString(String anyString) {
         if (anyString == null)
             return "";
         if (anyString.isEmpty() || anyString.isBlank())

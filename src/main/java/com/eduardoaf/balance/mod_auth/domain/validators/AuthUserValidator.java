@@ -68,7 +68,7 @@ public final class AuthUserValidator extends AbstractDomainValidator {
 
     private void failIfUserIsLocked() throws Exception {
         var user = users.getFirst();
-        String deleteDate = stringFormatter.getEmptyIfNull(user.get("delete_date"));
+        String deleteDate = stringFormatter.getAlwaysString(user.get("delete_date"));
         if (!deleteDate.isEmpty())
             AuthUserException.wrongAccountOrPassword("U004");
         var isEnabled = numberFormatter.getBoolean(user.get("is_enabled"));

@@ -43,6 +43,23 @@ public final class AuthUserEntity extends AbstractEntity {
         this.urlPicture = urlPicture;
     }
 
+    public static AuthUserEntity getInstanceById(
+            Integer id
+    ) {
+        return new AuthUserEntity(
+                id,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+    }
+
     public static AuthUserEntity getInstanceByEmail(
         String email
     ) {
