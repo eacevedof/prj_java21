@@ -31,7 +31,7 @@ public class AuthUserController {
         this.httpResponse = httpResponse;
     }
 
-    @PostMapping(value = "api/v1/user/create", consumes = {"application/json"})
+    @PostMapping(value = "api/v1/user/auth", consumes = {"application/json"})
     public ResponseEntity<?> createUser(@RequestBody AuthUserDto createUserDto) {
         try {
             createUserDto = AuthUserDto.getInstance(
