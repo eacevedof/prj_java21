@@ -1,12 +1,12 @@
 package com.eduardoaf.balance.mod_auth.infrastructure.controllers;
 
-import com.eduardoaf.balance.mod_shared.infrastructure.formatters.StringFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 
+import com.eduardoaf.balance.mod_shared.infrastructure.formatters.StringFormatter;
 import com.eduardoaf.balance.mod_shared.domain.exceptions.DomainTypeException;
 import com.eduardoaf.balance.mod_shared.domain.exceptions.DomainValueException;
 import com.eduardoaf.balance.mod_shared.infrastructure.file.Log;
