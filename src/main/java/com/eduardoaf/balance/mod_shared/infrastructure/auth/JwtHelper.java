@@ -16,43 +16,42 @@ public class JwtHelper {
     @Value("${jwt.secret}")
     private String SECRET_KEY;
 
-    public JwtHelper() {
+    public String generateToken(String username) {
+        return getJwtToken(username);
     }
 
-    public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
+    private String getJwtToken(String subject) {
+        return Jwts.builder()
+                .setSubject(subject)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 hours
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .compact();
     }
 
-    public Date extractExpiration(String token) {
-        return extractClaim(token, Claims::getExpiration);
+    public String extractUsername(String jwtToken) {
+        return extractClaim(jwtToken, Claims::getSubject);
     }
 
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
+    public Date extractExpiration(String jwtToken) {
+        return extractClaim(jwtToken, Claims::getExpiration);
+    }
+
+    private  <T> T extractClaim(String jwtToken, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(jwtToken);
         return claimsResolver.apply(claims);
     }
 
-    private Claims extractAllClaims(String token) {
-        //.parseClaimsJws(token).getBody();
-        return Jwts.parser().setSigningKey(SECRET_KEY).build().parseClaimsJws(token).getBody();
+    private Claims extractAllClaims(String jwtToken) {
+        return Jwts.parser().setSigningKey(SECRET_KEY).build().parseClaimsJws(jwtToken).getBody();
     }
 
     private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
 
-    public String generateToken(String username) {
-        return getJwtToken(username);
-    }
-
-    private String getJwtToken(String subject) {
-        return Jwts.builder().setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 hours
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
-    }
-
-    public Boolean validateToken(String token, String username) {
-        final String extractedUsername = extractUsername(token);
-        return (extractedUsername.equals(username) && !isTokenExpired(token));
+    public Boolean isValidJwtByUsername(String jwtToken, String username) {
+        final String extractedUsername = extractUsername(jwtToken);
+        return (extractedUsername.equals(username) && !isTokenExpired(jwtToken));
     }
 }
