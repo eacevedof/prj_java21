@@ -16,6 +16,9 @@ public class JwtHelper {
     @Value("${jwt.secret}")
     private String SECRET_KEY;
 
+    public JwtHelper() {
+    }
+
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }

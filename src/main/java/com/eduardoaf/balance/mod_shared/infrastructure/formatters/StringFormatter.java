@@ -37,6 +37,12 @@ public final class StringFormatter {
         return anyString.trim();
     }
 
+    public String getAlwaysString(Integer number) {
+        if (number == null)
+            return "";
+        return number.toString();
+    }
+
     public Boolean getBoolean(String number) {
         if (number == null)
             return false;

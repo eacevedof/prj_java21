@@ -10,7 +10,7 @@ public class UpdateQuery {
     private String updateTable = "";
     private final List<String> columns = new ArrayList<>();
     private final List<Object> values = new ArrayList<>();
-    private String whereClause = "";
+    private final List<String> whereClause = new ArrayList<>();
 
     public UpdateQuery(String table) {
         this.updateTable = table;
@@ -26,10 +26,20 @@ public class UpdateQuery {
         return this;
     }
 
-    public UpdateQuery where(String whereClause) {
-        this.whereClause = whereClause;
+    public UpdateQuery where(String andCondition) {
+        whereClause.add(andCondition);
         return this;
     }
+
+    public UpdateQuery where(String strField, Object anyValue) {
+        String strValue = getObjectAsString(anyValue);
+        strValue = SanitizeQuery.getInstance().getMysqlString(strValue);
+        String andCondition = strField + " = " + strValue;
+        whereClause.add(andCondition);
+        return this;
+    }
+
+
 
     public String getQuery() throws Exception {
         if (columns.isEmpty() || values.isEmpty() || columns.size() != values.size()) {
@@ -53,8 +63,9 @@ public class UpdateQuery {
             }
         }
 
+        sqlUpdate.append(" WHERE 1=1");
         if (!whereClause.isEmpty()) {
-            sqlUpdate.append(" WHERE ").append(whereClause);
+            sqlUpdate.append("AND ").append(String.join(" AND ", whereClause));
         }
 
         return sqlUpdate.toString();

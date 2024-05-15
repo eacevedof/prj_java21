@@ -1,5 +1,6 @@
 package com.eduardoaf.balance.mod_auth.infrastructure.repositories;
 
+import com.eduardoaf.balance.mod_shared.infrastructure.formatters.StringFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,15 +17,17 @@ public final class AuthUserWriterRepository extends AbstractMysqlRepository {
 
     private final Log log;
     private final DateFormatter dateFormatter;
+    private final StringFormatter stringFormatter;
 
     @Autowired
     public AuthUserWriterRepository(
             Log log,
             DateFormatter dateFormatter,
-            UuidFormatter uuid
+            StringFormatter stringFormatter
     ) {
         this.log = log;
         this.dateFormatter = dateFormatter;
+        this.stringFormatter = stringFormatter;
     }
 
     public void updateUserLogged(AuthUserEntity authUserEntity) throws Exception {
@@ -33,6 +36,7 @@ public final class AuthUserWriterRepository extends AbstractMysqlRepository {
                 .addColumn("update_user", authUserEntity.insertUser)
                 .addColumn("update_date", dateFormatter.getNow())
                 .addColumn("log_attempts", 0)
+                .where("id", stringFormatter.getAlwaysString(authUserEntity.id))
                 .getQuery();
         log.debug(sql, "updateUserLogged");
         this.execute(sql);

@@ -89,6 +89,7 @@ public final class AuthUserService {
         );
 
         sysUserWriterRepository.updateUserLogged(newAuthUserEntity);
+        var jwtToken = jwtHelper.generateToken(userMap.get("email"));
 
         return AuthedUserDto.getInstance(
             userMap.get("id"),
@@ -101,7 +102,7 @@ public final class AuthUserService {
             userMap.get("id_language"),
             userMap.get("id_profile"),
             userMap.get("url_picture"),
-            jwtHelper.generateToken(userMap.get("email"))
+            jwtToken
         );
     }
 }
