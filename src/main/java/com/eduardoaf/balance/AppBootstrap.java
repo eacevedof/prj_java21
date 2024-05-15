@@ -1,16 +1,16 @@
 package com.eduardoaf.balance;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
+import org.springframework.boot.SpringApplication;
 import com.eduardoaf.balance.boot_config.WebSecurityConfig;
 
 @Import(WebSecurityConfig.class)
 @SpringBootApplication
-public class Bootstrap {
+public class AppBootstrap {
 
     public static void main(String[] args) {
-        SpringApplication.run(Bootstrap.class, args);
+        SpringApplication.run(AppBootstrap.class, args);
     }
 
 }
