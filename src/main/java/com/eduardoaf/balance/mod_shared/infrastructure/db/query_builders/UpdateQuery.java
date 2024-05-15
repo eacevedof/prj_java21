@@ -8,6 +8,7 @@ import java.util.Date;
 public class UpdateQuery {
 
     private String updateTable = "";
+    private String comment = "";
     private final List<String> columns = new ArrayList<>();
     private final List<Object> values = new ArrayList<>();
     private final List<String> whereClause = new ArrayList<>();
@@ -31,6 +32,11 @@ public class UpdateQuery {
         return this;
     }
 
+    public UpdateQuery comment(String comment) {
+        this.comment = comment;
+        return this;
+    }
+
     public UpdateQuery where(String strField, Object anyValue) {
         String strValue = getObjectAsString(anyValue);
         strValue = SanitizeQuery.getInstance().getMysqlString(strValue);
@@ -44,7 +50,11 @@ public class UpdateQuery {
             throw new IllegalArgumentException("Columns and values must not be empty and must have the same size.");
         }
 
-        StringBuilder sqlUpdate = new StringBuilder("UPDATE ").append(updateTable).append(" SET ");
+        StringBuilder sqlUpdate = new StringBuilder()
+                .append("/*").append(comment).append("*/")
+                .append("UPDATE ")
+                .append(updateTable)
+                .append(" SET ");
 
         for (int i = 0; i < columns.size(); i++) {
             sqlUpdate.append(columns.get(i)).append(" = ");

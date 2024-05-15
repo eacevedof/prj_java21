@@ -43,14 +43,15 @@ public final class AuthUserWriterRepository extends AbstractMysqlRepository {
     }
 
     public void updateLogAttemptByEmail(AuthUserEntity authUserEntity) throws Exception {
-        var totalAttempts = getTotalAttemptsByEmail(
+        Integer totalAttempts = getTotalAttemptsByEmail(
             authUserEntity.getEmail()
         );
         var sql = UpdateQuery.getInstance("base_user")
+                .comment("updateLogAttemptByEmail")
                 .addColumn("update_platform", authUserEntity.getInsertPlatform())
                 .addColumn("update_user", authUserEntity.getInsertUser())
                 .addColumn("update_date", dateFormatter.getNow())
-                .addColumn("log_attempts", totalAttempts)
+                .addColumn("log_attempts", totalAttempts + 1)
                 .where("email", authUserEntity.getEmail())
                 .getQuery();
         log.debug(sql, "updateUserLogged");
