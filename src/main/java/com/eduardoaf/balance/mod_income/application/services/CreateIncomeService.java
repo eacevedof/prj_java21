@@ -1,5 +1,6 @@
 package com.eduardoaf.balance.mod_income.application.services;
 
+import com.eduardoaf.balance.mod_shared.domain.services.DomainAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,9 @@ public final class CreateIncomeService {
         this.appCapIncomeReaderRepository = appCapIncomeReaderRepository;
     }
 
-    public CreatedIncomeDto invoke(CreateIncomeDto createIncomeDto) throws Exception {
+    public CreatedIncomeDto invoke(
+        CreateIncomeDto createIncomeDto
+    ) throws Exception {
 
         createIncomeValidator.invoke(createIncomeDto);
 
