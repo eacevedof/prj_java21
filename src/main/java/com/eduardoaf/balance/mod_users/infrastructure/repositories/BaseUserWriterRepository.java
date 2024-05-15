@@ -6,19 +6,19 @@ import org.springframework.stereotype.Component;
 import com.eduardoaf.balance.mod_shared.infrastructure.file.Log;
 import com.eduardoaf.balance.mod_shared.infrastructure.formatters.UuidFormatter;
 import com.eduardoaf.balance.mod_shared.infrastructure.formatters.DateFormatter;
-import com.eduardoaf.balance.mod_users.domain.entities.BaseUserEntity;
+
 import com.eduardoaf.balance.mod_shared.infrastructure.repositories.AbstractMysqlRepository;
 import com.eduardoaf.balance.mod_shared.infrastructure.db.query_builders.InsertQuery;
 
 @Component
-public final class SysUserWriterRepository extends AbstractMysqlRepository {
+public final class BaseUserWriterRepository extends AbstractMysqlRepository {
 
     private final Log log;
     private final DateFormatter dateFormatter;
     private final UuidFormatter uuid;
 
     @Autowired
-    public SysUserWriterRepository(
+    public BaseUserWriterRepository(
             Log log,
             DateFormatter dateFormatter,
             UuidFormatter uuid

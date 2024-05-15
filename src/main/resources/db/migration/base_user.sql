@@ -59,7 +59,8 @@ CREATE TABLE `base_user` (
   `log_attempts` int NOT NULL DEFAULT '0',
 
 
-  
+
+
   PRIMARY KEY (`id`) USING BTREE,
   KEY `delete_date_idx` (`delete_date`) USING BTREE,
   KEY `is_enabled_idx` (`is_enabled`) USING BTREE,

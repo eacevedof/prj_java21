@@ -36,7 +36,7 @@ public final class AuthUserService {
     public AuthUserService
     (
         Log log,
-        AuthUserWriterRepository appSysUserWriterRepository,
+        AuthUserWriterRepository appBaseUserWriterRepository,
         AuthUserReaderRepository sysUserReaderRepository,
         AuthUserValidator authUserValidator,
         NumberFormatter numberFormatter,
@@ -46,7 +46,7 @@ public final class AuthUserService {
     ) {
         this.log = log;
         this.authUserValidator = authUserValidator;
-        this.sysUserWriterRepository = appSysUserWriterRepository;
+        this.sysUserWriterRepository = appBaseUserWriterRepository;
         this.sysUserReaderRepository = sysUserReaderRepository;
         this.passwordFormatter = passwordFormatter;
         this.stringFormatter = stringFormatter;

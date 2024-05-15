@@ -12,14 +12,14 @@ import com.eduardoaf.balance.mod_shared.infrastructure.db.query_builders.Sanitiz
 import com.eduardoaf.balance.mod_shared.infrastructure.repositories.AbstractMysqlRepository;
 
 @Component
-public final class SysUserReaderRepository extends AbstractMysqlRepository {
+public final class BaseUserReaderRepository extends AbstractMysqlRepository {
 
     private final Log log;
     private final SanitizeQuery sanitizeQuery;
     private final NumberFormatter numberFormatter;
 
     @Autowired
-    public SysUserReaderRepository (
+    public BaseUserReaderRepository(
             Log log,
             SanitizeQuery sanitizeQuery,
             NumberFormatter numberFormatter

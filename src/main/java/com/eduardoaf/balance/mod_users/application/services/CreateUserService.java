@@ -7,8 +7,8 @@ import com.eduardoaf.balance.mod_shared.infrastructure.formatters.NumberFormatte
 import com.eduardoaf.balance.mod_shared.infrastructure.formatters.PasswordFormatter;
 import com.eduardoaf.balance.mod_shared.infrastructure.formatters.StringFormatter;
 import com.eduardoaf.balance.mod_shared.infrastructure.file.Log;
-import com.eduardoaf.balance.mod_users.infrastructure.repositories.SysUserReaderRepository;
-import com.eduardoaf.balance.mod_users.infrastructure.repositories.SysUserWriterRepository;
+import com.eduardoaf.balance.mod_users.infrastructure.repositories.BaseUserReaderRepository;
+import com.eduardoaf.balance.mod_users.infrastructure.repositories.BaseUserWriterRepository;
 import com.eduardoaf.balance.mod_users.application.dtos.CreateUserDto;
 import com.eduardoaf.balance.mod_users.application.dtos.CreatedUserDto;
 import com.eduardoaf.balance.mod_users.domain.validators.CreateUserValidator;
@@ -19,8 +19,8 @@ public final class CreateUserService {
 
     private final Log log;
     private final CreateUserValidator createUserValidator;
-    private final SysUserWriterRepository sysUserWriterRepository;
-    private final SysUserReaderRepository sysUserReaderRepository;
+    private final BaseUserWriterRepository sysUserWriterRepository;
+    private final BaseUserReaderRepository sysUserReaderRepository;
     private final PasswordFormatter passwordFormatter;
     private final NumberFormatter numberFormatter;
     private final StringFormatter stringFormatter;
@@ -29,8 +29,8 @@ public final class CreateUserService {
     public CreateUserService
     (
         Log log,
-        SysUserWriterRepository appSysUserWriterRepository,
-        SysUserReaderRepository sysUserReaderRepository,
+        BaseUserWriterRepository appBaseUserWriterRepository,
+        com.eduardoaf.balance.mod_users.infrastructure.repositories.BaseUserReaderRepository sysUserReaderRepository,
         CreateUserValidator createUserValidator,
         NumberFormatter numberFormatter,
         StringFormatter stringFormatter,
@@ -38,7 +38,7 @@ public final class CreateUserService {
     ) {
         this.log = log;
         this.createUserValidator = createUserValidator;
-        this.sysUserWriterRepository = appSysUserWriterRepository;
+        this.sysUserWriterRepository = appBaseUserWriterRepository;
         this.sysUserReaderRepository = sysUserReaderRepository;
         this.passwordFormatter = passwordFormatter;
         this.stringFormatter = stringFormatter;

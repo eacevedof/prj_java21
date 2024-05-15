@@ -9,21 +9,21 @@ import com.eduardoaf.balance.mod_shared.domain.exceptions.DomainTypeException;
 import com.eduardoaf.balance.mod_shared.domain.validators.AbstractDomainValidator;
 import com.eduardoaf.balance.mod_shared.domain.exceptions.DomainValueException;
 import com.eduardoaf.balance.mod_users.application.dtos.CreateUserDto;
-import com.eduardoaf.balance.mod_users.infrastructure.repositories.SysUserReaderRepository;
+import com.eduardoaf.balance.mod_users.infrastructure.repositories.BaseUserReaderRepository;
 import com.eduardoaf.balance.mod_users.domain.exceptions.CreateUserException;
 
 @Service
 public final class CreateUserValidator extends AbstractDomainValidator {
 
     private final NumberFormatter numberFormatter;
-    private final SysUserReaderRepository sysUserReaderRepository;
+    private final BaseUserReaderRepository sysUserReaderRepository;
     private CreateUserDto createUserDto;
 
     @Autowired
     public CreateUserValidator
     (
         NumberFormatter numberFormatter,
-        SysUserReaderRepository sysUserReaderRepository
+        BaseUserReaderRepository sysUserReaderRepository
     ) {
         this.numberFormatter = numberFormatter;
         this.sysUserReaderRepository = sysUserReaderRepository;
