@@ -16,7 +16,7 @@ public final class AuthUserValidator extends AbstractDomainValidator {
 
     private final NumberFormatter numberFormatter;
     private final AuthUserReaderRepository sysUserReaderRepository;
-    private AuthUserDto createUserDto;
+    private AuthUserDto authUserDto;
 
     @Autowired
     public AuthUserValidator
@@ -28,8 +28,8 @@ public final class AuthUserValidator extends AbstractDomainValidator {
         this.sysUserReaderRepository = sysUserReaderRepository;
     }
 
-    public void invoke(AuthUserDto createUserDto) throws Exception{
-        this.createUserDto = createUserDto;
+    public void invoke(AuthUserDto authUserDto) throws Exception{
+        this.authUserDto = authUserDto;
         failIfWrongEmail();
 
         //failIfWrongIdLanguage();
@@ -38,7 +38,7 @@ public final class AuthUserValidator extends AbstractDomainValidator {
     }
 
     private void failIfUserExists() throws Exception {
-        var userId = sysUserReaderRepository.doesUserExistByEmail(createUserDto.email());
+        var userId = sysUserReaderRepository.doesUserExistByEmail(authUserDto.email());
         if (userId == null) return;
         var uuid = sysUserReaderRepository.getUuidByUserId(userId);
         AuthUserException.userAlreadyExists(uuid);
@@ -46,7 +46,7 @@ public final class AuthUserValidator extends AbstractDomainValidator {
 
     private void failIfWrongEmail() throws Exception {
         var label = "Email";
-        var value = createUserDto.email();
+        var value = authUserDto.email();
         if (!isTypeString(value))
             DomainTypeException.valueIsNotString(label, value);
 
@@ -68,7 +68,7 @@ public final class AuthUserValidator extends AbstractDomainValidator {
 
     private void failIfWrongIdLanguage() throws DomainTypeException, DomainValueException {
         var label = "Language ID";
-        var value = createUserDto.idLanguage();
+        var value = authUserDto.idLanguage();
         if (!isTypeInteger(value))
             DomainTypeException.valueIsNotNumeric(label, value);
 
@@ -78,7 +78,7 @@ public final class AuthUserValidator extends AbstractDomainValidator {
 
     private void failIfWrongIdProfile() throws DomainTypeException, DomainValueException {
         var label = "Profile ID";
-        var value = createUserDto.idProfile();
+        var value = authUserDto.idProfile();
         if (!isTypeNumeric(value))
             DomainTypeException.valueIsNotNumeric(label, value);
 

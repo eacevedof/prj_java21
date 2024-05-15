@@ -17,40 +17,29 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthUserController {
 
     private final Log log;
-    private final AuthUserService createUserService;
+    private final AuthUserService authUserService;
     private final HttpResponse httpResponse;
 
     @Autowired
     public AuthUserController(
         Log log,
-        AuthUserService createUserService,
+        AuthUserService authUserService,
         HttpResponse httpResponse
     ) {
         this.log = log;
-        this.createUserService = createUserService;
+        this.authUserService = authUserService;
         this.httpResponse = httpResponse;
     }
 
     @PostMapping(value = "api/v1/user/auth", consumes = {"application/json"})
-    public ResponseEntity<?> createUser(@RequestBody AuthUserDto createUserDto) {
+    public ResponseEntity<?> authUser(@RequestBody AuthUserDto authUserDto) {
         try {
-            createUserDto = AuthUserDto.getInstance(
-                createUserDto.codeErp(),
-                createUserDto.email(),
-                createUserDto.secret(),
-                createUserDto.phone(),
-                createUserDto.fullname(),
-                createUserDto.address(),
-                createUserDto.birthdate(),
-                createUserDto.idParent(),
-                createUserDto.idGender(),
-                createUserDto.idNationality(),
-                createUserDto.idCountry(),
-                createUserDto.idLanguage(),
-                createUserDto.idProfile()
+            authUserDto = AuthUserDto.getInstance(
+                authUserDto.username(),
+                authUserDto.password()
             );
-            var createdUserDto = createUserService.invoke(createUserDto);
-            return httpResponse.getResponse201("User created", createdUserDto);
+            var createdUserDto = authUserService.invoke(authUserDto);
+            return httpResponse.getResponse201("User logged", createdUserDto);
         }
         catch (DomainTypeException | DomainValueException | AuthUserException e) {
             return httpResponse.getResponse400(e.getMessage());

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 public final class AuthUserService {
 
     private final Log log;
-    private final AuthUserValidator createUserValidator;
+    private final AuthUserValidator authUserValidator;
     private final AuthUserWriterRepository sysUserWriterRepository;
     private final AuthUserReaderRepository sysUserReaderRepository;
     private final PasswordFormatter passwordFormatter;
@@ -30,13 +30,13 @@ public final class AuthUserService {
         Log log,
         AuthUserWriterRepository appSysUserWriterRepository,
         AuthUserReaderRepository sysUserReaderRepository,
-        AuthUserValidator createUserValidator,
+        AuthUserValidator authUserValidator,
         NumberFormatter numberFormatter,
         StringFormatter stringFormatter,
         PasswordFormatter passwordFormatter
     ) {
         this.log = log;
-        this.createUserValidator = createUserValidator;
+        this.authUserValidator = authUserValidator;
         this.sysUserWriterRepository = appSysUserWriterRepository;
         this.sysUserReaderRepository = sysUserReaderRepository;
         this.passwordFormatter = passwordFormatter;
@@ -44,30 +44,30 @@ public final class AuthUserService {
         this.numberFormatter = numberFormatter;
     }
 
-    public AuthedUserDto invoke(AuthUserDto createUserDto) throws Exception {
-        createUserValidator.invoke(createUserDto);
+    public AuthedUserDto invoke(AuthUserDto authUserDto) throws Exception {
+        authUserValidator.invoke(authUserDto);
 
         String password = "Abc.1234:)";
         String hashedPassword = passwordFormatter.getHashedPassword(password);
         var newUserEntity = SysUserEntity.getInstance(
             numberFormatter.getNull(),
             stringFormatter.getNull(),
-            stringFormatter.getTrimOrNull(createUserDto.codeErp()),
+            stringFormatter.getTrimOrNull(authUserDto.codeErp()),
             stringFormatter.getNull(),
-            stringFormatter.getTrimOrNull(createUserDto.email()),
+            stringFormatter.getTrimOrNull(authUserDto.email()),
             hashedPassword,
-            stringFormatter.getTrimOrNull(createUserDto.phone()),
-            stringFormatter.getTrimOrNull(createUserDto.fullname()),
-            stringFormatter.getTrimOrNull(createUserDto.address()),
+            stringFormatter.getTrimOrNull(authUserDto.phone()),
+            stringFormatter.getTrimOrNull(authUserDto.fullname()),
+            stringFormatter.getTrimOrNull(authUserDto.address()),
 
-            stringFormatter.getTrimOrNull(createUserDto.birthdate()),
+            stringFormatter.getTrimOrNull(authUserDto.birthdate()),
 
-            numberFormatter.getIntegerOrNull(createUserDto.idParent()),
-            numberFormatter.getIntegerOrNull(createUserDto.idGender()),
-            numberFormatter.getIntegerOrNull(createUserDto.idNationality()),
-            numberFormatter.getIntegerOrNull(createUserDto.idCountry()),
-            numberFormatter.getIntegerOrDefault(createUserDto.idLanguage(), 1),
-            numberFormatter.getIntegerOrDefault(createUserDto.idProfile(), 1),
+            numberFormatter.getIntegerOrNull(authUserDto.idParent()),
+            numberFormatter.getIntegerOrNull(authUserDto.idGender()),
+            numberFormatter.getIntegerOrNull(authUserDto.idNationality()),
+            numberFormatter.getIntegerOrNull(authUserDto.idCountry()),
+            numberFormatter.getIntegerOrDefault(authUserDto.idLanguage(), 1),
+            numberFormatter.getIntegerOrDefault(authUserDto.idProfile(), 1),
 
             stringFormatter.getNull(),
             stringFormatter.getNull(),
