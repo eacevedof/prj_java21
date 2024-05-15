@@ -23,8 +23,8 @@ public final class AuthUserService {
 
     private final Log log;
     private final AuthUserValidator authUserValidator;
-    private final AuthUserWriterRepository sysUserWriterRepository;
-    private final AuthUserReaderRepository sysUserReaderRepository;
+    private final AuthUserWriterRepository authUserWriterRepository;
+    private final AuthUserReaderRepository authUserReaderRepository;
     private final PasswordFormatter passwordFormatter;
     private final NumberFormatter numberFormatter;
     private final StringFormatter stringFormatter;
@@ -36,8 +36,8 @@ public final class AuthUserService {
     public AuthUserService
     (
         Log log,
-        AuthUserWriterRepository appBaseUserWriterRepository,
-        AuthUserReaderRepository sysUserReaderRepository,
+        AuthUserWriterRepository authUserWriterRepository,
+        AuthUserReaderRepository authUserReaderRepository,
         AuthUserValidator authUserValidator,
         NumberFormatter numberFormatter,
         StringFormatter stringFormatter,
@@ -46,8 +46,8 @@ public final class AuthUserService {
     ) {
         this.log = log;
         this.authUserValidator = authUserValidator;
-        this.sysUserWriterRepository = appBaseUserWriterRepository;
-        this.sysUserReaderRepository = sysUserReaderRepository;
+        this.authUserWriterRepository = authUserWriterRepository;
+        this.authUserReaderRepository = authUserReaderRepository;
         this.passwordFormatter = passwordFormatter;
         this.stringFormatter = stringFormatter;
         this.numberFormatter = numberFormatter;
@@ -60,7 +60,7 @@ public final class AuthUserService {
 
         authUserValidator.invoke(authUserDto);
 
-        var users = sysUserReaderRepository.getUsersCredentialsByEmail(authUserDto.username());
+        var users = authUserReaderRepository.getUsersCredentialsByEmail(authUserDto.username());
         if (users.isEmpty()) {
             log.debug("not found by email:"+authUserDto.username());
             return null;
@@ -74,10 +74,10 @@ public final class AuthUserService {
         }
 
         authUserId = numberFormatter.getIntegerOrNull(userMap.get("id"));
-        userMap = sysUserReaderRepository.getUserByUserId(authUserId);
+        userMap = authUserReaderRepository.getUserByUserId(authUserId);
         var newAuthUserEntity = AuthUserEntity.fromMapRow(userMap);
 
-        sysUserWriterRepository.updateUserLogged(newAuthUserEntity);
+        authUserWriterRepository.updateUserLogged(newAuthUserEntity);
         var jwtToken = jwtHelper.generateToken(newAuthUserEntity.getEmail());
 
         return AuthedUserDto.fromAuthUserEntityAndJwt(
