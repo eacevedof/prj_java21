@@ -63,7 +63,7 @@ public class UpdateQuery {
 
         sqlUpdate.append(" WHERE 1=1");
         if (!whereClause.isEmpty()) {
-            sqlUpdate.append("AND ").append(String.join(" AND ", whereClause));
+            sqlUpdate.append(" AND ").append(String.join(" AND ", whereClause));
         }
 
         return sqlUpdate.toString();
