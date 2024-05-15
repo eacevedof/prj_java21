@@ -32,8 +32,8 @@ public final class AuthUserWriterRepository extends AbstractMysqlRepository {
 
     public void updateUserLogged(AuthUserEntity authUserEntity) throws Exception {
         var sql = UpdateQuery.getInstance("base_user")
-                .addColumn("update_platform", authUserEntity.insertPlatform)
-                .addColumn("update_user", authUserEntity.insertUser)
+                .addColumn("update_platform", authUserEntity.getInsertPlatform())
+                .addColumn("update_user", authUserEntity.getInsertUser())
                 .addColumn("update_date", dateFormatter.getNow())
                 .addColumn("log_attempts", 0)
                 .where("id", stringFormatter.getAlwaysString(authUserEntity.id))

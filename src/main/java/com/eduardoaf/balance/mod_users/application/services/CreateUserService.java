@@ -74,37 +74,13 @@ public final class CreateUserService {
             numberFormatter.getNull()
         );
         sysUserWriterRepository.createNewUser(newUserEntity);
-        var lastId = sysUserWriterRepository.getLastInsertId();
+        Integer lastId = sysUserWriterRepository.getLastInsertId();
+
         var baseUserEntity = sysUserReaderRepository.getUserEntityByUserId(lastId);
         if (baseUserEntity == null) {
             log.debug("not found by id:"+lastId);
             return null;
         }
-
-        return CreatedUserDto.getInstance(
-            numberFormatter.getIntegerOrNull(dict.get("id")),
-
-            stringFormatter.getTrimOrNull(dict.get("uuid")),
-            stringFormatter.getTrimOrNull(dict.get("code_erp")),
-            stringFormatter.getTrimOrNull(dict.get("description")),
-            stringFormatter.getTrimOrNull(dict.get("email")),
-            stringFormatter.getTrimOrNull(dict.get("secret")),
-            stringFormatter.getTrimOrNull(dict.get("phone")),
-            stringFormatter.getTrimOrNull(dict.get("fullname")),
-            stringFormatter.getTrimOrNull(dict.get("address")),
-            stringFormatter.getTrimOrNull(dict.get("birthdate")),
-
-            numberFormatter.getIntegerOrNull(dict.get("id_parent")),
-            numberFormatter.getIntegerOrNull(dict.get("id_gender")),
-            numberFormatter.getIntegerOrNull(dict.get("id_nationality")),
-            numberFormatter.getIntegerOrNull(dict.get("id_country")),
-            numberFormatter.getIntegerOrNull(dict.get("id_language")),
-            numberFormatter.getIntegerOrNull(dict.get("id_profile")),
-
-            stringFormatter.getTrimOrNull(dict.get("url_picture")),
-            stringFormatter.getTrimOrNull(dict.get("date_validated")),
-
-            numberFormatter.getIntegerOrNull(dict.get("log_attempts"))
-        );
+        return CreatedUserDto.fromBaseUserEntity(baseUserEntity);
     }
 }

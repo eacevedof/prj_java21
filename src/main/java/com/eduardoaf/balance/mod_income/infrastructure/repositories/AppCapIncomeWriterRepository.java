@@ -30,11 +30,11 @@ public final class AppCapIncomeWriterRepository extends AbstractMysqlRepository 
 
     public void createNewIncome(AppCapIncomeEntity appCapIncomeEntity) throws Exception {
         var sql = InsertQuery.getInstance("app_cap_income")
-                .addColumn("insert_platform", appCapIncomeEntity.insertPlatform)
-                .addColumn("insert_user", appCapIncomeEntity.insertUser)
+                .addColumn("insert_platform", appCapIncomeEntity.getInsertPlatform())
+                .addColumn("insert_user", appCapIncomeEntity.getInsertUser())
                 .addColumn("insert_date", dateFormatter.getNow())
                 .addColumn("uuid", uuid.getUuid("IN", 15))
-                .addColumn("code_erp", appCapIncomeEntity.codeErp)
+                .addColumn("code_erp", appCapIncomeEntity.getCodeErp())
                 .addColumn("description", appCapIncomeEntity.description)
                 .addColumn("payment_for", appCapIncomeEntity.paymentFor)
                 .addColumn("payed_from", appCapIncomeEntity.payedFrom)

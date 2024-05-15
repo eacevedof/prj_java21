@@ -3,9 +3,12 @@ package com.eduardoaf.balance.mod_income.domain.entities;
 import com.eduardoaf.balance.mod_shared.domain.entities.AbstractEntity;
 import com.eduardoaf.balance.mod_shared.infrastructure.formatters.NumberFormatter;
 import com.eduardoaf.balance.mod_shared.infrastructure.formatters.StringFormatter;
+import lombok.Getter;
 
+
+@Getter
 public final class AppCapIncomeEntity extends AbstractEntity {
-    public final Integer id;
+
     public final String uuid;
     public final String codeErp;
     public final String description;

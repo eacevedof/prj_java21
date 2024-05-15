@@ -29,25 +29,25 @@ public record CreatedUserDto(
         BaseUserEntity baseUserEntity
     ) {
         return new CreatedUserDto(
-            baseUserEntity.id(),
-            baseUserEntity.uuid(),
-            baseUserEntity.codeErp(),
-            baseUserEntity.description(),
-            baseUserEntity.email(),
-            baseUserEntity.secret(),
-            baseUserEntity.phone(),
-            baseUserEntity.fullname(),
-            baseUserEntity.address(),
-            baseUserEntity.birthdate(),
-            baseUserEntity.idParent(),
-            baseUserEntity.idGender(),
-            baseUserEntity.idNationality(),
-            baseUserEntity.idCountry(),
-            baseUserEntity.idLanguage(),
-            baseUserEntity.idProfile(),
-            baseUserEntity.urlPicture(),
-            baseUserEntity.dateValidated(),
-            baseUserEntity.logAttempts()
+            baseUserEntity.getId(),
+            baseUserEntity.getUuid(),
+            baseUserEntity.getCodeErp(),
+            baseUserEntity.getDescription(),
+            baseUserEntity.getEmail(),
+            baseUserEntity.getSecret(),
+            baseUserEntity.getPhone(),
+            baseUserEntity.getFullname(),
+            baseUserEntity.getAddress(),
+            baseUserEntity.getBirthdate(),
+            baseUserEntity.getIdParent(),
+            baseUserEntity.getIdGender(),
+            baseUserEntity.getIdNationality(),
+            baseUserEntity.getIdCountry(),
+            baseUserEntity.getIdLanguage(),
+            baseUserEntity.getIdProfile(),
+            baseUserEntity.getUrlPicture(),
+            baseUserEntity.getDateValidated(),
+            baseUserEntity.getLogAttempts()
         );
     }
 
