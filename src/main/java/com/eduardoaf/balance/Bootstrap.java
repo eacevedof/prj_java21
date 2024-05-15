@@ -3,7 +3,7 @@ package com.eduardoaf.balance;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
-import com.eduardoaf.balance.config.WebSecurityConfig;
+import com.eduardoaf.balance.boot_config.WebSecurityConfig;
 
 @Import(WebSecurityConfig.class)
 @SpringBootApplication
