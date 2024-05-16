@@ -31,7 +31,7 @@ public class InsertQuery {
         return this;
     }
 
-    public String getQuery() throws Exception {
+    public String getQuery() {
         if (
             columns.isEmpty() || values.isEmpty() || columns.size() != values.size()
         ) {
