@@ -55,7 +55,7 @@ public final class AuthUserWriterRepository extends AbstractMysqlRepository {
                 .addColumn("log_attempts", totalAttempts + 1)
                 .where("email", authUserEntity.getEmail())
                 .getQuery();
-        log.debug(sql, "updateUserLogged");
+        log.debug(sql, "updateLogAttemptByEmail");
         this.execute(sql);
     }
 
