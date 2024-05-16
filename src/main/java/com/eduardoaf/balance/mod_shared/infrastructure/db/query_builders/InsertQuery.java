@@ -8,6 +8,7 @@ import java.util.Date;
 public class InsertQuery {
 
     private String intoTable = "";
+    private String comment = "";
     private final List<String> columns = new ArrayList<>();
     private final List<Object> values = new ArrayList<>();
 
@@ -17,6 +18,11 @@ public class InsertQuery {
 
     public static InsertQuery getInstance(String intoTable) {
         return new InsertQuery(intoTable);
+    }
+
+    public InsertQuery comment(String comment) {
+        this.comment = comment;
+        return this;
     }
 
     public InsertQuery addColumn(String column, Object value) {
@@ -32,7 +38,11 @@ public class InsertQuery {
             throw new IllegalArgumentException("Columns and values must not be empty and must have the same size.");
         }
 
-        StringBuilder sqlInsert = new StringBuilder("INSERT INTO ").append(intoTable).append(" (");
+        StringBuilder sqlInsert = new StringBuilder()
+                .append("/*").append(comment).append("*/\n")
+                .append("INSERT INTO ")
+                .append(intoTable).append(" (");
+
         StringBuilder sqlValues = new StringBuilder("\nVALUES (");
 
         for (int i = 0; i < columns.size(); i++) {
