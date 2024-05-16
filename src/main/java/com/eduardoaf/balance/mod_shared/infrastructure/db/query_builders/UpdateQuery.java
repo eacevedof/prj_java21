@@ -45,7 +45,7 @@ public class UpdateQuery {
         return this;
     }
 
-    public String getQuery() throws Exception {
+    public String getQuery() {
         if (columns.isEmpty() || values.isEmpty() || columns.size() != values.size()) {
             throw new IllegalArgumentException("Columns and values must not be empty and must have the same size.");
         }
