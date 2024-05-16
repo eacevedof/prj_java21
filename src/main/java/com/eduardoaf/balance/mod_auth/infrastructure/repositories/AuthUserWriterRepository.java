@@ -1,13 +1,12 @@
 package com.eduardoaf.balance.mod_auth.infrastructure.repositories;
 
-import com.eduardoaf.balance.mod_shared.infrastructure.formatters.StringFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.eduardoaf.balance.mod_shared.infrastructure.db.query_builders.UpdateQuery;
 import com.eduardoaf.balance.mod_shared.infrastructure.file.Log;
+import com.eduardoaf.balance.mod_shared.infrastructure.formatters.StringFormatter;
 import com.eduardoaf.balance.mod_shared.infrastructure.formatters.DateFormatter;
-import com.eduardoaf.balance.mod_shared.infrastructure.formatters.UuidFormatter;
 import com.eduardoaf.balance.mod_shared.infrastructure.repositories.AbstractMysqlRepository;
 
 import com.eduardoaf.balance.mod_auth.domain.entities.AuthUserEntity;
