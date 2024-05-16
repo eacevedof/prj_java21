@@ -3,19 +3,18 @@ package com.eduardoaf.balance.mod_shared.domain.services;
 import org.springframework.stereotype.Service;
 
 import com.eduardoaf.balance.mod_shared.infrastructure.file.Log;
-import com.eduardoaf.balance.mod_users.domain.entities.BaseUserEntity;
 import com.eduardoaf.balance.mod_shared.infrastructure.auth.JwtHelper;
+import com.eduardoaf.balance.mod_users.domain.entities.BaseUserEntity;
 
 import com.eduardoaf.balance.mod_shared.domain.exceptions.AuthUserException;
 import com.eduardoaf.balance.mod_users.infrastructure.repositories.BaseUserReaderRepository;
-
 
 @Service
 public class DomainAuthService {
 
     private final Log log;
     private final BaseUserReaderRepository sysUserReaderRepository;
-    private static BaseUserEntity baseUserEntity;
+    private BaseUserEntity baseUserEntity;
     private final JwtHelper jwtHelper;
 
     public DomainAuthService (
@@ -31,7 +30,7 @@ public class DomainAuthService {
     public void tryToLoadAuthUserByJwtOrFail(
         String jwtToken
     ) throws Exception {
-        DomainAuthService.baseUserEntity = null;
+        baseUserEntity = null;
         jwtToken = getBearerToken(jwtToken);
         if (jwtToken.isEmpty()) {
             AuthUserException.unauthorizedUser(jwtToken);
@@ -50,7 +49,7 @@ public class DomainAuthService {
         if (userId == null) {
             AuthUserException.unauthorizedUser(jwtToken);
         }
-        DomainAuthService.baseUserEntity = sysUserReaderRepository.getUserMinByUserId(userId);
+        baseUserEntity = sysUserReaderRepository.getUserMinByUserId(userId);
         if (baseUserEntity == null)
             AuthUserException.unauthorizedUser("not found");
 
@@ -69,16 +68,16 @@ public class DomainAuthService {
     }
 
     public BaseUserEntity getAuthUser() {
-        return DomainAuthService.baseUserEntity;
+        return baseUserEntity;
     }
 
     public Integer getIntegerAuthUserId() {
-        return DomainAuthService.baseUserEntity.getId();
+        return baseUserEntity.getId();
     }
 
     public String getStringAuthUserId() {
-        if (DomainAuthService.baseUserEntity.getId() == null)
+        if (baseUserEntity.getId() == null)
             return null;
-        return DomainAuthService.baseUserEntity.getId().toString();
+        return baseUserEntity.getId().toString();
     }
 }
