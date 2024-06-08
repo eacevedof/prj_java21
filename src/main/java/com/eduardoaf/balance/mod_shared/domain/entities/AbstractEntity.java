@@ -35,22 +35,22 @@ public abstract class AbstractEntity {
         StringFormatter stringFormatter = StringFormatter.getInstance();
         NumberFormatter numberFormatter = NumberFormatter.getInstance();
 
-        abstractEntity.processFlag =  stringFormatter.getTrimOrNull(mapRow.get("process_flag"));
-        abstractEntity.insertPlatform =  stringFormatter.getTrimOrNull(mapRow.get("insert_platform"));
-        abstractEntity.insertUser =  stringFormatter.getTrimOrNull(mapRow.get("insert_user"));
-        abstractEntity.insertDate =  stringFormatter.getTrimOrNull(mapRow.get("insert_date"));
-        abstractEntity.updatePlatform =  stringFormatter.getTrimOrNull(mapRow.get("update_platform"));
-        abstractEntity.updateUser =  stringFormatter.getTrimOrNull(mapRow.get("update_user"));
-        abstractEntity.updateDate =  stringFormatter.getTrimOrNull(mapRow.get("update_date"));
-        abstractEntity.deletePlatform =  stringFormatter.getTrimOrNull(mapRow.get("delete_platform"));
-        abstractEntity.deleteUser =  stringFormatter.getTrimOrNull(mapRow.get("delete_user"));
-        abstractEntity.deleteDate =  stringFormatter.getTrimOrNull(mapRow.get("delete_date"));
-        abstractEntity.cruCsvNote =  stringFormatter.getTrimOrNull(mapRow.get("cru_csv_note"));
-        abstractEntity.isErpSent =  stringFormatter.getTrimOrNull(mapRow.get("is_erp_sent"));
-        abstractEntity.isEnabled =  stringFormatter.getTrimOrNull(mapRow.get("is_enabled"));
-        abstractEntity.i =  numberFormatter.getIntegerOrNull(mapRow.get("i"));
-        abstractEntity.id =  numberFormatter.getIntegerOrNull(mapRow.get("id"));
-        abstractEntity.description =  stringFormatter.getTrimOrNull(mapRow.get("description"));
+        abstractEntity.processFlag = stringFormatter.getTrimOrNull(mapRow.get("process_flag"));
+        abstractEntity.insertPlatform = stringFormatter.getTrimOrNull(mapRow.get("insert_platform"));
+        abstractEntity.insertUser = stringFormatter.getTrimOrNull(mapRow.get("insert_user"));
+        abstractEntity.insertDate = stringFormatter.getTrimOrNull(mapRow.get("insert_date"));
+        abstractEntity.updatePlatform = stringFormatter.getTrimOrNull(mapRow.get("update_platform"));
+        abstractEntity.updateUser = stringFormatter.getTrimOrNull(mapRow.get("update_user"));
+        abstractEntity.updateDate = stringFormatter.getTrimOrNull(mapRow.get("update_date"));
+        abstractEntity.deletePlatform = stringFormatter.getTrimOrNull(mapRow.get("delete_platform"));
+        abstractEntity.deleteUser = stringFormatter.getTrimOrNull(mapRow.get("delete_user"));
+        abstractEntity.deleteDate = stringFormatter.getTrimOrNull(mapRow.get("delete_date"));
+        abstractEntity.cruCsvNote = stringFormatter.getTrimOrNull(mapRow.get("cru_csv_note"));
+        abstractEntity.isErpSent = stringFormatter.getTrimOrNull(mapRow.get("is_erp_sent"));
+        abstractEntity.isEnabled = stringFormatter.getTrimOrNull(mapRow.get("is_enabled"));
+        abstractEntity.i = numberFormatter.getIntegerOrNull(mapRow.get("i"));
+        abstractEntity.id = numberFormatter.getIntegerOrNull(mapRow.get("id"));
+        abstractEntity.description = stringFormatter.getTrimOrNull(mapRow.get("description"));
     }
 
 }
