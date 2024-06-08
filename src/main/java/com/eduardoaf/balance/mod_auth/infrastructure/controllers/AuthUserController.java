@@ -49,7 +49,7 @@ public class AuthUserController {
                 stringFormatter.getTrimOrNull(authUserDto.password())
             );
             var createdUserDto = authUserService.invoke(authUserDto);
-            return httpResponse.getResponse201(
+            return httpResponse.getResponse200(
                 AuthOkMessage.USER_SUCCESSFULLY_AUTHENTICATED.getValue(),
                 createdUserDto
             );
